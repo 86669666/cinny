@@ -36,22 +36,24 @@ function extractText(node: ReactNode): string {
 
 function parseModels(children: ReactNode): ModelEntry[] {
   const models: ModelEntry[] = [];
-  React.Children.forEach(children, (child) => {
-    if (React.isValidElement(child)) {
-      /* eslint-disable react/prop-types */
-      const props = child.props as Record<string, unknown>;
-      if (props['data-hermes-model']) {
-        models.push({
-          model: props['data-hermes-model'] as string,
-          active: props['data-hermes-model-active'] === 'true',
-          provider: (props['data-hermes-model-provider'] as string) || '',
-          providerSlug: (props['data-hermes-model-provider-slug'] as string) || '',
-          label: extractText(child) || (props['data-hermes-model'] as string),
-        });
-      }
-      /* eslint-enable react/prop-types */
+  const walk = (node: ReactNode) => {
+    if (!React.isValidElement(node)) return;
+    /* eslint-disable react/prop-types */
+    const props = node.props as Record<string, unknown>;
+    if (props['data-hermes-model']) {
+      models.push({
+        model: props['data-hermes-model'] as string,
+        active: props['data-hermes-model-active'] === 'true',
+        provider: (props['data-hermes-model-provider'] as string) || '',
+        providerSlug: (props['data-hermes-model-provider-slug'] as string) || '',
+        label: extractText(node) || (props['data-hermes-model'] as string),
+      });
+      return; // don't recurse into matched elements
     }
-  });
+    /* eslint-enable react/prop-types */
+    React.Children.forEach(node.props.children, walk);
+  };
+  React.Children.forEach(children, walk);
   return models;
 }
 
