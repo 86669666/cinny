@@ -80,6 +80,12 @@ const permittedTagToAttributes = {
     'data-hermes-model-provider',
     'data-hermes-model-provider-slug',
   ],
+  tr: [
+    'data-hermes-model',
+    'data-hermes-model-active',
+    'data-hermes-model-provider',
+    'data-hermes-model-provider-slug',
+  ],
   blockquote: ['data-md'],
   h1: ['data-md'],
   h2: ['data-md'],
