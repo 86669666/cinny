@@ -85,25 +85,24 @@ const MODELS_PER_PAGE = 5;
 
 export function ModelCard({ children, page, total }: ModelCardProps) {
   const { t } = useTranslation();
+  const [dismissed, setDismissed] = useState(false);
   const [switchingModel, setSwitchingModel] = useState<string | null>(null);
-  const [switchedTo, setSwitchedTo] = useState<string | null>(null);
 
   const models = parseModels(children);
   const serverTotalPages = total ? parseInt(total, 10) : 1;
   const serverPage = page ? parseInt(page, 10) : 0;
 
-  // Client-side pagination for the flat list within this page
   const [clientPage, setClientPage] = useState(0);
   const clientTotalPages = Math.max(1, Math.ceil(models.length / MODELS_PER_PAGE));
   const pagedModels = models.slice(
     clientPage * MODELS_PER_PAGE,
-    (clientPage + 1) * MODELS_PER_PAGE
+    (clientPage + 1) * MODELS_PER_PAGE,
   );
 
   const handleSwitch = (modelEntry: ModelEntry) => {
-    if (modelEntry.active || switchingModel || switchedTo) return;
+    if (modelEntry.active || switchingModel || dismissed) return;
     setSwitchingModel(modelEntry.model);
-    setSwitchedTo(modelEntry.model);
+    setDismissed(true);
 
     const messageText = `/model ${modelEntry.model}`;
     const event = new CustomEvent('hermes-auto-action', {
@@ -113,29 +112,10 @@ export function ModelCard({ children, page, total }: ModelCardProps) {
     document.dispatchEvent(event);
   };
 
-  if (models.length === 0) {
-    return (
-      <div className={css.ModelCardPanel}>
-        <div className={css.ModelCardEmpty}>
-          <Text size="T300">{t('hermes.no_models')}</Text>
-        </div>
-      </div>
-    );
-  }
-
-  // ── Render ──
+  if (dismissed || models.length === 0) return null;
 
   return (
     <div className={css.ModelCardPanel}>
-      {/* Switched confirmation banner */}
-      {switchedTo && (
-        <div className={css.ModelCardSwitchedBanner}>
-          <CheckIcon />
-          {t('hermes.model_switched', { model: switchedTo })}
-        </div>
-      )}
-
-      {/* Header */}
       <div className={css.ModelCardHeader}>
         <span className={css.ModelCardTitle}>{t('hermes.model_switcher')}</span>
         {serverTotalPages > 1 && (
@@ -145,78 +125,67 @@ export function ModelCard({ children, page, total }: ModelCardProps) {
         )}
       </div>
 
-      {/* Model rows — dimmed after switch */}
-      <div className={switchedTo ? css.ModelCardSwitched : undefined}>
-        <div className={css.ModelCardList}>
-          {pagedModels.map((m) => (
-            <div
-              key={m.model}
-              className={m.active || m.model === switchedTo ? css.ModelCardRowActive : css.ModelCardRow}
-              onClick={() => !m.active && !switchedTo && handleSwitch(m)}
-              role="button"
-              tabIndex={m.active || switchedTo ? -1 : 0}
-              aria-pressed={m.active}
-            >
-              {/* Info */}
-              <div className={css.ModelCardRowInfo}>
-                <span className={css.ModelCardRowName}>{m.label}</span>
-                {m.provider && (
-                  <span className={css.ModelCardRowProvider}>
-                    <span className={css.ModelCardProviderDot} />
-                    {m.provider}
-                  </span>
-                )}
-              </div>
-
-              {/* Action */}
-              <div className={css.ModelCardRowAction}>
-                {m.active ? (
-                  <span className={css.ModelCardActiveBadge}>
-                    <CheckIcon />
-                    {t('hermes.active_model')}
-                  </span>
-                ) : m.model === switchedTo ? (
-                  <span className={css.ModelCardActiveBadge}>
-                    <CheckIcon />
-                    {t('hermes.active_model')}
-                  </span>
-                ) : (
-                  <button
-                    className={css.ModelCardSwitchBtn}
-                    disabled={switchedTo !== null}
-                    onClick={(e) => { e.stopPropagation(); handleSwitch(m); }}
-                  >
-                    {switchingModel === m.model ? t('hermes.switching') : t('hermes.switch_model')}
-                  </button>
-                )}
-              </div>
+      <div className={css.ModelCardList}>
+        {pagedModels.map((m) => (
+          <div
+            key={m.model}
+            className={m.active ? css.ModelCardRowActive : css.ModelCardRow}
+            onClick={() => !m.active && handleSwitch(m)}
+            role="button"
+            tabIndex={m.active ? -1 : 0}
+            aria-pressed={m.active}
+          >
+            <div className={css.ModelCardRowInfo}>
+              <span className={css.ModelCardRowName}>{m.label}</span>
+              {m.provider && (
+                <span className={css.ModelCardRowProvider}>
+                  <span className={css.ModelCardProviderDot} />
+                  {m.provider}
+                </span>
+              )}
             </div>
-          ))}
-        </div>
 
-        {/* Pagination footer */}
-        {clientTotalPages > 1 && (
-          <div className={css.ModelCardFooter}>
-            <button
-              className={css.ModelCardPageBtn}
-              disabled={clientPage <= 0}
-              onClick={() => setClientPage((p) => Math.max(0, p - 1))}
-            >
-              <ChevronLeft />
-            </button>
-            <span className={css.ModelCardPageNum}>
-              {clientPage + 1} / {clientTotalPages}
-            </span>
-            <button
-              className={css.ModelCardPageBtn}
-              disabled={clientPage >= clientTotalPages - 1}
-              onClick={() => setClientPage((p) => Math.min(clientTotalPages - 1, p + 1))}
-            >
-              <ChevronRight />
-            </button>
+            <div className={css.ModelCardRowAction}>
+              {m.active ? (
+                <span className={css.ModelCardActiveBadge}>
+                  <CheckIcon />
+                  {t('hermes.active_model')}
+                </span>
+              ) : (
+                <button
+                  className={css.ModelCardSwitchBtn}
+                  disabled={switchingModel !== null}
+                  onClick={(e) => { e.stopPropagation(); handleSwitch(m); }}
+                >
+                  {switchingModel === m.model ? t('hermes.switching') : t('hermes.switch_model')}
+                </button>
+              )}
+            </div>
           </div>
-        )}
+        ))}
       </div>
+
+      {clientTotalPages > 1 && (
+        <div className={css.ModelCardFooter}>
+          <button
+            className={css.ModelCardPageBtn}
+            disabled={clientPage <= 0}
+            onClick={() => setClientPage((p) => Math.max(0, p - 1))}
+          >
+            <ChevronLeft />
+          </button>
+          <span className={css.ModelCardPageNum}>
+            {clientPage + 1} / {clientTotalPages}
+          </span>
+          <button
+            className={css.ModelCardPageBtn}
+            disabled={clientPage >= clientTotalPages - 1}
+            onClick={() => setClientPage((p) => Math.min(clientTotalPages - 1, p + 1))}
+          >
+            <ChevronRight />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

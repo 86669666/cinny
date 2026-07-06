@@ -231,7 +231,6 @@
   "hermes.switch_model": "Switch",
   "hermes.switching": "Switching...",
   "hermes.no_models": "No models available",
-  "hermes.model_switched": "Switched to {{model}}",
   "settings.formatting": "Formatting",
   "settings.year": "Year",
   "settings.month": "Month",
