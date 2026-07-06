@@ -45,6 +45,7 @@ export function VerificationStatusBadge({
   verificationStatus,
   otherUnverifiedCount,
 }: VerificationStatusBadgeProps) {
+  const { t } = useTranslation();
   if (
     verificationStatus === VerificationStatus.Unknown ||
     typeof otherUnverifiedCount !== 'number'

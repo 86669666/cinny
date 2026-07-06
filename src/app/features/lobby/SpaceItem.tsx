@@ -112,6 +112,7 @@ function UnjoinedSpaceProfile({
   avatarUrl,
   suggested,
 }: UnjoinedSpaceProfileProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
 
   const [joinState, join] = useAsyncCallback<Room, MatrixError, []>(
@@ -183,6 +184,7 @@ function SpaceProfile({
   categoryId,
   handleClose,
 }: SpaceProfileProps) {
+  const { t } = useTranslation();
   return (
     <Chip
       data-category-id={categoryId}

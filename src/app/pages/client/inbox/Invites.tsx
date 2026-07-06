@@ -160,6 +160,7 @@ function InviteCard({
   onNavigate,
   hideAvatar,
 }: InviteCardProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const userId = mx.getSafeUserId();
 
@@ -356,6 +357,7 @@ function InviteFilters({
   unknownInvites,
   spamInvites,
 }: InviteFiltersProps) {
+  const { t } = useTranslation();
   const isKnown = filter === InviteFilter.Known;
   const isUnknown = filter === InviteFilter.Unknown;
   const isSpam = filter === InviteFilter.Spam;
@@ -474,6 +476,7 @@ function UnknownInvites({
   hour24Clock,
   dateFormatString,
 }: UnknownInvitesProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
 
   const [declineAllStatus, declineAll] = useAsyncCallback(

@@ -60,6 +60,7 @@ export function RoomProfileEdit({
   topic,
   onClose,
 }: RoomProfileEditProps) {
+  const { t } = useTranslation();
   const room = useRoom();
   const mx = useMatrixClient();
   const alive = useAlive();

@@ -223,6 +223,7 @@ function RoomNotificationsGroupComp({
   hour24Clock,
   dateFormatString,
 }: RoomNotificationsGroupProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const unread = useRoomUnread(room.roomId, roomToUnreadAtom);

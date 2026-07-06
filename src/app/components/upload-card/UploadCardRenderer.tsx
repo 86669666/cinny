@@ -114,6 +114,7 @@ export function UploadCardRenderer({
   onRemove,
   onComplete,
 }: UploadCardRendererProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const mediaConfig = useMediaConfig();
   const allowSize = mediaConfig['m.upload.size'] || Infinity;
