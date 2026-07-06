@@ -536,6 +536,32 @@ export const ModelCardPageNum = style([
 ]);
 
 // Empty state
+export const ModelCardCloseBtn = style([
+  DefaultReset,
+  {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: toRem(28),
+    height: toRem(28),
+    borderRadius: config.radii.R300,
+    border: 'none',
+    backgroundColor: 'transparent',
+    color: color.SurfaceVariant.OnContainer,
+    opacity: 0.6,
+    cursor: 'pointer',
+    flexShrink: 0,
+    marginLeft: 'auto',
+    transition: 'opacity 0.15s ease',
+    selectors: {
+      '&:hover': {
+        opacity: 1,
+        backgroundColor: color.SurfaceVariant.ContainerActive,
+      },
+    },
+  },
+]);
+
 export const ModelCardSearch = style([
   DefaultReset,
   {
