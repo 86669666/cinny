@@ -26,6 +26,7 @@ import {
 } from '../../../hooks/useSecretStorage';
 import { useCrossSigningActive } from '../../../hooks/useCrossSigning';
 import { BackupRestoreTile } from '../../../components/BackupRestore';
+import { useTranslation } from 'react-i18next';
 
 function DevicesPlaceholder() {
   return (
@@ -40,6 +41,7 @@ type DevicesProps = {
   requestClose: () => void;
 };
 export function Devices({ requestClose }: DevicesProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const crypto = mx.getCrypto();
   const crossSigningActive = useCrossSigningActive();
@@ -70,7 +72,7 @@ export function Devices({ requestClose }: DevicesProps) {
         <Box grow="Yes" gap="200">
           <Box grow="Yes" alignItems="Center" gap="200">
             <Text size="H3" truncate>
-              Devices
+              {t('settings.devices')}
             </Text>
           </Box>
           <Box shrink="No">
@@ -93,7 +95,7 @@ export function Devices({ requestClose }: DevicesProps) {
                   gap="400"
                 >
                   <SettingTile
-                    title="Device Verification"
+                    title={t('settings.device_verification')}
                     description="To verify device identity and grant access to encrypted messages."
                     after={
                       <>

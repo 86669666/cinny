@@ -97,6 +97,7 @@ import {
 } from '../../../hooks/useMemberPowerTag';
 import { useRoomCreatorsTag } from '../../../hooks/useRoomCreatorsTag';
 import { useRoomCreators } from '../../../hooks/useRoomCreators';
+import { useTranslation } from 'react-i18next';
 
 type RoomNotificationsGroup = {
   roomId: string;
@@ -438,7 +439,7 @@ function RoomNotificationsGroupComp({
               onClick={handleMarkAsRead}
               before={<Icon size="100" src={Icons.CheckTwice} />}
             >
-              <Text size="T200">Mark as Read</Text>
+              <Text size="T200">{t('nav.mark_as_read')}</Text>
             </Chip>
           )}
         </Box>
@@ -524,7 +525,7 @@ function RoomNotificationsGroupComp({
                       variant="Secondary"
                       radii="400"
                     >
-                      <Text size="T200">Open</Text>
+                      <Text size="T200">{t('action.open')}</Text>
                     </Chip>
                   </Box>
                 </Box>
@@ -562,6 +563,7 @@ const useNotificationsSearchParams = (
 const DEFAULT_REFRESH_MS = 7000;
 
 export function Notifications() {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const [hideActivity] = useSetting(settingsAtom, 'hideActivity');
   const [mediaAutoLoad] = useSetting(settingsAtom, 'mediaAutoLoad');
@@ -666,7 +668,7 @@ export function Notifications() {
               <Box direction="Column" gap="200">
                 <Box ref={scrollTopAnchorRef} direction="Column" gap="100">
                   <span data-spacing-node />
-                  <Text size="L400">Filter</Text>
+                  <Text size="L400">{t('action.filter')}</Text>
                   <Box gap="200">
                     <Chip
                       onClick={() => setOnlyHighlighted(false)}

@@ -7,11 +7,13 @@ import { SettingTile } from '../../../components/setting-tile';
 import CinnySVG from '../../../../../public/res/svg/cinny.svg';
 import { clearCacheAndReload } from '../../../../client/initMatrix';
 import { useMatrixClient } from '../../../hooks/useMatrixClient';
+import { useTranslation } from 'react-i18next';
 
 type AboutProps = {
   requestClose: () => void;
 };
 export function About({ requestClose }: AboutProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
 
   return (
@@ -20,7 +22,7 @@ export function About({ requestClose }: AboutProps) {
         <Box grow="Yes" gap="200">
           <Box grow="Yes" alignItems="Center" gap="200">
             <Text size="H3" truncate>
-              About
+              {t('settings.about')}
             </Text>
           </Box>
           <Box shrink="No">

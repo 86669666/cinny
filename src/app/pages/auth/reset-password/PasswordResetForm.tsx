@@ -15,6 +15,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import FocusTrap from 'focus-trap-react';
 import { AuthDict, AuthType, MatrixError, createClient } from 'matrix-js-sdk';
+import { useTranslation } from 'react-i18next';
 import { useAutoDiscoveryInfo } from '../../../hooks/useAutoDiscoveryInfo';
 import { AsyncStatus, useAsyncCallback } from '../../../hooks/useAsyncCallback';
 import { useAuthServer } from '../../../hooks/useAuthServer';
@@ -36,6 +37,7 @@ type FormData = {
 };
 
 function ResetPasswordComplete({ email }: { email?: string }) {
+  const { t } = useTranslation();
   const server = useAuthServer();
 
   const navigate = useNavigate();
@@ -60,7 +62,7 @@ function ResetPasswordComplete({ email }: { email?: string }) {
               </Text>
               <Button variant="Primary" onClick={handleClick}>
                 <Text size="B400" as="span">
-                  Login
+                  {t('auth.login')}
                 </Text>
               </Button>
             </Box>
@@ -75,6 +77,7 @@ type PasswordResetFormProps = {
   defaultEmail?: string;
 };
 export function PasswordResetForm({ defaultEmail }: PasswordResetFormProps) {
+  const { t } = useTranslation();
   const server = useAuthServer();
 
   const serverDiscovery = useAutoDiscoveryInfo();
@@ -171,7 +174,7 @@ export function PasswordResetForm({ defaultEmail }: PasswordResetFormProps) {
       </Text>
       <Box direction="Column" gap="100">
         <Text as="label" size="L400" priority="300">
-          Email
+          {t('auth.email')}
         </Text>
         <Input
           defaultValue={defaultEmail}
@@ -193,7 +196,7 @@ export function PasswordResetForm({ defaultEmail }: PasswordResetFormProps) {
           <>
             <Box direction="Column" gap="100">
               <Text as="label" size="L400" priority="300">
-                New Password
+                {t('auth.new_password')}
               </Text>
               <PasswordInput
                 ref={passRef}
@@ -207,7 +210,7 @@ export function PasswordResetForm({ defaultEmail }: PasswordResetFormProps) {
             </Box>
             <Box direction="Column" gap="100">
               <Text as="label" size="L400" priority="300">
-                Confirm Password
+                {t('auth.confirm_password')}
               </Text>
               <PasswordInput
                 ref={confPassRef}
@@ -233,7 +236,7 @@ export function PasswordResetForm({ defaultEmail }: PasswordResetFormProps) {
       <span data-spacing-node />
       <Button type="submit" variant="Primary" size="500">
         <Text as="span" size="B500">
-          Reset Password
+          {t('auth.reset_password')}
         </Text>
       </Button>
 

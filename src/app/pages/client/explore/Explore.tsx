@@ -37,8 +37,10 @@ import { AsyncStatus, useAsyncCallback } from '../../../hooks/useAsyncCallback';
 import { useNavToActivePathMapper } from '../../../hooks/useNavToActivePathMapper';
 import { PageNav, PageNavContent, PageNavHeader } from '../../../components/page';
 import { stopPropagation } from '../../../utils/keyboard';
+import { useTranslation } from 'react-i18next';
 
 export function AddServer() {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const navigate = useNavigate();
   const [dialog, setDialog] = useState(false);
@@ -94,7 +96,7 @@ export function AddServer() {
                 size="500"
               >
                 <Box grow="Yes">
-                  <Text size="H4">Add Server</Text>
+                  <Text size="H4">{t('nav.add_server')}</Text>
                 </Box>
                 <IconButton size="300" onClick={() => setDialog(false)} radii="300">
                   <Icon src={Icons.Cross} />
@@ -109,7 +111,7 @@ export function AddServer() {
               >
                 <Text priority="400">Add server name to explore public communities.</Text>
                 <Box direction="Column" gap="100">
-                  <Text size="L400">Server Name</Text>
+                  <Text size="L400">{t('nav.server_name')}</Text>
                   <Input ref={serverInputRef} name="serverInput" variant="Background" required />
                   {exploreState.status === AsyncStatus.Error && (
                     <Text style={{ color: color.Critical.Main }} size="T300">
@@ -128,11 +130,11 @@ export function AddServer() {
                     }
                     aria-disabled={exploreState.status === AsyncStatus.Loading}
                   >
-                    <Text size="B400">Save</Text>
+                    <Text size="B400">{t('action.save')}</Text>
                   </Button> */}
 
                   <Button type="submit" onClick={handleView} variant="Secondary" fill="Soft">
-                    <Text size="B400">View</Text>
+                    <Text size="B400">{t('action.view')}</Text>
                   </Button>
                 </Box>
               </Box>

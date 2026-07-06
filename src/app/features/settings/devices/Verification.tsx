@@ -35,6 +35,7 @@ import { stopPropagation } from '../../../utils/keyboard';
 import { useAuthMetadata } from '../../../hooks/useAuthMetadata';
 import { withSearchParam } from '../../../pages/pathUtils';
 import { useAccountManagementActions } from '../../../hooks/useAccountManagement';
+import { useTranslation } from 'react-i18next';
 
 type VerificationStatusBadgeProps = {
   verificationStatus: VerificationStatus;
@@ -53,7 +54,7 @@ export function VerificationStatusBadge({
   if (verificationStatus === VerificationStatus.Unverified) {
     return (
       <Badge variant="Critical" fill="Solid" size="500">
-        <Text size="L400">Unverified</Text>
+        <Text size="L400">{t('settings.unverified')}</Text>
       </Badge>
     );
   }
@@ -74,6 +75,7 @@ export function VerificationStatusBadge({
 }
 
 function LearnStartVerificationFromOtherDevice() {
+  const { t } = useTranslation();
   return (
     <Box direction="Column">
       <Text size="T200">Steps to verify from other device.</Text>
@@ -81,7 +83,7 @@ function LearnStartVerificationFromOtherDevice() {
         <ul style={{ margin: `${config.space.S100} 0` }}>
           <li>Open your other verified device.</li>
           <li>
-            Open <i>Settings</i>.
+            Open <i>{t('nav.settings')}</i>.
           </li>
           <li>
             Find this device in <i>Devices/Sessions</i> section.

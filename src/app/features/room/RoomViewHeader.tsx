@@ -72,6 +72,7 @@ import { RoomSettingsPage } from '../../state/roomSettings';
 import { useCallEmbed, useCallStart } from '../../hooks/useCallEmbed';
 import { useLivekitSupport } from '../../hooks/useLivekitSupport';
 import { webRTCSupported } from '../../utils/rtc';
+import { useTranslation } from 'react-i18next';
 
 type RoomMenuProps = {
   room: Room;
@@ -193,7 +194,7 @@ const RoomMenu = forwardRef<HTMLDivElement, RoomMenuProps>(({ room, requestClose
           radii="300"
         >
           <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-            Room Settings
+            {t('room.room_settings')}
           </Text>
         </MenuItem>
         <UseStateProvider initial={false}>
@@ -384,6 +385,7 @@ function CallButton() {
 }
 
 export function RoomViewHeader({ callView }: { callView?: boolean }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
@@ -526,7 +528,7 @@ export function RoomViewHeader({ callView }: { callView?: boolean }) {
               offset={4}
               tooltip={
                 <Tooltip>
-                  <Text>Search</Text>
+                  <Text>{t('action.search')}</Text>
                 </Tooltip>
               }
             >
@@ -604,7 +606,7 @@ export function RoomViewHeader({ callView }: { callView?: boolean }) {
               tooltip={
                 <Tooltip>
                   {callView ? (
-                    <Text>Members</Text>
+                    <Text>{t('room.members')}</Text>
                   ) : (
                     <Text>{peopleDrawer ? 'Hide Members' : 'Show Members'}</Text>
                   )}
@@ -625,7 +627,7 @@ export function RoomViewHeader({ callView }: { callView?: boolean }) {
             offset={4}
             tooltip={
               <Tooltip>
-                <Text>More Options</Text>
+                <Text>{t('action.more_options')}</Text>
               </Tooltip>
             }
           >

@@ -12,6 +12,7 @@ import {
 } from '../../state/room/roomInputDrafts';
 import { useObjectURL } from '../../hooks/useObjectURL';
 import { useMediaConfig } from '../../hooks/useMediaConfig';
+import { useTranslation } from 'react-i18next';
 
 type PreviewImageProps = {
   fileItem: TUploadItem;
@@ -61,6 +62,7 @@ type MediaPreviewProps = {
   children: ReactNode;
 };
 function MediaPreview({ fileItem, onSpoiler, children }: MediaPreviewProps) {
+  const { t } = useTranslation();
   const { originalFile, metadata } = fileItem;
   const fileUrl = useObjectURL(originalFile);
 
@@ -91,7 +93,7 @@ function MediaPreview({ fileItem, onSpoiler, children }: MediaPreviewProps) {
           before={<Icon src={Icons.EyeBlind} size="50" />}
           onClick={() => onSpoiler(!metadata.markedAsSpoiler)}
         >
-          <Text size="B300">Spoiler</Text>
+          <Text size="B300">{t('msg.spoiler')}</Text>
         </Chip>
       </Box>
     </Box>
@@ -156,7 +158,7 @@ export function UploadCardRenderer({
               radii="Pill"
               outlined
             >
-              <Text size="B300">Retry</Text>
+              <Text size="B300">{t('action.retry')}</Text>
             </Chip>
           )}
           <IconButton

@@ -29,6 +29,7 @@ import { LogoutDialog } from '../../../components/LogoutDialog';
 import { stopPropagation } from '../../../utils/keyboard';
 import { useSetting } from '../../../state/hooks/settings';
 import { settingsAtom } from '../../../state/settings';
+import { useTranslation } from 'react-i18next';
 
 export function DeviceTilePlaceholder() {
   return (
@@ -110,6 +111,7 @@ type DeviceRenameProps = {
   refreshDeviceList: () => Promise<void>;
 };
 function DeviceRename({ device, onCancel, onRename, refreshDeviceList }: DeviceRenameProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
 
   const [renameState, rename] = useAsyncCallback<void, MatrixError, [string]>(
@@ -169,7 +171,7 @@ function DeviceRename({ device, onCancel, onRename, refreshDeviceList }: DeviceR
             disabled={renaming}
             before={renaming && <Spinner size="100" variant="Success" fill="Solid" />}
           >
-            <Text size="B300">Save</Text>
+            <Text size="B300">{t('action.save')}</Text>
           </Button>
           <Button
             type="button"
@@ -180,7 +182,7 @@ function DeviceRename({ device, onCancel, onRename, refreshDeviceList }: DeviceR
             onClick={onCancel}
             disabled={renaming}
           >
-            <Text size="B300">Cancel</Text>
+            <Text size="B300">{t('action.cancel')}</Text>
           </Button>
         </Box>
       </Box>
@@ -196,6 +198,7 @@ function DeviceRename({ device, onCancel, onRename, refreshDeviceList }: DeviceR
 }
 
 export function DeviceLogoutBtn() {
+  const { t } = useTranslation();
   const [prompt, setPrompt] = useState(false);
 
   const handleClose = () => setPrompt(false);
@@ -203,7 +206,7 @@ export function DeviceLogoutBtn() {
   return (
     <>
       <Chip variant="Secondary" fill="Soft" radii="Pill" onClick={() => setPrompt(true)}>
-        <Text size="B300">Logout</Text>
+        <Text size="B300">{t('action.logout')}</Text>
       </Chip>
       {prompt && (
         <Overlay open backdrop={<OverlayBackdrop />}>
@@ -236,6 +239,7 @@ export function DeviceDeleteBtn({
   onDeleteToggle,
   disabled,
 }: DeviceDeleteBtnProps) {
+  const { t } = useTranslation();
   return deleted ? (
     <Chip
       variant="Critical"
@@ -244,7 +248,7 @@ export function DeviceDeleteBtn({
       onClick={() => onDeleteToggle(deviceId)}
       disabled={disabled}
     >
-      <Text size="B300">Undo</Text>
+      <Text size="B300">{t('action.undo')}</Text>
     </Chip>
   ) : (
     <Chip
@@ -275,6 +279,7 @@ export function DeviceTile({
   options,
   children,
 }: DeviceTileProps) {
+  const { t } = useTranslation();
   const activeTs = device.last_seen_ts;
   const [details, setDetails] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -307,7 +312,7 @@ export function DeviceTile({
                   onClick={() => setEdit(true)}
                   disabled={disabled}
                 >
-                  <Text size="B300">Edit</Text>
+                  <Text size="B300">{t('action.edit')}</Text>
                 </Chip>
               )}
             </Box>

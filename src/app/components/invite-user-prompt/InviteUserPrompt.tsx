@@ -56,6 +56,7 @@ type InviteUserProps = {
   requestClose: () => void;
 };
 export function InviteUserPrompt({ room, requestClose }: InviteUserProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const alive = useAlive();
 

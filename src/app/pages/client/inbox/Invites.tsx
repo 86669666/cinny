@@ -67,6 +67,7 @@ import { useIgnoredUsers } from '../../../hooks/useIgnoredUsers';
 import { useReportRoomSupported } from '../../../hooks/useReportRoomSupported';
 import { useSetting } from '../../../state/hooks/settings';
 import { settingsAtom } from '../../../state/settings';
+import { useTranslation } from 'react-i18next';
 
 const COMPACT_CARD_WIDTH = 548;
 
@@ -302,7 +303,7 @@ function InviteCard({
               disabled={joining || leaving}
               before={joining ? <Spinner variant="Success" fill="Soft" size="100" /> : undefined}
             >
-              <Text size="B300">Accept</Text>
+              <Text size="B300">{t('action.accept')}</Text>
             </Button>
           </Box>
         </Box>
@@ -391,7 +392,7 @@ function InviteFilters({
           )
         }
       >
-        <Text size="T200">Public</Text>
+        <Text size="T200">{t('room.public')}</Text>
       </Chip>
       <Chip
         variant={isSpam ? 'Critical' : 'Surface'}
@@ -488,7 +489,7 @@ function UnknownInvites({
   return (
     <Box direction="Column" gap="200">
       <Box gap="200" justifyContent="SpaceBetween" alignItems="Center">
-        <Text size="H4">Public</Text>
+        <Text size="H4">{t('room.public')}</Text>
         <Box>
           {invites.length > 0 && (
             <Chip
@@ -692,6 +693,7 @@ function SpamInvites({
 }
 
 export function Invites() {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const { navigateRoom, navigateSpace } = useRoomNavigate();
@@ -776,7 +778,7 @@ export function Invites() {
               <Box ref={containerRef} direction="Column" gap="600">
                 <Box direction="Column" gap="100">
                   <span data-spacing-node />
-                  <Text size="L400">Filter</Text>
+                  <Text size="L400">{t('action.filter')}</Text>
                   <InviteFilters
                     filter={filter}
                     onFilter={setFilter}

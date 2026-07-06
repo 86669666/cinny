@@ -51,6 +51,7 @@ import {
 } from '../../hooks/useMemberPowerTag';
 import { useRoomCreators } from '../../hooks/useRoomCreators';
 import { useRoomCreatorsTag } from '../../hooks/useRoomCreatorsTag';
+import { useTranslation } from 'react-i18next';
 
 type SearchResultGroupProps = {
   room: Room;
@@ -74,6 +75,7 @@ export function SearchResultGroup({
   hour24Clock,
   dateFormatString,
 }: SearchResultGroupProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const highlightRegex = useMemo(() => makeHighlightRegex(highlights), [highlights]);
@@ -303,7 +305,7 @@ export function SearchResultGroup({
                       variant="Secondary"
                       radii="400"
                     >
-                      <Text size="T200">Open</Text>
+                      <Text size="T200">{t('action.open')}</Text>
                     </Chip>
                   </Box>
                 </Box>

@@ -30,6 +30,7 @@ import {
 } from '../hooks/useVerificationRequest';
 import { AsyncStatus, useAsyncCallback } from '../hooks/useAsyncCallback';
 import { ContainerColor } from '../styles/ContainerColor.css';
+import { useTranslation } from 'react-i18next';
 
 const DialogHeaderStyles: CSSProperties = {
   padding: `0 ${config.space.S200} 0 ${config.space.S400}`,
@@ -50,11 +51,12 @@ function WaitingMessage({ message }: WaitingMessageProps) {
 
 type VerificationUnexpectedProps = { message: string; onClose: () => void };
 function VerificationUnexpected({ message, onClose }: VerificationUnexpectedProps) {
+  const { t } = useTranslation();
   return (
     <Box direction="Column" gap="400">
       <Text>{message}</Text>
       <Button variant="Secondary" fill="Soft" onClick={onClose}>
-        <Text size="B400">Close</Text>
+        <Text size="B400">{t('action.close')}</Text>
       </Button>
     </Box>
   );
@@ -73,6 +75,7 @@ type VerificationAcceptProps = {
   onAccept: () => Promise<void>;
 };
 function VerificationAccept({ onAccept }: VerificationAcceptProps) {
+  const { t } = useTranslation();
   const [acceptState, accept] = useAsyncCallback(onAccept);
 
   const accepting = acceptState.status === AsyncStatus.Loading;
@@ -86,7 +89,7 @@ function VerificationAccept({ onAccept }: VerificationAcceptProps) {
         before={accepting && <Spinner size="100" variant="Primary" fill="Solid" />}
         disabled={accepting}
       >
-        <Text size="B400">Accept</Text>
+        <Text size="B400">{t('action.accept')}</Text>
       </Button>
     </Box>
   );
@@ -217,11 +220,12 @@ type VerificationCanceledProps = {
   onClose: () => void;
 };
 function VerificationCanceled({ onClose }: VerificationCanceledProps) {
+  const { t } = useTranslation();
   return (
     <Box direction="Column" gap="400">
       <Text>Verification has been canceled.</Text>
       <Button variant="Secondary" fill="Soft" onClick={onClose}>
-        <Text size="B400">Close</Text>
+        <Text size="B400">{t('action.close')}</Text>
       </Button>
     </Box>
   );
@@ -232,6 +236,7 @@ type DeviceVerificationProps = {
   onExit: () => void;
 };
 export function DeviceVerification({ request, onExit }: DeviceVerificationProps) {
+  const { t } = useTranslation();
   const phase = useVerificationRequestPhase(request);
 
   const handleCancel = useCallback(() => {
@@ -259,7 +264,7 @@ export function DeviceVerification({ request, onExit }: DeviceVerificationProps)
           <Dialog variant="Surface">
             <Header style={DialogHeaderStyles} variant="Surface" size="500">
               <Box grow="Yes">
-                <Text size="H4">Device Verification</Text>
+                <Text size="H4">{t('settings.device_verification')}</Text>
               </Box>
               <IconButton size="300" radii="300" onClick={handleCancel}>
                 <Icon src={Icons.Cross} />

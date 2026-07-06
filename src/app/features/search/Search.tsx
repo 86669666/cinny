@@ -135,6 +135,7 @@ type SearchProps = {
   requestClose: () => void;
 };
 export function Search({ requestClose }: SearchProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const scrollRef = useRef<HTMLDivElement>(null);

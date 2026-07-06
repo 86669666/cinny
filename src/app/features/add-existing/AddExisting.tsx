@@ -54,6 +54,7 @@ import { StateEvent } from '../../../types/matrix/room';
 import { getViaServers } from '../../plugins/via-servers';
 import { rateLimitedActions } from '../../utils/matrix';
 import { useAlive } from '../../hooks/useAlive';
+import { useTranslation } from 'react-i18next';
 
 const SEARCH_OPTS: UseAsyncSearchOptions = {
   limit: 500,
@@ -71,6 +72,7 @@ type AddExistingModalProps = {
   requestClose: () => void;
 };
 export function AddExistingModal({ parentId, space, requestClose }: AddExistingModalProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const alive = useAlive();
@@ -347,7 +349,7 @@ export function AddExistingModal({ parentId, space, requestClose }: AddExistingM
                               disabled={applyingChanges}
                               onClick={resetChanges}
                             >
-                              <Text size="B300">Reset</Text>
+                              <Text size="B300">{t('action.reset')}</Text>
                             </Button>
                             <Button
                               size="300"
@@ -361,7 +363,7 @@ export function AddExistingModal({ parentId, space, requestClose }: AddExistingM
                               }
                               onClick={handleApplyChanges}
                             >
-                              <Text size="B300">Apply Changes</Text>
+                              <Text size="B300">{t('action.apply_changes')}</Text>
                             </Button>
                           </Box>
                         </Box>

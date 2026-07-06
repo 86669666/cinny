@@ -30,11 +30,13 @@ import {
   AccountDataSubmitCallback,
 } from '../../../components/AccountDataEditor';
 import { useMatrixClient } from '../../../hooks/useMatrixClient';
+import { useTranslation } from 'react-i18next';
 
 type DeveloperToolsProps = {
   requestClose: () => void;
 };
 export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
+  const { t } = useTranslation();
   const [developerTools, setDeveloperTools] = useSetting(settingsAtom, 'developerTools');
   const mx = useMatrixClient();
   const room = useRoom();
@@ -103,7 +105,7 @@ export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
           <PageContent>
             <Box direction="Column" gap="700">
               <Box direction="Column" gap="100">
-                <Text size="L400">Options</Text>
+                <Text size="L400">{t('action.options')}</Text>
                 <SequenceCard
                   className={SequenceCardStyle}
                   variant="SurfaceVariant"
@@ -140,7 +142,7 @@ export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
                           radii="300"
                           outlined
                         >
-                          <Text size="B300">Copy</Text>
+                          <Text size="B300">{t('action.copy')}</Text>
                         </Button>
                       }
                     />
@@ -207,7 +209,7 @@ export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
                     {expandState && (
                       <Box direction="Column" gap="100">
                         <Box justifyContent="SpaceBetween">
-                          <Text size="L400">Events</Text>
+                          <Text size="L400">{t('settings.events')}</Text>
                           <Text size="L400">Total: {roomState.size}</Text>
                         </Box>
                         <CutoutCard>
@@ -344,7 +346,7 @@ export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
                     {expandAccountData && (
                       <Box direction="Column" gap="100">
                         <Box justifyContent="SpaceBetween">
-                          <Text size="L400">Events</Text>
+                          <Text size="L400">{t('settings.events')}</Text>
                           <Text size="L400">Total: {accountData.size}</Text>
                         </Box>
                         <CutoutCard>

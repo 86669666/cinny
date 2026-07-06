@@ -5,14 +5,16 @@ import { SequenceCard } from '../../../components/sequence-card';
 import { SequenceCardStyle } from '../styles.css';
 import { SettingTile } from '../../../components/setting-tile';
 import { copyToClipboard } from '../../../utils/dom';
+import { useTranslation } from 'react-i18next';
 
 export function MatrixId() {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const userId = mx.getUserId()!;
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">Matrix ID</Text>
+      <Text size="L400">{t('settings.matrix_id')}</Text>
       <SequenceCard
         className={SequenceCardStyle}
         variant="SurfaceVariant"

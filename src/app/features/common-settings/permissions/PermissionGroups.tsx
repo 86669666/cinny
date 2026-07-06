@@ -19,6 +19,7 @@ import { StateEvent } from '../../../../types/matrix/room';
 import { PowerSwitcher } from '../../../components/power';
 import { AsyncStatus, useAsyncCallback } from '../../../hooks/useAsyncCallback';
 import { useAlive } from '../../../hooks/useAlive';
+import { useTranslation } from 'react-i18next';
 
 const USER_DEFAULT_LOCATION: PermissionLocation = {
   user: true,
@@ -34,6 +35,7 @@ export function PermissionGroups({
   permissionGroups,
   canEdit,
 }: PermissionGroupsProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const room = useRoom();
   const alive = useAlive();
@@ -266,7 +268,7 @@ export function PermissionGroups({
                 disabled={applyingChanges}
                 onClick={resetChanges}
               >
-                <Text size="B300">Reset</Text>
+                <Text size="B300">{t('action.reset')}</Text>
               </Button>
               <Button
                 size="300"
@@ -276,7 +278,7 @@ export function PermissionGroups({
                 before={applyingChanges && <Spinner variant="Success" fill="Solid" size="100" />}
                 onClick={handleApplyChanges}
               >
-                <Text size="B300">Apply Changes</Text>
+                <Text size="B300">{t('action.apply_changes')}</Text>
               </Button>
             </Box>
           </Box>

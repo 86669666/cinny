@@ -46,6 +46,7 @@ function extractText(node: ReactNode): string {
 }
 
 export function HermesCard({ children, page, total }: HermesCardProps) {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(page ? parseInt(page, 10) : 0);
   const totalPages = total ? parseInt(total, 10) : 1;
 

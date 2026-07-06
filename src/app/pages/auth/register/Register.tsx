@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Box, Text, color } from 'folds';
 import { Link, useSearchParams } from 'react-router-dom';
 import { SSOAction } from 'matrix-js-sdk';
+import { useTranslation } from 'react-i18next';
 import { useAuthServer } from '../../../hooks/useAuthServer';
 import { RegisterFlowStatus, useAuthFlows } from '../../../hooks/useAuthFlows';
 import { useParsedLoginFlows } from '../../../hooks/useParsedLoginFlows';
@@ -24,6 +25,7 @@ const useRegisterSearchParams = (searchParams: URLSearchParams): RegisterPathSea
   );
 
 export function Register() {
+  const { t } = useTranslation();
   const server = useAuthServer();
   const { loginFlows, registerFlows } = useAuthFlows();
   const [searchParams] = useSearchParams();
@@ -36,7 +38,7 @@ export function Register() {
   return (
     <Box direction="Column" gap="500">
       <Text size="H2" priority="400">
-        Register
+        {t('auth.register')}
       </Text>
       {registerFlows.status === RegisterFlowStatus.RegistrationDisabled && !sso && (
         <Text style={{ color: color.Critical.Main }} size="T300">
@@ -91,7 +93,7 @@ export function Register() {
         </>
       )}
       <Text align="Center">
-        Already have an account? <Link to={getLoginPath(server)}>Login</Link>
+        {t('auth.already_have_account')} <Link to={getLoginPath(server)}>{t('auth.login')}</Link>
       </Text>
     </Box>
   );

@@ -13,11 +13,13 @@ import {
 } from '../../../components/AccountDataEditor';
 import { copyToClipboard } from '../../../utils/dom';
 import { AccountData } from './AccountData';
+import { useTranslation } from 'react-i18next';
 
 type DeveloperToolsProps = {
   requestClose: () => void;
 };
 export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const [developerTools, setDeveloperTools] = useSetting(settingsAtom, 'developerTools');
   const [expand, setExpend] = useState(false);
@@ -47,7 +49,7 @@ export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
         <Box grow="Yes" gap="200">
           <Box grow="Yes" alignItems="Center" gap="200">
             <Text size="H3" truncate>
-              Developer Tools
+              {t('settings.developer_tools')}
             </Text>
           </Box>
           <Box shrink="No">
@@ -70,7 +72,7 @@ export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
                   gap="400"
                 >
                   <SettingTile
-                    title="Enable Developer Tools"
+                    title={t('settings.enable_dev_tools')}
                     after={
                       <Switch
                         variant="Primary"

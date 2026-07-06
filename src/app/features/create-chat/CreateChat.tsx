@@ -12,11 +12,13 @@ import { millisecondsToMinutes } from '../../utils/common';
 import { createRoomEncryptionState } from '../../components/create-room';
 import { useAlive } from '../../hooks/useAlive';
 import { getDirectRoomPath } from '../../pages/pathUtils';
+import { useTranslation } from 'react-i18next';
 
 type CreateChatProps = {
   defaultUserId?: string;
 };
 export function CreateChat({ defaultUserId }: CreateChatProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const alive = useAlive();
   const navigate = useNavigate();
@@ -78,7 +80,7 @@ export function CreateChat({ defaultUserId }: CreateChatProps) {
         <Text size="L400">User ID</Text>
         <Input
           defaultValue={defaultUserId}
-          placeholder="@username:server"
+          placeholder={t('chat.username_server')}
           name="userIdInput"
           variant="SurfaceVariant"
           size="500"
@@ -106,7 +108,7 @@ export function CreateChat({ defaultUserId }: CreateChatProps) {
           gap="500"
         >
           <SettingTile
-            title="End-to-End Encryption"
+            title={t('room.e2e_encryption')}
             description="Once this feature is enabled, it can't be disabled after the room is created."
             after={
               <Switch
@@ -142,7 +144,7 @@ export function CreateChat({ defaultUserId }: CreateChatProps) {
           disabled={disabled}
           before={loading && <Spinner variant="Primary" fill="Solid" size="200" />}
         >
-          <Text size="B500">Create</Text>
+          <Text size="B500">{t('action.create')}</Text>
         </Button>
       </Box>
     </Box>

@@ -3,6 +3,7 @@ import { Box, Text, Icon, Icons, config, IconSrc } from 'folds';
 import { SequenceCard } from '../sequence-card';
 import { SettingTile } from '../setting-tile';
 import { CreateRoomAccess } from './types';
+import { useTranslation } from 'react-i18next';
 
 type CreateRoomAccessSelectorProps = {
   value?: CreateRoomAccess;
@@ -18,6 +19,7 @@ export function CreateRoomAccessSelector({
   disabled,
   getIcon,
 }: CreateRoomAccessSelectorProps) {
+  const { t } = useTranslation();
   return (
     <Box shrink="No" direction="Column" gap="100">
       {canRestrict && (
@@ -58,7 +60,7 @@ export function CreateRoomAccessSelector({
           before={<Icon size="400" src={getIcon(CreateRoomAccess.Private)} />}
           after={value === CreateRoomAccess.Private && <Icon src={Icons.Check} />}
         >
-          <Text size="H6">Private</Text>
+          <Text size="H6">{t('room.private')}</Text>
           <Text size="T300" priority="300">
             Only people with invite can join.
           </Text>
@@ -79,7 +81,7 @@ export function CreateRoomAccessSelector({
           before={<Icon size="400" src={getIcon(CreateRoomAccess.Public)} />}
           after={value === CreateRoomAccess.Public && <Icon src={Icons.Check} />}
         >
-          <Text size="H6">Public</Text>
+          <Text size="H6">{t('room.public')}</Text>
           <Text size="T300" priority="300">
             Anyone with the address can join.
           </Text>

@@ -33,12 +33,14 @@ import { useAlive } from '../../../hooks/useAlive';
 import { StateEvent } from '../../../../types/matrix/room';
 import { RoomPermissionsAPI } from '../../../hooks/useRoomPermissions';
 import { getMxIdServer } from '../../../utils/matrix';
+import { useTranslation } from 'react-i18next';
 
 type RoomPublishedAddressesProps = {
   permissions: RoomPermissionsAPI;
 };
 
 export function RoomPublishedAddresses({ permissions }: RoomPublishedAddressesProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const room = useRoom();
 
@@ -64,7 +66,7 @@ export function RoomPublishedAddresses({ permissions }: RoomPublishedAddressesPr
         title="Published Addresses"
         description={
           <span>
-            If access is <b>Public</b>, Published addresses will be used to join by anyone.
+            If access is <b>{t('room.public')}</b>, Published addresses will be used to join by anyone.
           </span>
         }
       />
@@ -131,6 +133,7 @@ export function RoomPublishedAddresses({ permissions }: RoomPublishedAddressesPr
 }
 
 function LocalAddressInput({ addLocalAlias }: { addLocalAlias: (alias: string) => Promise<void> }) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const userId = mx.getSafeUserId();
   const server = getMxIdServer(userId);
@@ -183,7 +186,7 @@ function LocalAddressInput({ addLocalAlias }: { addLocalAlias: (alias: string) =
             disabled={adding}
             before={adding && <Spinner size="100" variant="Success" fill="Solid" />}
           >
-            <Text size="B400">Save</Text>
+            <Text size="B400">{t('action.save')}</Text>
           </Button>
         </Box>
       </Box>
@@ -315,7 +318,7 @@ function LocalAddressesList({
                 )
               }
             >
-              <Text size="B300">Delete</Text>
+              <Text size="B300">{t('action.delete')}</Text>
             </Chip>
           </Box>
         </Box>
@@ -360,6 +363,7 @@ function LocalAddressesList({
 }
 
 export function RoomLocalAddresses({ permissions }: { permissions: RoomPermissionsAPI }) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const room = useRoom();
 
@@ -406,7 +410,7 @@ export function RoomLocalAddresses({ permissions }: { permissions: RoomPermissio
           {localAliasesState.status === AsyncStatus.Loading && (
             <Box gap="100">
               <Spinner variant="Secondary" size="100" />
-              <Text size="T200">Loading...</Text>
+              <Text size="T200">{t('misc.loading')}</Text>
             </Box>
           )}
           {localAliasesState.status === AsyncStatus.Success &&

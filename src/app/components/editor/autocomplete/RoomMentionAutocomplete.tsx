@@ -18,6 +18,7 @@ import { allRoomsAtom } from '../../../state/room-list/roomList';
 import { factoryRoomIdByActivity } from '../../../utils/sort';
 import { RoomAvatar, RoomIcon } from '../../room-avatar';
 import { getViaServers } from '../../../plugins/via-servers';
+import { useTranslation } from 'react-i18next';
 
 type MentionAutoCompleteHandler = (roomAliasOrId: string, name: string) => void;
 
@@ -76,6 +77,7 @@ export function RoomMentionAutocomplete({
   query,
   requestClose,
 }: RoomMentionAutocompleteProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const mDirects = useAtomValue(mDirectAtom);
 
@@ -133,7 +135,7 @@ export function RoomMentionAutocomplete({
   });
 
   return (
-    <AutocompleteMenu headerContent={<Text size="L400">Rooms</Text>} requestClose={requestClose}>
+    <AutocompleteMenu headerContent={<Text size="L400">{t('nav.rooms')}</Text>} requestClose={requestClose}>
       {autoCompleteRoomIds.length === 0 ? (
         <UnknownRoomMentionItem query={query} handleAutocomplete={handleAutocomplete} />
       ) : (

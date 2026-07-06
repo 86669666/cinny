@@ -10,6 +10,7 @@ import { getNotificationState, usePermissionState } from '../../../hooks/usePerm
 import { useEmailNotifications } from '../../../hooks/useEmailNotifications';
 import { AsyncStatus, useAsyncCallback } from '../../../hooks/useAsyncCallback';
 import { useMatrixClient } from '../../../hooks/useMatrixClient';
+import { useTranslation } from 'react-i18next';
 
 function EmailNotification() {
   const mx = useMatrixClient();
@@ -85,6 +86,7 @@ function EmailNotification() {
 }
 
 export function SystemNotification() {
+  const { t } = useTranslation();
   const notifPermission = usePermissionState('notifications', getNotificationState());
   const [showNotifications, setShowNotifications] = useSetting(settingsAtom, 'showNotifications');
   const [isNotificationSounds, setIsNotificationSounds] = useSetting(
@@ -121,7 +123,7 @@ export function SystemNotification() {
           after={
             notifPermission === 'prompt' ? (
               <Button size="300" radii="300" onClick={requestNotificationPermission}>
-                <Text size="B300">Enable</Text>
+                <Text size="B300">{t('action.enable')}</Text>
               </Button>
             ) : (
               <Switch

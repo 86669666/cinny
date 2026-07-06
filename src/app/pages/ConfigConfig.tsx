@@ -1,13 +1,15 @@
 import { Box, Button, Dialog, Spinner, Text, color, config } from 'folds';
 import React from 'react';
 import { SplashScreen } from '../components/splash-screen';
+import { useTranslation } from 'react-i18next';
 
 export function ConfigConfigLoading() {
+  const { t } = useTranslation();
   return (
     <SplashScreen>
       <Box grow="Yes" direction="Column" gap="400" alignItems="Center" justifyContent="Center">
         <Spinner variant="Secondary" size="600" />
-        <Text>Heating up</Text>
+        <Text>{t('misc.heating_up')}</Text>
       </Box>
     </SplashScreen>
   );

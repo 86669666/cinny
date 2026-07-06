@@ -38,6 +38,7 @@ import { useOpenCreateSpaceModal } from '../../state/hooks/createSpaceModal';
 import { AddExistingModal } from '../add-existing';
 import { CreateRoomType } from '../../components/create-room/types';
 import { BetaNoticeBadge } from '../../components/BetaNoticeBadge';
+import { useTranslation } from 'react-i18next';
 
 function SpaceProfileLoading() {
   return (
@@ -59,6 +60,7 @@ type InaccessibleSpaceProfileProps = {
   suggested?: boolean;
 };
 function InaccessibleSpaceProfile({ roomId, suggested }: InaccessibleSpaceProfileProps) {
+  const { t } = useTranslation();
   return (
     <Chip
       as="span"
@@ -88,7 +90,7 @@ function InaccessibleSpaceProfile({ roomId, suggested }: InaccessibleSpaceProfil
         </Badge>
         {suggested && (
           <Badge variant="Success" fill="Soft" radii="Pill" outlined>
-            <Text size="L400">Suggested</Text>
+            <Text size="L400">{t('nav.suggested')}</Text>
           </Badge>
         )}
       </Box>
@@ -148,7 +150,7 @@ function UnjoinedSpaceProfile({
         </Text>
         {suggested && (
           <Badge variant="Success" fill="Soft" radii="Pill" outlined>
-            <Text size="L400">Suggested</Text>
+            <Text size="L400">{t('nav.suggested')}</Text>
           </Badge>
         )}
         {joinState.status === AsyncStatus.Error && (
@@ -210,7 +212,7 @@ function SpaceProfile({
         </Text>
         {suggested && (
           <Badge variant="Success" fill="Soft" radii="Pill" outlined>
-            <Text size="L400">Suggested</Text>
+            <Text size="L400">{t('nav.suggested')}</Text>
           </Badge>
         )}
       </Box>

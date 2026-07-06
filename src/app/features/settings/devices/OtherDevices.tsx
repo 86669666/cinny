@@ -15,6 +15,7 @@ import { useAuthMetadata } from '../../../hooks/useAuthMetadata';
 import { withSearchParam } from '../../../pages/pathUtils';
 import { useAccountManagementActions } from '../../../hooks/useAccountManagement';
 import { SettingTile } from '../../../components/setting-tile';
+import { useTranslation } from 'react-i18next';
 
 type OtherDevicesProps = {
   devices: IMyDevice[];
@@ -22,6 +23,7 @@ type OtherDevicesProps = {
   showVerification?: boolean;
 };
 export function OtherDevices({ devices, refreshDeviceList, showVerification }: OtherDevicesProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const crypto = mx.getCrypto();
   const authMetadata = useAuthMetadata();
@@ -124,7 +126,7 @@ export function OtherDevices({ devices, refreshDeviceList, showVerification }: O
                   outlined
                   onClick={handleDashboardOIDC}
                 >
-                  <Text size="B300">Open</Text>
+                  <Text size="B300">{t('action.open')}</Text>
                 </Button>
               }
             />
@@ -234,7 +236,7 @@ export function OtherDevices({ devices, refreshDeviceList, showVerification }: O
                 disabled={deleting}
                 onClick={handleCancelDelete}
               >
-                <Text size="B300">Cancel</Text>
+                <Text size="B300">{t('action.cancel')}</Text>
               </Button>
               <Button
                 size="300"
@@ -244,7 +246,7 @@ export function OtherDevices({ devices, refreshDeviceList, showVerification }: O
                 before={deleting && <Spinner variant="Critical" fill="Solid" size="100" />}
                 onClick={() => deleteDevices()}
               >
-                <Text size="B300">Logout</Text>
+                <Text size="B300">{t('action.logout')}</Text>
               </Button>
             </Box>
           </Box>

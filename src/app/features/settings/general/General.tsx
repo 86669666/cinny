@@ -50,6 +50,7 @@ import { useMessageLayoutItems } from '../../../hooks/useMessageLayout';
 import { useMessageSpacingItems } from '../../../hooks/useMessageSpacing';
 import { useDateFormatItems } from '../../../hooks/useDateFormat';
 import { SequenceCardStyle } from '../styles.css';
+import { useTranslation } from 'react-i18next';
 
 type ThemeSelectorProps = {
   themeNames: Record<string, string>;
@@ -304,13 +305,14 @@ function PageZoomInput() {
 }
 
 function Appearance() {
+  const { t } = useTranslation();
   const [systemTheme, setSystemTheme] = useSetting(settingsAtom, 'useSystemTheme');
   const [monochromeMode, setMonochromeMode] = useSetting(settingsAtom, 'monochromeMode');
   const [twitterEmoji, setTwitterEmoji] = useSetting(settingsAtom, 'twitterEmoji');
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">Appearance</Text>
+      <Text size="L400">{t('settings.appearance')}</Text>
       <SequenceCard
         className={SequenceCardStyle}
         variant="SurfaceVariant"
@@ -348,7 +350,7 @@ function Appearance() {
       </SequenceCard>
 
       <SequenceCard className={SequenceCardStyle} variant="SurfaceVariant" direction="Column">
-        <SettingTile title="Page Zoom" after={<PageZoomInput />} />
+        <SettingTile title={t('settings.page_zoom')} after={<PageZoomInput />} />
       </SequenceCard>
     </Box>
   );
@@ -688,11 +690,12 @@ function SelectDateFormat() {
 }
 
 function DateAndTime() {
+  const { t } = useTranslation();
   const [hour24Clock, setHour24Clock] = useSetting(settingsAtom, 'hour24Clock');
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">Date & Time</Text>
+      <Text size="L400">{t('settings.date_time')}</Text>
       <SequenceCard className={SequenceCardStyle} variant="SurfaceVariant" direction="Column">
         <SettingTile
           title="24-Hour Time Format"
@@ -708,13 +711,14 @@ function DateAndTime() {
 }
 
 function Editor() {
+  const { t } = useTranslation();
   const [enterForNewline, setEnterForNewline] = useSetting(settingsAtom, 'enterForNewline');
   const [isMarkdown, setIsMarkdown] = useSetting(settingsAtom, 'isMarkdown');
   const [hideActivity, setHideActivity] = useSetting(settingsAtom, 'hideActivity');
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">Editor</Text>
+      <Text size="L400">{t('settings.editor')}</Text>
       <SequenceCard className={SequenceCardStyle} variant="SurfaceVariant" direction="Column">
         <SettingTile
           title="ENTER for Newline"
@@ -880,6 +884,7 @@ function SelectMessageSpacing() {
 }
 
 function Messages() {
+  const { t } = useTranslation();
   const [legacyUsernameColor, setLegacyUsernameColor] = useSetting(
     settingsAtom,
     'legacyUsernameColor'
@@ -899,12 +904,12 @@ function Messages() {
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">Messages</Text>
+      <Text size="L400">{t('settings.messages')}</Text>
       <SequenceCard className={SequenceCardStyle} variant="SurfaceVariant" direction="Column">
-        <SettingTile title="Message Layout" after={<SelectMessageLayout />} />
+        <SettingTile title={t('settings.message_layout')} after={<SelectMessageLayout />} />
       </SequenceCard>
       <SequenceCard className={SequenceCardStyle} variant="SurfaceVariant" direction="Column">
-        <SettingTile title="Message Spacing" after={<SelectMessageSpacing />} />
+        <SettingTile title={t('settings.message_spacing')} after={<SelectMessageSpacing />} />
       </SequenceCard>
       <SequenceCard className={SequenceCardStyle} variant="SurfaceVariant" direction="Column">
         <SettingTile
@@ -982,13 +987,14 @@ type GeneralProps = {
   requestClose: () => void;
 };
 export function General({ requestClose }: GeneralProps) {
+  const { t } = useTranslation();
   return (
     <Page>
       <PageHeader outlined={false}>
         <Box grow="Yes" gap="200">
           <Box grow="Yes" alignItems="Center" gap="200">
             <Text size="H3" truncate>
-              General
+              {t('settings.general')}
             </Text>
           </Box>
           <Box shrink="No">

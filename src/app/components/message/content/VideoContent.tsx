@@ -32,6 +32,7 @@ import {
 } from '../../../utils/matrix';
 import { useMediaAuthentication } from '../../../hooks/useMediaAuthentication';
 import { validBlurHash } from '../../../utils/blurHash';
+import { useTranslation } from 'react-i18next';
 
 type RenderVideoProps = {
   title: string;
@@ -179,7 +180,7 @@ export const VideoContent = as<'div', VideoContentProps>(
                     setBlurred(false);
                   }}
                 >
-                  <Text size="B300">Spoiler</Text>
+                  <Text size="B300">{t('msg.spoiler')}</Text>
                 </Chip>
               )}
             </TooltipProvider>
@@ -214,7 +215,7 @@ export const VideoContent = as<'div', VideoContentProps>(
                   onClick={handleRetry}
                   before={<Icon size="Inherit" src={Icons.Warning} filled />}
                 >
-                  <Text size="B300">Retry</Text>
+                  <Text size="B300">{t('action.retry')}</Text>
                 </Button>
               )}
             </TooltipProvider>

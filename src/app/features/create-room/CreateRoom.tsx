@@ -42,6 +42,7 @@ import {
 import { RoomType } from '../../../types/matrix/room';
 import { CreateRoomTypeSelector } from '../../components/create-room/CreateRoomTypeSelector';
 import { getRoomIconSrc } from '../../utils/room';
+import { useTranslation } from 'react-i18next';
 
 const getCreateRoomAccessToIcon = (access: CreateRoomAccess, type?: CreateRoomType) => {
   const isVoiceRoom = type === CreateRoomType.VoiceRoom;
@@ -70,6 +71,7 @@ export function CreateRoomForm({
   space,
   onCreate,
 }: CreateRoomFormProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const alive = useAlive();
 
@@ -172,7 +174,7 @@ export function CreateRoomForm({
         </Box>
       )}
       <Box direction="Column" gap="100">
-        <Text size="L400">Access</Text>
+        <Text size="L400">{t('room.access')}</Text>
         <CreateRoomAccessSelector
           value={access}
           onSelect={setAccess}
@@ -182,7 +184,7 @@ export function CreateRoomForm({
         />
       </Box>
       <Box shrink="No" direction="Column" gap="100">
-        <Text size="L400">Name</Text>
+        <Text size="L400">{t('chat.name')}</Text>
         <Input
           required
           before={<Icon size="100" src={getCreateRoomAccessToIcon(access, type)} />}
@@ -210,7 +212,7 @@ export function CreateRoomForm({
 
       <Box shrink="No" direction="Column" gap="100">
         <Box gap="200" alignItems="End">
-          <Text size="L400">Options</Text>
+          <Text size="L400">{t('action.options')}</Text>
           <Box grow="Yes" justifyContent="End">
             <Chip
               radii="Pill"
@@ -218,7 +220,7 @@ export function CreateRoomForm({
               onClick={() => setAdvance(!advance)}
               type="button"
             >
-              <Text size="T200">Advanced Options</Text>
+              <Text size="T200">{t('room.advanced_options')}</Text>
             </Chip>
           </Box>
         </Box>
@@ -245,7 +247,7 @@ export function CreateRoomForm({
               gap="500"
             >
               <SettingTile
-                title="End-to-End Encryption"
+                title={t('room.e2e_encryption')}
                 description="Once this feature is enabled, it can't be disabled after the room is created."
                 after={
                   <Switch
@@ -333,7 +335,7 @@ export function CreateRoomForm({
           disabled={disabled}
           before={loading && <Spinner variant="Primary" fill="Solid" size="200" />}
         >
-          <Text size="B500">Create</Text>
+          <Text size="B500">{t('action.create')}</Text>
         </Button>
       </Box>
     </Box>

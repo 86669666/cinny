@@ -43,6 +43,7 @@ import { allRoomsAtom } from '../../../state/room-list/roomList';
 import { AccountDataEvent } from '../../../../types/matrix/accountData';
 import { AsyncStatus, useAsyncCallback } from '../../../hooks/useAsyncCallback';
 import { stopPropagation } from '../../../utils/keyboard';
+import { useTranslation } from 'react-i18next';
 
 function GlobalPackSelector({
   packs,
@@ -251,6 +252,7 @@ type GlobalPacksProps = {
   onViewPack: (imagePack: ImagePack) => void;
 };
 export function GlobalPacks({ onViewPack }: GlobalPacksProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const globalPacks = useGlobalImagePacks();
@@ -408,7 +410,7 @@ export function GlobalPacks({ onViewPack }: GlobalPacksProps) {
                 outlined
                 onClick={() => onViewPack(pack)}
               >
-                <Text size="B300">View</Text>
+                <Text size="B300">{t('action.view')}</Text>
               </Button>
             )
           }
@@ -519,7 +521,7 @@ export function GlobalPacks({ onViewPack }: GlobalPacksProps) {
                 disabled={applyingChanges}
                 onClick={resetChanges}
               >
-                <Text size="B300">Reset</Text>
+                <Text size="B300">{t('action.reset')}</Text>
               </Button>
               <Button
                 size="300"
@@ -529,7 +531,7 @@ export function GlobalPacks({ onViewPack }: GlobalPacksProps) {
                 before={applyingChanges && <Spinner variant="Success" fill="Solid" size="100" />}
                 onClick={applyChanges}
               >
-                <Text size="B300">Apply Changes</Text>
+                <Text size="B300">{t('action.apply_changes')}</Text>
               </Button>
             </Box>
           </Box>

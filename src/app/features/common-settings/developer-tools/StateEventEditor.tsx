@@ -31,6 +31,7 @@ import { usePowerLevels } from '../../../hooks/usePowerLevels';
 import { useTextAreaCodeEditor } from '../../../hooks/useTextAreaCodeEditor';
 import { useRoomCreators } from '../../../hooks/useRoomCreators';
 import { useRoomPermissions } from '../../../hooks/useRoomPermissions';
+import { useTranslation } from 'react-i18next';
 
 const EDITOR_INTENT_SPACE_COUNT = 2;
 
@@ -41,6 +42,7 @@ type StateEventEditProps = {
   requestClose: () => void;
 };
 function StateEventEdit({ type, stateKey, content, requestClose }: StateEventEditProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const room = useRoom();
   const alive = useAlive();
@@ -138,7 +140,7 @@ function StateEventEdit({ type, stateKey, content, requestClose }: StateEventEdi
                   disabled={submitting}
                   before={submitting && <Spinner variant="Primary" fill="Solid" size="300" />}
                 >
-                  <Text size="B300">Save</Text>
+                  <Text size="B300">{t('action.save')}</Text>
                 </Button>
                 <Button
                   variant="Secondary"
@@ -148,7 +150,7 @@ function StateEventEdit({ type, stateKey, content, requestClose }: StateEventEdi
                   onClick={requestClose}
                   disabled={submitting}
                 >
-                  <Text size="B300">Cancel</Text>
+                  <Text size="B300">{t('action.cancel')}</Text>
                 </Button>
               </Box>
             }
@@ -194,6 +196,7 @@ type StateEventViewProps = {
   onEditContent?: (content: object) => void;
 };
 function StateEventView({ content, eventJSONStr, onEditContent }: StateEventViewProps) {
+  const { t } = useTranslation();
   return (
     <Box direction="Column" style={{ padding: config.space.S400 }} gap="400">
       <Box grow="Yes" direction="Column" gap="100">
@@ -210,7 +213,7 @@ function StateEventView({ content, eventJSONStr, onEditContent }: StateEventView
                 outlined
                 onClick={() => onEditContent(content)}
               >
-                <Text size="B300">Edit</Text>
+                <Text size="B300">{t('action.edit')}</Text>
               </Chip>
             </Box>
           )}
@@ -241,6 +244,7 @@ export type StateEventEditorProps = StateEventInfo & {
 };
 
 export function StateEventEditor({ type, stateKey, requestClose }: StateEventEditorProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const room = useRoom();
   const stateEvent = useStateEvent(room, type as unknown as StateEvent, stateKey);
@@ -271,7 +275,7 @@ export function StateEventEditor({ type, stateKey, requestClose }: StateEventEdi
               onClick={requestClose}
               before={<Icon size="100" src={Icons.ArrowLeft} />}
             >
-              <Text size="T300">Developer Tools</Text>
+              <Text size="T300">{t('settings.developer_tools')}</Text>
             </Chip>
           </Box>
           <Box shrink="No">

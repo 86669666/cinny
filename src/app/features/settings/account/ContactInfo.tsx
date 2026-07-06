@@ -5,8 +5,10 @@ import { SequenceCardStyle } from '../styles.css';
 import { SettingTile } from '../../../components/setting-tile';
 import { useMatrixClient } from '../../../hooks/useMatrixClient';
 import { AsyncStatus, useAsyncCallback } from '../../../hooks/useAsyncCallback';
+import { useTranslation } from 'react-i18next';
 
 export function ContactInformation() {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const [threePIdsState, loadThreePIds] = useAsyncCallback(
     useCallback(() => mx.getThreePids(), [mx])
@@ -22,14 +24,14 @@ export function ContactInformation() {
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">Contact Information</Text>
+      <Text size="L400">{t('settings.email_address')}</Text>
       <SequenceCard
         className={SequenceCardStyle}
         variant="SurfaceVariant"
         direction="Column"
         gap="400"
       >
-        <SettingTile title="Email Address" description="Email address attached to your account.">
+        <SettingTile title={t('settings.email_address')} description={t('settings.email_address_desc')}>
           <Box>
             {emailIds?.map((email) => (
               <Chip key={email.address} as="span" variant="Secondary" radii="Pill">
