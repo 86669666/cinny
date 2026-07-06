@@ -273,5 +273,6 @@
   "settings.formatting_options": "格式选项",
   "settings.auto_formatting": "自动格式化",
   "hermes.page_n": "第 {{current}} / {{total}} 页",
-  "hermes.search_models": "搜索模型..."
+  "hermes.search_models": "搜索模型...",
+  "hermes.all": "全部"
 }

@@ -98,29 +98,47 @@ export function ModelCard({ children, page, total }: ModelCardProps) {
   const [switchingModel, setSwitchingModel] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const [clientPage, setClientPage] = useState(0);
+  const [activeProvider, setActiveProvider] = useState<string | null>(null);
 
   const models = parseModels(children);
   const serverTotalPages = total ? parseInt(total, 10) : 1;
   const serverPage = page ? parseInt(page, 10) : 0;
 
+  // Derive ordered unique providers
+  const providers = useMemo(() => {
+    const seen = new Set<string>();
+    const result: string[] = [];
+    for (const m of models) {
+      if (m.provider && !seen.has(m.provider)) {
+        seen.add(m.provider);
+        result.push(m.provider);
+      }
+    }
+    return result;
+  }, [models]);
+
   const filtered = useMemo(() => {
-    if (!query.trim()) return models;
-    const q = query.toLowerCase();
-    return models.filter(
-      (m) =>
-        m.model.toLowerCase().includes(q) ||
-        m.label.toLowerCase().includes(q) ||
-        m.provider.toLowerCase().includes(q),
-    );
-  }, [models, query]);
+    let list = models;
+    if (activeProvider) {
+      list = list.filter((m) => m.provider === activeProvider);
+    }
+    if (query.trim()) {
+      const q = query.toLowerCase();
+      list = list.filter(
+        (m) =>
+          m.model.toLowerCase().includes(q) ||
+          m.label.toLowerCase().includes(q) ||
+          m.provider.toLowerCase().includes(q),
+      );
+    }
+    return list;
+  }, [models, activeProvider, query]);
 
   const clientTotalPages = Math.max(1, Math.ceil(filtered.length / MODELS_PER_PAGE));
   const pagedModels = filtered.slice(
     clientPage * MODELS_PER_PAGE,
     (clientPage + 1) * MODELS_PER_PAGE,
   );
-
-  // Reset page when query changes
   const safeClientPage = clientPage >= clientTotalPages ? 0 : clientPage;
 
   const handleSwitch = (modelEntry: ModelEntry) => {
@@ -134,6 +152,12 @@ export function ModelCard({ children, page, total }: ModelCardProps) {
       bubbles: true,
     });
     document.dispatchEvent(event);
+  };
+
+  const selectProvider = (provider: string | null) => {
+    setActiveProvider(provider);
+    setQuery('');
+    setClientPage(0);
   };
 
   if (dismissed || models.length === 0) return null;
@@ -159,6 +183,27 @@ export function ModelCard({ children, page, total }: ModelCardProps) {
           </span>
         )}
       </div>
+
+      {/* Provider tabs — only show when > 1 provider */}
+      {providers.length > 1 && (
+        <div className={css.ModelCardTabs}>
+          <button
+            className={activeProvider === null ? css.ModelCardTabActive : css.ModelCardTab}
+            onClick={() => selectProvider(null)}
+          >
+            {t('hermes.all')}
+          </button>
+          {providers.map((p) => (
+            <button
+              key={p}
+              className={activeProvider === p ? css.ModelCardTabActive : css.ModelCardTab}
+              onClick={() => selectProvider(p)}
+            >
+              {p}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Search */}
       <div className={css.ModelCardSearch}>
@@ -225,7 +270,7 @@ export function ModelCard({ children, page, total }: ModelCardProps) {
         )}
       </div>
 
-      {/* Pagination (only when more than one page) */}
+      {/* Pagination */}
       {clientTotalPages > 1 && (
         <div className={css.ModelCardFooter}>
           <button

@@ -535,6 +535,52 @@ export const ModelCardPageNum = style([
   },
 ]);
 
+// Provider tab bar
+export const ModelCardTabs = style([
+  DefaultReset,
+  {
+    display: 'flex',
+    gap: config.space.S100,
+    padding: `${config.space.S200} ${config.space.S400} 0`,
+    backgroundColor: color.Surface.Container,
+    overflowX: 'auto',
+    scrollbarWidth: 'none',
+    selectors: { '&::-webkit-scrollbar': { display: 'none' } },
+  },
+]);
+
+export const ModelCardTab = style([
+  DefaultReset,
+  {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: config.space.S100,
+    padding: `${config.space.S100} ${config.space.S300}`,
+    borderRadius: `${config.radii.Pill} ${config.radii.Pill} 0 0`,
+    border: 'none',
+    backgroundColor: 'transparent',
+    color: color.SurfaceVariant.OnContainer,
+    fontSize: config.fontSize.T200,
+    fontWeight: config.fontWeight.W500,
+    cursor: 'pointer',
+    whiteSpace: 'nowrap',
+    transition: 'all 0.15s ease',
+    selectors: {
+      '&:hover': {
+        backgroundColor: color.SurfaceVariant.Container,
+      },
+    },
+  },
+]);
+
+export const ModelCardTabActive = style([
+  ModelCardTab,
+  {
+    color: color.Primary.Main,
+    backgroundColor: color.Primary.Container,
+  },
+]);
+
 // Empty state
 export const ModelCardCloseBtn = style([
   DefaultReset,
