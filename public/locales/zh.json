@@ -272,5 +272,6 @@
   "misc.yet_another_client": "又一个 Matrix 客户端。",
   "settings.formatting_options": "格式选项",
   "settings.auto_formatting": "自动格式化",
-  "hermes.page_n": "第 {{current}} / {{total}} 页"
+  "hermes.page_n": "第 {{current}} / {{total}} 页",
+  "hermes.search_models": "搜索模型..."
 }

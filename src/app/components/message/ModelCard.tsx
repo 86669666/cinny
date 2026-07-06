@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'folds';
 import * as css from '../../styles/CustomHtml.css';
@@ -55,6 +55,15 @@ function parseModels(children: ReactNode): ModelEntry[] {
 
 // ── Icons (inline SVG, no dependency) ──
 
+function SearchIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </svg>
+  );
+}
+
 function ChevronLeft() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -87,17 +96,32 @@ export function ModelCard({ children, page, total }: ModelCardProps) {
   const { t } = useTranslation();
   const [dismissed, setDismissed] = useState(false);
   const [switchingModel, setSwitchingModel] = useState<string | null>(null);
+  const [query, setQuery] = useState('');
+  const [clientPage, setClientPage] = useState(0);
 
   const models = parseModels(children);
   const serverTotalPages = total ? parseInt(total, 10) : 1;
   const serverPage = page ? parseInt(page, 10) : 0;
 
-  const [clientPage, setClientPage] = useState(0);
-  const clientTotalPages = Math.max(1, Math.ceil(models.length / MODELS_PER_PAGE));
-  const pagedModels = models.slice(
+  const filtered = useMemo(() => {
+    if (!query.trim()) return models;
+    const q = query.toLowerCase();
+    return models.filter(
+      (m) =>
+        m.model.toLowerCase().includes(q) ||
+        m.label.toLowerCase().includes(q) ||
+        m.provider.toLowerCase().includes(q),
+    );
+  }, [models, query]);
+
+  const clientTotalPages = Math.max(1, Math.ceil(filtered.length / MODELS_PER_PAGE));
+  const pagedModels = filtered.slice(
     clientPage * MODELS_PER_PAGE,
     (clientPage + 1) * MODELS_PER_PAGE,
   );
+
+  // Reset page when query changes
+  const safeClientPage = clientPage >= clientTotalPages ? 0 : clientPage;
 
   const handleSwitch = (modelEntry: ModelEntry) => {
     if (modelEntry.active || switchingModel || dismissed) return;
@@ -116,6 +140,7 @@ export function ModelCard({ children, page, total }: ModelCardProps) {
 
   return (
     <div className={css.ModelCardPanel}>
+      {/* Header */}
       <div className={css.ModelCardHeader}>
         <span className={css.ModelCardTitle}>{t('hermes.model_switcher')}</span>
         {serverTotalPages > 1 && (
@@ -125,61 +150,87 @@ export function ModelCard({ children, page, total }: ModelCardProps) {
         )}
       </div>
 
-      <div className={css.ModelCardList}>
-        {pagedModels.map((m) => (
-          <div
-            key={m.model}
-            className={m.active ? css.ModelCardRowActive : css.ModelCardRow}
-            onClick={() => !m.active && handleSwitch(m)}
-            role="button"
-            tabIndex={m.active ? -1 : 0}
-            aria-pressed={m.active}
-          >
-            <div className={css.ModelCardRowInfo}>
-              <span className={css.ModelCardRowName}>{m.label}</span>
-              {m.provider && (
-                <span className={css.ModelCardRowProvider}>
-                  <span className={css.ModelCardProviderDot} />
-                  {m.provider}
-                </span>
-              )}
-            </div>
-
-            <div className={css.ModelCardRowAction}>
-              {m.active ? (
-                <span className={css.ModelCardActiveBadge}>
-                  <CheckIcon />
-                  {t('hermes.active_model')}
-                </span>
-              ) : (
-                <button
-                  className={css.ModelCardSwitchBtn}
-                  disabled={switchingModel !== null}
-                  onClick={(e) => { e.stopPropagation(); handleSwitch(m); }}
-                >
-                  {switchingModel === m.model ? t('hermes.switching') : t('hermes.switch_model')}
-                </button>
-              )}
-            </div>
-          </div>
-        ))}
+      {/* Search */}
+      <div className={css.ModelCardSearch}>
+        <span className={css.ModelCardSearchIcon}>
+          <SearchIcon />
+        </span>
+        <input
+          className={css.ModelCardSearchInput}
+          type="text"
+          placeholder={t('hermes.search_models')}
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setClientPage(0);
+          }}
+          autoFocus
+        />
       </div>
 
+      {/* Model rows */}
+      <div className={css.ModelCardList}>
+        {pagedModels.length === 0 ? (
+          <div className={css.ModelCardEmpty}>
+            <Text size="T300">{t('hermes.no_models')}</Text>
+          </div>
+        ) : (
+          pagedModels.map((m) => (
+            <div
+              key={m.model}
+              className={m.active ? css.ModelCardRowActive : css.ModelCardRow}
+              onClick={() => !m.active && handleSwitch(m)}
+              role="button"
+              tabIndex={m.active ? -1 : 0}
+              aria-pressed={m.active}
+            >
+              <div className={css.ModelCardRowInfo}>
+                <span className={css.ModelCardRowName}>{m.label}</span>
+                {m.provider && (
+                  <span className={css.ModelCardRowProvider}>
+                    <span className={css.ModelCardProviderDot} />
+                    {m.provider}
+                  </span>
+                )}
+              </div>
+
+              <div className={css.ModelCardRowAction}>
+                {m.active ? (
+                  <span className={css.ModelCardActiveBadge}>
+                    <CheckIcon />
+                    {t('hermes.active_model')}
+                  </span>
+                ) : (
+                  <button
+                    className={css.ModelCardSwitchBtn}
+                    disabled={switchingModel !== null}
+                    onClick={(e) => { e.stopPropagation(); handleSwitch(m); }}
+                  >
+                    {switchingModel === m.model ? t('hermes.switching') : t('hermes.switch_model')}
+                  </button>
+                )}
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Pagination (only when more than one page) */}
       {clientTotalPages > 1 && (
         <div className={css.ModelCardFooter}>
           <button
             className={css.ModelCardPageBtn}
-            disabled={clientPage <= 0}
+            disabled={safeClientPage <= 0}
             onClick={() => setClientPage((p) => Math.max(0, p - 1))}
           >
             <ChevronLeft />
           </button>
           <span className={css.ModelCardPageNum}>
-            {clientPage + 1} / {clientTotalPages}
+            {safeClientPage + 1} / {clientTotalPages}
           </span>
           <button
             className={css.ModelCardPageBtn}
-            disabled={clientPage >= clientTotalPages - 1}
+            disabled={safeClientPage >= clientTotalPages - 1}
             onClick={() => setClientPage((p) => Math.min(clientTotalPages - 1, p + 1))}
           >
             <ChevronRight />

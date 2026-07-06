@@ -536,6 +536,46 @@ export const ModelCardPageNum = style([
 ]);
 
 // Empty state
+export const ModelCardSearch = style([
+  DefaultReset,
+  {
+    display: 'flex',
+    alignItems: 'center',
+    gap: config.space.S200,
+    padding: `${config.space.S200} ${config.space.S400}`,
+    borderBottom: `${config.borderWidth.B300} solid ${color.Surface.ContainerLine}`,
+    backgroundColor: color.Surface.Container,
+  },
+]);
+
+export const ModelCardSearchInput = style([
+  DefaultReset,
+  {
+    width: '100%',
+    border: 'none',
+    outline: 'none',
+    backgroundColor: 'transparent',
+    fontSize: config.fontSize.T300,
+    color: color.Surface.OnContainer,
+    padding: `${config.space.S100} 0`,
+    '::placeholder': {
+      color: color.SurfaceVariant.OnContainer,
+      opacity: 0.6,
+    },
+  },
+]);
+
+export const ModelCardSearchIcon = style([
+  DefaultReset,
+  {
+    display: 'flex',
+    flexShrink: 0,
+    color: color.SurfaceVariant.OnContainer,
+    opacity: 0.5,
+  },
+]);
+
+// Empty state
 export const ModelCardEmpty = style([
   DefaultReset,
   {
