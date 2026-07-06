@@ -147,7 +147,7 @@ function DeviceRename({ device, onCancel, onRename, refreshDeviceList }: DeviceR
 
   return (
     <Box as="form" onSubmit={handleSubmit} direction="Column" gap="100">
-      <Text size="L400">Device Name</Text>
+      <Text size="L400">{t('settings.device_name')}</Text>
       <Box gap="200">
         <Box grow="Yes" direction="Column">
           <Input
@@ -191,7 +191,7 @@ function DeviceRename({ device, onCancel, onRename, refreshDeviceList }: DeviceR
           {renameState.error.message}
         </Text>
       ) : (
-        <Text size="T200">Device names are visible to public.</Text>
+        <Text size="T200">{t('settings.device_name_public')}</Text>
       )}
     </Box>
   );

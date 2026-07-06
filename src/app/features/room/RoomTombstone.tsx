@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { Box, Button, Spinner, Text, color } from 'folds';
+import { useTranslation } from 'react-i18next';
 
 import * as css from './RoomTombstone.css';
 import { useMatrixClient } from '../../hooks/useMatrixClient';
@@ -11,6 +12,7 @@ import { getViaServers } from '../../plugins/via-servers';
 
 type RoomTombstoneProps = { roomId: string; body?: string; replacementRoomId: string };
 export function RoomTombstone({ roomId, body, replacementRoomId }: RoomTombstoneProps) {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const { navigateRoom } = useRoomNavigate();
 
@@ -44,7 +46,7 @@ export function RoomTombstone({ roomId, body, replacementRoomId }: RoomTombstone
         {replacementRoom?.getMyMembership() === Membership.Join ||
         joinState.status === AsyncStatus.Success ? (
           <Button onClick={handleOpen} size="300" variant="Success" fill="Solid" radii="300">
-            <Text size="B300">Open New Room</Text>
+            <Text size="B300">{t('room.open_new_room')}</Text>
           </Button>
         ) : (
           <Button
@@ -60,7 +62,7 @@ export function RoomTombstone({ roomId, body, replacementRoomId }: RoomTombstone
             }
             disabled={joinState.status === AsyncStatus.Loading}
           >
-            <Text size="B300">Join New Room</Text>
+            <Text size="B300">{t('room.join_new_room')}</Text>
           </Button>
         )}
       </Box>

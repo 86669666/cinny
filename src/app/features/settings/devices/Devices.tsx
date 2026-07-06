@@ -87,7 +87,7 @@ export function Devices({ requestClose }: DevicesProps) {
           <PageContent>
             <Box direction="Column" gap="700">
               <Box direction="Column" gap="100">
-                <Text size="L400">Security</Text>
+                <Text size="L400">{t('settings.security')}</Text>
                 <SequenceCard
                   className={SequenceCardStyle}
                   variant="SurfaceVariant"
@@ -115,7 +115,7 @@ export function Devices({ requestClose }: DevicesProps) {
                 </SequenceCard>
               </Box>
               <Box direction="Column" gap="100">
-                <Text size="L400">Current</Text>
+                <Text size="L400">{t('settings.current')}</Text>
                 {currentDevice ? (
                   <SequenceCard
                     className={SequenceCardStyle}

@@ -70,7 +70,7 @@ export function VerificationStatusBadge({
 
   return (
     <Badge variant="Success" fill="Solid" size="500">
-      <Text size="L400">Verified</Text>
+      <Text size="L400">{t('settings.verified')}</Text>
     </Badge>
   );
 }
@@ -79,17 +79,15 @@ function LearnStartVerificationFromOtherDevice() {
   const { t } = useTranslation();
   return (
     <Box direction="Column">
-      <Text size="T200">Steps to verify from other device.</Text>
+      <Text size="T200">{t('settings.verify_steps')}</Text>
       <Text as="div" size="T200">
         <ul style={{ margin: `${config.space.S100} 0` }}>
-          <li>Open your other verified device.</li>
+          <li>{t('settings.open_verified_device')}</li>
           <li>
             Open <i>{t('nav.settings')}</i>.
           </li>
-          <li>
-            Find this device in <i>Devices/Sessions</i> section.
-          </li>
-          <li>Initiate verification.</li>
+          <li>{t('settings.find_device')}</li>
+          <li>{t('settings.initiate_verification')}</li>
         </ul>
       </Text>
       <Text size="T200">

@@ -283,50 +283,114 @@ export const HermesCardActions = style([
   },
 ]);
 
-export const ModelCard = style([
+// ── Telegram-style Model Switcher Card ──
+
+// Outer card container
+export const ModelCardPanel = style([
+  DefaultReset,
+  {
+    border: `${config.borderWidth.B300} solid ${color.Surface.ContainerLine}`,
+    borderRadius: config.radii.R500,
+    backgroundColor: color.Surface.Container,
+    overflow: 'hidden',
+    margin: `${config.space.S200} 0`,
+  },
+]);
+
+// Card header
+export const ModelCardHeader = style([
+  DefaultReset,
+  {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: `${config.space.S300} ${config.space.S400}`,
+    borderBottom: `${config.borderWidth.B300} solid ${color.Surface.ContainerLine}`,
+    backgroundColor: color.SurfaceVariant.Container,
+  },
+]);
+
+export const ModelCardTitle = style([
+  DefaultReset,
+  {
+    fontWeight: config.fontWeight.W600,
+    fontSize: config.fontSize.H5,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
+]);
+
+export const ModelCardPageIndicator = style([
+  DefaultReset,
+  {
+    fontSize: config.fontSize.T200,
+    color: color.SurfaceVariant.OnContainer,
+    whiteSpace: 'nowrap',
+    marginLeft: config.space.S200,
+  },
+]);
+
+// Model list
+export const ModelCardList = style([
   DefaultReset,
   {
     display: 'flex',
     flexDirection: 'column',
-    gap: config.space.S200,
   },
 ]);
 
-export const ModelCardItem = style([
+// Individual model row — large tap target, clear separation
+export const ModelCardRow = style([
   DefaultReset,
   {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: `${config.space.S200} ${config.space.S300}`,
-    borderRadius: config.radii.R300,
-    border: `1px solid ${color.Surface.ContainerLine}`,
-    backgroundColor: color.Surface.Container,
-    gap: config.space.S200,
+    padding: `${config.space.S300} ${config.space.S400}`,
+    borderBottom: `${config.borderWidth.B300} solid ${color.Surface.ContainerLine}`,
+    cursor: 'pointer',
+    gap: config.space.S300,
+    transition: 'background-color 0.15s ease',
+    selectors: {
+      '&:last-child': {
+        borderBottom: 'none',
+      },
+      '&:hover': {
+        backgroundColor: color.SurfaceVariant.Container,
+      },
+    },
   },
 ]);
 
-export const ModelCardItemActive = style([
-  ModelCardItem,
+// Active model row — green tint
+export const ModelCardRowActive = style([
+  ModelCardRow,
   {
-    borderColor: color.Success.ContainerLine,
     backgroundColor: color.Success.Container,
+    borderLeft: `3px solid ${color.Success.Main}`,
+    selectors: {
+      '&:hover': {
+        backgroundColor: color.Success.Container,
+      },
+    },
   },
 ]);
 
-export const ModelCardItemInfo = style([
+// Model info area (left side)
+export const ModelCardRowInfo = style([
   DefaultReset,
   {
     display: 'flex',
     flexDirection: 'column',
-    gap: config.space.S100,
+    gap: '2px',
     minWidth: 0,
     flex: 1,
+    paddingLeft: 0,
   },
 ]);
 
-export const ModelCardItemName = style([
+export const ModelCardRowName = style([
   DefaultReset,
   {
     fontWeight: config.fontWeight.W500,
@@ -337,26 +401,147 @@ export const ModelCardItemName = style([
   },
 ]);
 
-export const ModelCardItemProvider = style([
+export const ModelCardRowProvider = style([
   DefaultReset,
   {
     fontSize: config.fontSize.T200,
     color: color.SurfaceVariant.OnContainer,
+    display: 'flex',
+    alignItems: 'center',
+    gap: config.space.S100,
   },
 ]);
 
-export const ModelCardItemBadge = style([
+// Provider dot
+export const ModelCardProviderDot = style([
+  DefaultReset,
+  {
+    width: '6px',
+    height: '6px',
+    borderRadius: '50%',
+    backgroundColor: color.SurfaceVariant.OnContainer,
+    opacity: 0.5,
+    flexShrink: 0,
+  },
+]);
+
+// Right side — action button area, MINIMUM 80px to avoid misclicks
+export const ModelCardRowAction = style([
+  DefaultReset,
+  {
+    display: 'flex',
+    alignItems: 'center',
+    flexShrink: 0,
+    minWidth: toRem(80),
+    justifyContent: 'flex-end',
+  },
+]);
+
+// Active badge — shows checkmark + "Active"
+export const ModelCardActiveBadge = style([
   DefaultReset,
   {
     display: 'inline-flex',
     alignItems: 'center',
-    padding: `0 ${config.space.S200}`,
+    gap: config.space.S100,
+    padding: `${config.space.S100} ${config.space.S300}`,
     borderRadius: config.radii.Pill,
-    backgroundColor: color.SurfaceVariant.Container,
-    color: color.SurfaceVariant.OnContainer,
+    backgroundColor: color.Success.Main,
+    color: '#fff',
     fontSize: config.fontSize.T200,
     fontWeight: config.fontWeight.W500,
-    lineHeight: '1.4',
     whiteSpace: 'nowrap',
+  },
+]);
+
+// Switch button
+export const ModelCardSwitchBtn = style([
+  DefaultReset,
+  {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: `${config.space.S100} ${config.space.S300}`,
+    borderRadius: config.radii.Pill,
+    border: `${config.borderWidth.B300} solid ${color.Primary.Main}`,
+    backgroundColor: 'transparent',
+    color: color.Primary.Main,
+    fontSize: config.fontSize.T200,
+    fontWeight: config.fontWeight.W500,
+    cursor: 'pointer',
+    whiteSpace: 'nowrap',
+    minWidth: toRem(64),
+    transition: 'all 0.15s ease',
+    selectors: {
+      '&:hover': {
+        backgroundColor: color.Primary.Main,
+        color: '#fff',
+      },
+      '&[disabled]': {
+        opacity: 0.4,
+        cursor: 'default',
+      },
+    },
+  },
+]);
+
+// Pagination footer
+export const ModelCardFooter = style([
+  DefaultReset,
+  {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: config.space.S300,
+    padding: `${config.space.S200} ${config.space.S400} ${config.space.S300}`,
+    borderTop: `${config.borderWidth.B300} solid ${color.Surface.ContainerLine}`,
+  },
+]);
+
+export const ModelCardPageBtn = style([
+  DefaultReset,
+  {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: toRem(32),
+    height: toRem(32),
+    borderRadius: config.radii.R300,
+    border: 'none',
+    backgroundColor: color.SurfaceVariant.Container,
+    color: color.SurfaceVariant.OnContainer,
+    cursor: 'pointer',
+    fontSize: config.fontSize.T300,
+    transition: 'background-color 0.15s ease',
+    selectors: {
+      '&:hover:not([disabled])': {
+        backgroundColor: color.SurfaceVariant.ContainerActive,
+      },
+      '&[disabled]': {
+        opacity: 0.3,
+        cursor: 'default',
+      },
+    },
+  },
+]);
+
+export const ModelCardPageNum = style([
+  DefaultReset,
+  {
+    fontSize: config.fontSize.T200,
+    color: color.SurfaceVariant.OnContainer,
+    minWidth: toRem(40),
+    textAlign: 'center',
+  },
+]);
+
+// Empty state
+export const ModelCardEmpty = style([
+  DefaultReset,
+  {
+    padding: config.space.S500,
+    textAlign: 'center',
+    fontSize: config.fontSize.T300,
+    color: color.SurfaceVariant.OnContainer,
   },
 ]);

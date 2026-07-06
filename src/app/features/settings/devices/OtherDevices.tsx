@@ -106,7 +106,7 @@ export function OtherDevices({ devices, refreshDeviceList, showVerification }: O
   return devices.length > 0 ? (
     <>
       <Box direction="Column" gap="100">
-        <Text size="L400">Others</Text>
+        <Text size="L400">{t('settings.others')}</Text>
         {authMetadata && (
           <SequenceCard
             className={SequenceCardStyle}
@@ -200,11 +200,11 @@ export function OtherDevices({ devices, refreshDeviceList, showVerification }: O
             <Box grow="Yes" direction="Column">
               {deleteError ? (
                 <Text size="T200">
-                  <b>Failed to logout devices! Please try again. {deleteError.message}</b>
+                  <b>{t('settings.failed_logout')} {deleteError.message}</b>
                 </Text>
               ) : (
                 <Text size="T200">
-                  <b>Logout from selected devices. ({deleted.size} selected)</b>
+                  <b>{t('settings.logout_selected')} ({deleted.size} selected)</b>
                 </Text>
               )}
               {authData && (

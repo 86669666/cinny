@@ -276,5 +276,6 @@
   "room.join_new_room": "Join New Room",
   "misc.yet_another_client": "Yet another matrix client.",
   "settings.formatting_options": "Formatting Options",
-  "settings.auto_formatting": "Auto Formatting"
+  "settings.auto_formatting": "Auto Formatting",
+  "hermes.page_n": "Page {{current}} of {{total}}"
 }
