@@ -25,6 +25,7 @@ import {
 } from 'folds';
 import { useNavigate } from 'react-router-dom';
 import { Room } from 'matrix-js-sdk';
+import { useTranslation } from 'react-i18next';
 import { useStateEvent } from '../../hooks/useStateEvent';
 import { PageHeader } from '../../components/page';
 import { RoomAvatar, RoomIcon } from '../../components/room-avatar';
@@ -72,7 +73,6 @@ import { RoomSettingsPage } from '../../state/roomSettings';
 import { useCallEmbed, useCallStart } from '../../hooks/useCallEmbed';
 import { useLivekitSupport } from '../../hooks/useLivekitSupport';
 import { webRTCSupported } from '../../utils/rtc';
-import { useTranslation } from 'react-i18next';
 
 type RoomMenuProps = {
   room: Room;
@@ -266,7 +266,6 @@ type CallMenuProps = {
 };
 const CallMenu = forwardRef<HTMLDivElement, CallMenuProps>(
   ({ requestClose, onVoiceCall, onVideoCall }, ref) => {
-    const { t } = useTranslation();
     const handleVoice = () => {
       onVoiceCall();
       requestClose();

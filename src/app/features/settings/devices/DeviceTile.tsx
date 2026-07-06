@@ -18,6 +18,7 @@ import {
 import { CryptoApi } from 'matrix-js-sdk/lib/crypto-api';
 import FocusTrap from 'focus-trap-react';
 import { IMyDevice, MatrixError } from 'matrix-js-sdk';
+import { useTranslation } from 'react-i18next';
 import { SettingTile } from '../../../components/setting-tile';
 import { useMatrixClient } from '../../../hooks/useMatrixClient';
 import { timeDayMonYear, timeHourMinute, today, yesterday } from '../../../utils/time';
@@ -29,7 +30,6 @@ import { LogoutDialog } from '../../../components/LogoutDialog';
 import { stopPropagation } from '../../../utils/keyboard';
 import { useSetting } from '../../../state/hooks/settings';
 import { settingsAtom } from '../../../state/settings';
-import { useTranslation } from 'react-i18next';
 
 export function DeviceTilePlaceholder() {
   return (

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Box, Text, Chip } from 'folds';
+import { useTranslation } from 'react-i18next';
 import { useMatrixClient } from '../../../hooks/useMatrixClient';
 import { SequenceCard } from '../../../components/sequence-card';
 import { SequenceCardStyle } from '../styles.css';
 import { SettingTile } from '../../../components/setting-tile';
 import { copyToClipboard } from '../../../utils/dom';
-import { useTranslation } from 'react-i18next';
 
 export function MatrixId() {
   const { t } = useTranslation();

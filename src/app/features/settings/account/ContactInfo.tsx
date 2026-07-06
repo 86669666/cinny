@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
 import { Box, Text, Chip } from 'folds';
+import { useTranslation } from 'react-i18next';
 import { SequenceCard } from '../../../components/sequence-card';
 import { SequenceCardStyle } from '../styles.css';
 import { SettingTile } from '../../../components/setting-tile';
 import { useMatrixClient } from '../../../hooks/useMatrixClient';
 import { AsyncStatus, useAsyncCallback } from '../../../hooks/useAsyncCallback';
-import { useTranslation } from 'react-i18next';
 
 export function ContactInformation() {
   const { t } = useTranslation();
