@@ -110,14 +110,6 @@ export function ModelCard({ children, page, total }: ModelCardProps) {
     });
     document.dispatchEvent(event);
 
-    // Fallback: insert text into composer
-    const input = document.querySelector('[contenteditable="true"]') as HTMLElement;
-    if (input) {
-      input.focus();
-      document.execCommand('insertText', false, messageText);
-      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', code: 'Enter', keyCode: 13, bubbles: true, cancelable: true }));
-    }
-
     setTimeout(() => setSwitchingModel(null), 3000);
   };
 

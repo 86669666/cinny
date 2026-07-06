@@ -125,7 +125,8 @@ export function HermesCard({ children, page, total }: HermesCardProps) {
         <Box direction="Row" justifyContent="Center" alignItems="Center" gap="200">
           <Button
             size="300"
-            variant="SurfaceVariant"
+            variant="Secondary"
+            fill="Soft"
             radii="Pill"
             disabled={currentPage <= 0}
             onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
@@ -137,7 +138,8 @@ export function HermesCard({ children, page, total }: HermesCardProps) {
           </Text>
           <Button
             size="300"
-            variant="SurfaceVariant"
+            variant="Secondary"
+            fill="Soft"
             radii="Pill"
             disabled={currentPage >= totalPages - 1}
             onClick={() => setCurrentPage((p) => Math.min(totalPages - 1, p + 1))}
