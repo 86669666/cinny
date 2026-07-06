@@ -22,6 +22,7 @@ import Linkify from 'linkify-react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ChildNode } from 'domhandler';
 import * as css from '../styles/CustomHtml.css';
+import { HermesCard } from '../components/message/HermesCard';
 import {
   getMxIdLocalPart,
   getCanonicalAliasRoomId,
@@ -470,6 +471,17 @@ export const getReactCustomHtmlParser = (
             >
               {domToReact(children, opts)}
             </span>
+          );
+        }
+
+        if (name === 'div' && 'data-hermes-card' in props) {
+          return (
+            <HermesCard
+              page={props['data-hermes-page']}
+              total={props['data-hermes-total']}
+            >
+              {domToReact(children, opts)}
+            </HermesCard>
           );
         }
 

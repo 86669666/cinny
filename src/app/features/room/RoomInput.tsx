@@ -327,6 +327,10 @@ export const RoomInput = forwardRef<HTMLDivElement, RoomInputProps>(
       } else if (commandName === Command.UnFlip) {
         plainText = `${UNFLIP} ${plainText}`;
         customHtml = `${UNFLIP} ${customHtml}`;
+      } else if (commandName === Command.Model) {
+        // Send /model command as-is to room for Hermes bot processing
+        plainText = `/${Command.Model} ${plainText}`.trim();
+        customHtml = `/${Command.Model} ${customHtml}`;
       } else if (commandName) {
         const commandContent = commands[commandName as Command];
         if (commandContent) {

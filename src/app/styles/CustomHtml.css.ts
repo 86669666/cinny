@@ -259,3 +259,26 @@ export const highlightText = style([
     color: 'black',
   },
 ]);
+
+export const HermesCard = style([
+  DefaultReset,
+  {
+    border: `1px solid ${color.Surface.ContainerLine}`,
+    borderRadius: config.radii.R400,
+    padding: config.space.S300,
+    backgroundColor: color.Surface.Container,
+  },
+]);
+
+export const HermesCardContent = style([
+  DefaultReset,
+  {},
+]);
+
+export const HermesCardActions = style([
+  DefaultReset,
+  {
+    paddingTop: config.space.S200,
+    borderTop: `1px solid ${color.Surface.ContainerLine}`,
+  },
+]);

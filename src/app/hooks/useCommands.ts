@@ -159,6 +159,7 @@ export enum Command {
   UnFlip = 'unflip',
   Delete = 'delete',
   Acl = 'acl',
+  Model = 'model',
 }
 
 export type CommandContent = {
@@ -530,6 +531,11 @@ export const useCommands = (mx: MatrixClient, room: Room): CommandRecord => {
 
           await mx.sendStateEvent(room.roomId, StateEvent.RoomServerAcl as any, aclContent);
         },
+      },
+      [Command.Model]: {
+        name: Command.Model,
+        description: 'Change or view current Hermes model. Example: /model claude-sonnet-4',
+        exe: async () => undefined,
       },
     }),
     [mx, room, navigateRoom]
