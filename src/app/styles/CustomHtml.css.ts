@@ -535,6 +535,32 @@ export const ModelCardPageNum = style([
   },
 ]);
 
+// Switched confirmation banner — overlays the card when model switched
+export const ModelCardSwitchedBanner = style([
+  DefaultReset,
+  {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: config.space.S200,
+    padding: `${config.space.S300} ${config.space.S400}`,
+    backgroundColor: color.Success.Container,
+    borderBottom: `${config.borderWidth.B300} solid ${color.Success.Main}`,
+    color: color.Success.OnContainer,
+    fontSize: config.fontSize.T300,
+    fontWeight: config.fontWeight.W600,
+  },
+]);
+
+// Switched state — dim the card body, disable pointer events
+export const ModelCardSwitched = style([
+  DefaultReset,
+  {
+    opacity: 0.55,
+    pointerEvents: 'none',
+  },
+]);
+
 // Empty state
 export const ModelCardEmpty = style([
   DefaultReset,
