@@ -1,4 +1,5 @@
 import React, { ReactNode, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Box, Button, Chip, Header, Icon, Icons, Text, config } from 'folds';
 import * as css from '../../styles/CustomHtml.css';
 
