@@ -79,6 +79,7 @@ type RoomMenuProps = {
   requestClose: () => void;
 };
 const RoomMenu = forwardRef<HTMLDivElement, RoomMenuProps>(({ room, requestClose }, ref) => {
+  const { t } = useTranslation();
   const mx = useMatrixClient();
   const [hideActivity] = useSetting(settingsAtom, 'hideActivity');
   const unread = useRoomUnread(room.roomId, roomToUnreadAtom);
@@ -265,6 +266,7 @@ type CallMenuProps = {
 };
 const CallMenu = forwardRef<HTMLDivElement, CallMenuProps>(
   ({ requestClose, onVoiceCall, onVideoCall }, ref) => {
+    const { t } = useTranslation();
     const handleVoice = () => {
       onVoiceCall();
       requestClose();
