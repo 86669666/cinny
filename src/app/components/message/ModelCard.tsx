@@ -9,6 +9,7 @@ interface ModelEntry {
   model: string;
   active: boolean;
   provider: string;
+  providerSlug: string;
   label: string;
 }
 
@@ -44,6 +45,7 @@ function parseModels(children: ReactNode): ModelEntry[] {
           model: props['data-hermes-model'] as string,
           active: props['data-hermes-model-active'] === 'true',
           provider: (props['data-hermes-model-provider'] as string) || '',
+          providerSlug: (props['data-hermes-model-provider-slug'] as string) || '',
           label: extractText(child) || (props['data-hermes-model'] as string),
         });
       }
@@ -146,7 +148,9 @@ export function ModelCard({ children, page, total }: ModelCardProps) {
     setSwitchingModel(modelEntry.model);
     setDismissed(true);
 
-    const messageText = `/model ${modelEntry.model}`;
+    const messageText = modelEntry.providerSlug
+      ? `/model ${modelEntry.model} --provider ${modelEntry.providerSlug}`
+      : `/model ${modelEntry.model}`;
     const event = new CustomEvent('hermes-auto-action', {
       detail: { action: 'model', label: modelEntry.label, payload: modelEntry.model, text: messageText },
       bubbles: true,

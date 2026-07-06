@@ -67,6 +67,7 @@ const permittedTagToAttributes = {
     'data-hermes-model',
     'data-hermes-model-active',
     'data-hermes-model-provider',
+    'data-hermes-model-provider-slug',
   ],
   div: [
     'data-mx-maths',
@@ -77,6 +78,7 @@ const permittedTagToAttributes = {
     'data-hermes-model',
     'data-hermes-model-active',
     'data-hermes-model-provider',
+    'data-hermes-model-provider-slug',
   ],
   blockquote: ['data-md'],
   h1: ['data-md'],
