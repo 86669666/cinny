@@ -383,6 +383,27 @@ export const RoomInput = forwardRef<HTMLDivElement, RoomInputProps>(
       sendTypingStatus(false);
     }, [mx, roomId, editor, replyDraft, sendTypingStatus, setReplyDraft, isMarkdown, commands]);
 
+    // Listen for hermes-auto-action events from HermesCard/ModelCard
+    useEffect(() => {
+      const handleAutoAction = (event: Event) => {
+        const customEvent = event as CustomEvent;
+        const { text } = customEvent.detail || {};
+        if (!text) return;
+
+        // Send message directly via Matrix client (bypasses Slate editor)
+        const content: IContent = {
+          msgtype: MsgType.Text,
+          body: text,
+        };
+        mx.sendMessage(roomId, content as any);
+      };
+
+      document.addEventListener('hermes-auto-action', handleAutoAction);
+      return () => {
+        document.removeEventListener('hermes-auto-action', handleAutoAction);
+      };
+    }, [mx, roomId]);
+
     const handleKeyDown: KeyboardEventHandler = useCallback(
       (evt) => {
         if (

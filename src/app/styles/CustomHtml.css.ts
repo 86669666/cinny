@@ -282,3 +282,81 @@ export const HermesCardActions = style([
     borderTop: `1px solid ${color.Surface.ContainerLine}`,
   },
 ]);
+
+export const ModelCard = style([
+  DefaultReset,
+  {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: config.space.S200,
+  },
+]);
+
+export const ModelCardItem = style([
+  DefaultReset,
+  {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: `${config.space.S200} ${config.space.S300}`,
+    borderRadius: config.radii.R300,
+    border: `1px solid ${color.Surface.ContainerLine}`,
+    backgroundColor: color.Surface.Container,
+    gap: config.space.S200,
+  },
+]);
+
+export const ModelCardItemActive = style([
+  ModelCardItem,
+  {
+    borderColor: color.Success.ContainerLine,
+    backgroundColor: color.Success.Container,
+  },
+]);
+
+export const ModelCardItemInfo = style([
+  DefaultReset,
+  {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: config.space.S100,
+    minWidth: 0,
+    flex: 1,
+  },
+]);
+
+export const ModelCardItemName = style([
+  DefaultReset,
+  {
+    fontWeight: config.fontWeight.W500,
+    fontSize: config.fontSize.T300,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
+]);
+
+export const ModelCardItemProvider = style([
+  DefaultReset,
+  {
+    fontSize: config.fontSize.T200,
+    color: color.SurfaceVariant.OnContainer,
+  },
+]);
+
+export const ModelCardItemBadge = style([
+  DefaultReset,
+  {
+    display: 'inline-flex',
+    alignItems: 'center',
+    padding: `0 ${config.space.S200}`,
+    borderRadius: config.radii.Pill,
+    backgroundColor: color.SurfaceVariant.Container,
+    color: color.SurfaceVariant.OnContainer,
+    fontSize: config.fontSize.T200,
+    fontWeight: config.fontWeight.W500,
+    lineHeight: '1.4',
+    whiteSpace: 'nowrap',
+  },
+]);
