@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { Box, Text, color } from 'folds';
 import { Link, useSearchParams } from 'react-router-dom';
 import { SSOAction } from 'matrix-js-sdk';
-import { useTranslation } from 'react-i18next';
 import { useAuthFlows } from '../../../hooks/useAuthFlows';
 import { useAuthServer } from '../../../hooks/useAuthServer';
 import { useParsedLoginFlows } from '../../../hooks/useParsedLoginFlows';
@@ -36,7 +35,6 @@ const useLoginSearchParams = (searchParams: URLSearchParams): LoginPathSearchPar
   );
 
 export function Login() {
-  const { t } = useTranslation();
   const server = useAuthServer();
   const { hashRouter } = useClientConfig();
   const { loginFlows } = useAuthFlows();
@@ -59,7 +57,7 @@ export function Login() {
   return (
     <Box direction="Column" gap="500">
       <Text size="H2" priority="400">
-        {t('auth.login')}
+        Login
       </Text>
       {parsedFlows.token && loginSearchParams.loginToken && (
         <TokenLogin token={loginSearchParams.loginToken} />
@@ -94,7 +92,7 @@ export function Login() {
         </>
       )}
       <Text align="Center">
-        {t('auth.no_account')} <Link to={getRegisterPath(server)}>{t('auth.register')}</Link>
+        Do not have an account? <Link to={getRegisterPath(server)}>Register</Link>
       </Text>
     </Box>
   );

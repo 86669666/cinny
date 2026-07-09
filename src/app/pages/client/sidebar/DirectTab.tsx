@@ -1,5 +1,4 @@
 import React, { MouseEventHandler, forwardRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Box, Icon, Icons, Menu, MenuItem, PopOut, RectCords, Text, config, toRem } from 'folds';
 import FocusTrap from 'focus-trap-react';
@@ -31,7 +30,6 @@ type DirectMenuProps = {
   requestClose: () => void;
 };
 const DirectMenu = forwardRef<HTMLDivElement, DirectMenuProps>(({ requestClose }, ref) => {
-  const { t } = useTranslation();
   const orphanRooms = useDirectRooms();
   const [hideActivity] = useSetting(settingsAtom, 'hideActivity');
   const unread = useRoomsUnread(orphanRooms, roomToUnreadAtom);
@@ -54,7 +52,7 @@ const DirectMenu = forwardRef<HTMLDivElement, DirectMenuProps>(({ requestClose }
           aria-disabled={!unread}
         >
           <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-            {t('nav.mark_as_read')}
+            Mark as Read
           </Text>
         </MenuItem>
       </Box>
@@ -63,7 +61,6 @@ const DirectMenu = forwardRef<HTMLDivElement, DirectMenuProps>(({ requestClose }
 });
 
 export function DirectTab() {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const mx = useMatrixClient();
   const screenSize = useScreenSizeContext();
@@ -96,7 +93,7 @@ export function DirectTab() {
   };
   return (
     <SidebarItem active={directSelected}>
-      <SidebarItemTooltip tooltip={t('nav.direct')}>
+      <SidebarItemTooltip tooltip="Direct Messages">
         {(triggerRef) => (
           <SidebarAvatar
             as="button"

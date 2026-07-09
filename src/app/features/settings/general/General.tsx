@@ -29,7 +29,6 @@ import {
 } from 'folds';
 import { isKeyHotkey } from 'is-hotkey';
 import FocusTrap from 'focus-trap-react';
-import { useTranslation } from 'react-i18next';
 import { Page, PageContent, PageHeader } from '../../../components/page';
 import { SequenceCard } from '../../../components/sequence-card';
 import { useSetting } from '../../../state/hooks/settings';
@@ -305,14 +304,13 @@ function PageZoomInput() {
 }
 
 function Appearance() {
-  const { t } = useTranslation();
   const [systemTheme, setSystemTheme] = useSetting(settingsAtom, 'useSystemTheme');
   const [monochromeMode, setMonochromeMode] = useSetting(settingsAtom, 'monochromeMode');
   const [twitterEmoji, setTwitterEmoji] = useSetting(settingsAtom, 'twitterEmoji');
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">{t('settings.appearance')}</Text>
+      <Text size="L400">Appearance</Text>
       <SequenceCard
         className={SequenceCardStyle}
         variant="SurfaceVariant"
@@ -350,7 +348,7 @@ function Appearance() {
       </SequenceCard>
 
       <SequenceCard className={SequenceCardStyle} variant="SurfaceVariant" direction="Column">
-        <SettingTile title={t('settings.page_zoom')} after={<PageZoomInput />} />
+        <SettingTile title="Page Zoom" after={<PageZoomInput />} />
       </SequenceCard>
     </Box>
   );
@@ -361,7 +359,6 @@ type DateHintProps = {
   handleReset: () => void;
 };
 function DateHint({ hasChanges, handleReset }: DateHintProps) {
-  const { t } = useTranslation();
   const [anchor, setAnchor] = useState<RectCords>();
   const categoryPadding = { padding: config.space.S200, paddingTop: 0 };
 
@@ -384,13 +381,13 @@ function DateHint({ hasChanges, handleReset }: DateHintProps) {
         >
           <Menu style={{ maxHeight: '85vh', overflowY: 'auto' }}>
             <Header size="300" style={{ padding: `0 ${config.space.S200}` }}>
-              <Text size="L400">{t('settings.formatting')}</Text>
+              <Text size="L400">Formatting</Text>
             </Header>
 
             <Box direction="Column">
               <Box style={categoryPadding} direction="Column">
                 <Header size="300">
-                  <Text size="L400">{t('settings.year')}</Text>
+                  <Text size="L400">Year</Text>
                 </Header>
                 <Box direction="Column" tabIndex={0} gap="100">
                   <Text size="T300">
@@ -411,7 +408,7 @@ function DateHint({ hasChanges, handleReset }: DateHintProps) {
 
               <Box style={categoryPadding} direction="Column">
                 <Header size="300">
-                  <Text size="L400">{t('settings.month')}</Text>
+                  <Text size="L400">Month</Text>
                 </Header>
                 <Box direction="Column" tabIndex={0} gap="100">
                   <Text size="T300">
@@ -443,7 +440,7 @@ function DateHint({ hasChanges, handleReset }: DateHintProps) {
 
               <Box style={categoryPadding} direction="Column">
                 <Header size="300">
-                  <Text size="L400">{t('settings.day_of_month')}</Text>
+                  <Text size="L400">Day of the Month</Text>
                 </Header>
                 <Box direction="Column" tabIndex={0} gap="100">
                   <Text size="T300">
@@ -462,7 +459,7 @@ function DateHint({ hasChanges, handleReset }: DateHintProps) {
               </Box>
               <Box style={categoryPadding} direction="Column">
                 <Header size="300">
-                  <Text size="L400">{t('settings.day_of_week')}</Text>
+                  <Text size="L400">Day of the Week</Text>
                 </Header>
                 <Box direction="Column" tabIndex={0} gap="100">
                   <Text size="T300">
@@ -691,12 +688,11 @@ function SelectDateFormat() {
 }
 
 function DateAndTime() {
-  const { t } = useTranslation();
   const [hour24Clock, setHour24Clock] = useSetting(settingsAtom, 'hour24Clock');
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">{t('settings.date_time')}</Text>
+      <Text size="L400">Date & Time</Text>
       <SequenceCard className={SequenceCardStyle} variant="SurfaceVariant" direction="Column">
         <SettingTile
           title="24-Hour Time Format"
@@ -712,14 +708,13 @@ function DateAndTime() {
 }
 
 function Editor() {
-  const { t } = useTranslation();
   const [enterForNewline, setEnterForNewline] = useSetting(settingsAtom, 'enterForNewline');
   const [isMarkdown, setIsMarkdown] = useSetting(settingsAtom, 'isMarkdown');
   const [hideActivity, setHideActivity] = useSetting(settingsAtom, 'hideActivity');
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">{t('settings.editor')}</Text>
+      <Text size="L400">Editor</Text>
       <SequenceCard className={SequenceCardStyle} variant="SurfaceVariant" direction="Column">
         <SettingTile
           title="ENTER for Newline"
@@ -885,7 +880,6 @@ function SelectMessageSpacing() {
 }
 
 function Messages() {
-  const { t } = useTranslation();
   const [legacyUsernameColor, setLegacyUsernameColor] = useSetting(
     settingsAtom,
     'legacyUsernameColor'
@@ -905,12 +899,12 @@ function Messages() {
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">{t('settings.messages')}</Text>
+      <Text size="L400">Messages</Text>
       <SequenceCard className={SequenceCardStyle} variant="SurfaceVariant" direction="Column">
-        <SettingTile title={t('settings.message_layout')} after={<SelectMessageLayout />} />
+        <SettingTile title="Message Layout" after={<SelectMessageLayout />} />
       </SequenceCard>
       <SequenceCard className={SequenceCardStyle} variant="SurfaceVariant" direction="Column">
-        <SettingTile title={t('settings.message_spacing')} after={<SelectMessageSpacing />} />
+        <SettingTile title="Message Spacing" after={<SelectMessageSpacing />} />
       </SequenceCard>
       <SequenceCard className={SequenceCardStyle} variant="SurfaceVariant" direction="Column">
         <SettingTile
@@ -988,14 +982,13 @@ type GeneralProps = {
   requestClose: () => void;
 };
 export function General({ requestClose }: GeneralProps) {
-  const { t } = useTranslation();
   return (
     <Page>
       <PageHeader outlined={false}>
         <Box grow="Yes" gap="200">
           <Box grow="Yes" alignItems="Center" gap="200">
             <Text size="H3" truncate>
-              {t('settings.general')}
+              General
             </Text>
           </Box>
           <Box shrink="No">

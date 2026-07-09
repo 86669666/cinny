@@ -28,7 +28,6 @@ import { useRoom } from '../../../hooks/useRoom';
 import { useStateEvent } from '../../../hooks/useStateEvent';
 import { stopPropagation } from '../../../utils/keyboard';
 import { RoomPermissionsAPI } from '../../../hooks/useRoomPermissions';
-import { useTranslation } from 'react-i18next';
 
 const ROOM_ENC_ALGO = 'm.megolm.v1.aes-sha2';
 
@@ -36,7 +35,6 @@ type RoomEncryptionProps = {
   permissions: RoomPermissionsAPI;
 };
 export function RoomEncryption({ permissions }: RoomEncryptionProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const room = useRoom();
 
@@ -80,7 +78,7 @@ export function RoomEncryption({ permissions }: RoomEncryptionProps) {
         after={
           enabled ? (
             <Badge size="500" variant="Success" fill="Solid" radii="300">
-              <Text size="L400">{t('misc.enabled')}</Text>
+              <Text size="L400">Enabled</Text>
             </Badge>
           ) : (
             <Button
@@ -92,7 +90,7 @@ export function RoomEncryption({ permissions }: RoomEncryptionProps) {
               onClick={() => setPrompt(true)}
               before={enabling && <Spinner size="100" variant="Primary" fill="Solid" />}
             >
-              <Text size="B300">{t('action.enable')}</Text>
+              <Text size="B300">Enable</Text>
             </Button>
           )
         }

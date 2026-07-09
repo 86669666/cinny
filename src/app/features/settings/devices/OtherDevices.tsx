@@ -15,7 +15,6 @@ import { useAuthMetadata } from '../../../hooks/useAuthMetadata';
 import { withSearchParam } from '../../../pages/pathUtils';
 import { useAccountManagementActions } from '../../../hooks/useAccountManagement';
 import { SettingTile } from '../../../components/setting-tile';
-import { useTranslation } from 'react-i18next';
 
 type OtherDevicesProps = {
   devices: IMyDevice[];
@@ -23,7 +22,6 @@ type OtherDevicesProps = {
   showVerification?: boolean;
 };
 export function OtherDevices({ devices, refreshDeviceList, showVerification }: OtherDevicesProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const crypto = mx.getCrypto();
   const authMetadata = useAuthMetadata();
@@ -106,7 +104,7 @@ export function OtherDevices({ devices, refreshDeviceList, showVerification }: O
   return devices.length > 0 ? (
     <>
       <Box direction="Column" gap="100">
-        <Text size="L400">{t('settings.others')}</Text>
+        <Text size="L400">Others</Text>
         {authMetadata && (
           <SequenceCard
             className={SequenceCardStyle}
@@ -126,7 +124,7 @@ export function OtherDevices({ devices, refreshDeviceList, showVerification }: O
                   outlined
                   onClick={handleDashboardOIDC}
                 >
-                  <Text size="B300">{t('action.open')}</Text>
+                  <Text size="B300">Open</Text>
                 </Button>
               }
             />
@@ -200,11 +198,11 @@ export function OtherDevices({ devices, refreshDeviceList, showVerification }: O
             <Box grow="Yes" direction="Column">
               {deleteError ? (
                 <Text size="T200">
-                  <b>{t('settings.failed_logout')} {deleteError.message}</b>
+                  <b>Failed to logout devices! Please try again. {deleteError.message}</b>
                 </Text>
               ) : (
                 <Text size="T200">
-                  <b>{t('settings.logout_selected')} ({deleted.size} selected)</b>
+                  <b>Logout from selected devices. ({deleted.size} selected)</b>
                 </Text>
               )}
               {authData && (
@@ -236,7 +234,7 @@ export function OtherDevices({ devices, refreshDeviceList, showVerification }: O
                 disabled={deleting}
                 onClick={handleCancelDelete}
               >
-                <Text size="B300">{t('action.cancel')}</Text>
+                <Text size="B300">Cancel</Text>
               </Button>
               <Button
                 size="300"
@@ -246,7 +244,7 @@ export function OtherDevices({ devices, refreshDeviceList, showVerification }: O
                 before={deleting && <Spinner variant="Critical" fill="Solid" size="100" />}
                 onClick={() => deleteDevices()}
               >
-                <Text size="B300">{t('action.logout')}</Text>
+                <Text size="B300">Logout</Text>
               </Button>
             </Box>
           </Box>

@@ -38,7 +38,6 @@ import { useOpenSpaceSettings } from '../../state/hooks/spaceSettings';
 import { useRoomCreators } from '../../hooks/useRoomCreators';
 import { useRoomPermissions } from '../../hooks/useRoomPermissions';
 import { InviteUserPrompt } from '../../components/invite-user-prompt';
-import { useTranslation } from 'react-i18next';
 
 type LobbyMenuProps = {
   powerLevels: IPowerLevels;
@@ -141,7 +140,6 @@ type LobbyHeaderProps = {
   powerLevels: IPowerLevels;
 };
 export function LobbyHeader({ showProfile, powerLevels }: LobbyHeaderProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const space = useSpace();
@@ -215,7 +213,7 @@ export function LobbyHeader({ showProfile, powerLevels }: LobbyHeaderProps) {
               offset={4}
               tooltip={
                 <Tooltip>
-                  <Text>{t('room.members')}</Text>
+                  <Text>Members</Text>
                 </Tooltip>
               }
             >
@@ -236,7 +234,7 @@ export function LobbyHeader({ showProfile, powerLevels }: LobbyHeaderProps) {
             offset={4}
             tooltip={
               <Tooltip>
-                <Text>{t('action.more_options')}</Text>
+                <Text>More Options</Text>
               </Tooltip>
             }
           >

@@ -16,10 +16,8 @@ import {
 import { useCreateSelected } from '../../../hooks/router/useCreateSelected';
 import { JoinAddressPrompt } from '../../../components/join-address-prompt';
 import { _RoomSearchParams } from '../../paths';
-import { useTranslation } from 'react-i18next';
 
 export function CreateTab() {
-  const { t } = useTranslation();
   const createSelected = useCreateSelected();
 
   const navigate = useNavigate();
@@ -75,7 +73,7 @@ export function CreateTab() {
                       onClick={handleCreateSpace}
                     >
                       <SettingTile before={<Icon size="400" src={Icons.Space} />}>
-                        <Text size="H6">{t('nav.create_space')}</Text>
+                        <Text size="H6">Create Space</Text>
                         <Text size="T300" priority="300">
                           Build a space for your community.
                         </Text>
@@ -92,7 +90,7 @@ export function CreateTab() {
                       onClick={handleJoinWithAddress}
                     >
                       <SettingTile before={<Icon size="400" src={Icons.Link} />}>
-                        <Text size="H6">{t('nav.join_address')}</Text>
+                        <Text size="H6">Join with Address</Text>
                         <Text size="T300" priority="300">
                           Become a part of existing community.
                         </Text>

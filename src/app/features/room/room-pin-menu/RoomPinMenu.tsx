@@ -86,7 +86,6 @@ import {
   useGetMemberPowerTag,
 } from '../../../hooks/useMemberPowerTag';
 import { useRoomCreatorsTag } from '../../../hooks/useRoomCreatorsTag';
-import { useTranslation } from 'react-i18next';
 
 type PinnedMessageProps = {
   room: Room;
@@ -112,7 +111,6 @@ function PinnedMessage({
   hour24Clock,
   dateFormatString,
 }: PinnedMessageProps) {
-  const { t } = useTranslation();
   const pinnedEvent = useRoomEvent(room, eventId);
   const useAuthentication = useMediaAuthentication();
   const mx = useMatrixClient();
@@ -144,7 +142,7 @@ function PinnedMessage({
   const renderOptions = () => (
     <Box shrink="No" gap="200" alignItems="Center">
       <Chip data-event-id={eventId} onClick={handleOpenClick} variant="Secondary" radii="Pill">
-        <Text size="T200">{t('action.open')}</Text>
+        <Text size="T200">Open</Text>
       </Chip>
       {canPinEvent && (
         <IconButton

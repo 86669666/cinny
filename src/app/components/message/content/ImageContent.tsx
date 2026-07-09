@@ -31,7 +31,6 @@ import { decryptFile, downloadEncryptedMedia, mxcUrlToHttp } from '../../../util
 import { useMediaAuthentication } from '../../../hooks/useMediaAuthentication';
 import { ModalWide } from '../../../styles/Modal.css';
 import { validBlurHash } from '../../../utils/blurHash';
-import { useTranslation } from 'react-i18next';
 
 type RenderViewerProps = {
   src: string;
@@ -164,7 +163,7 @@ export const ImageContent = as<'div', ImageContentProps>(
               onClick={loadSrc}
               before={<Icon size="Inherit" src={Icons.Photo} filled />}
             >
-              <Text size="B300">{t('action.view')}</Text>
+              <Text size="B300">View</Text>
             </Button>
           </Box>
         )}
@@ -208,7 +207,7 @@ export const ImageContent = as<'div', ImageContentProps>(
                     }
                   }}
                 >
-                  <Text size="B300">{t('msg.spoiler')}</Text>
+                  <Text size="B300">Spoiler</Text>
                 </Chip>
               )}
             </TooltipProvider>
@@ -243,7 +242,7 @@ export const ImageContent = as<'div', ImageContentProps>(
                   onClick={handleRetry}
                   before={<Icon size="Inherit" src={Icons.Warning} filled />}
                 >
-                  <Text size="B300">{t('action.retry')}</Text>
+                  <Text size="B300">Retry</Text>
                 </Button>
               )}
             </TooltipProvider>

@@ -21,9 +21,9 @@ export function RenderBody({
   htmlReactParserOptions,
   linkifyOpts,
 }: RenderBodyProps) {
-  if (body === '') return <MessageEmptyContent />;
+  if (body === '') <MessageEmptyContent />;
   if (customBody) {
-    if (customBody === '') return <MessageEmptyContent />;
+    if (customBody === '') <MessageEmptyContent />;
     return parse(sanitizeCustomHtml(customBody), htmlReactParserOptions);
   }
   return (

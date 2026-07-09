@@ -20,7 +20,6 @@ import { MatrixError } from 'matrix-js-sdk';
 import { useMatrixClient } from '../../hooks/useMatrixClient';
 import { AsyncStatus, useAsyncCallback } from '../../hooks/useAsyncCallback';
 import { stopPropagation } from '../../utils/keyboard';
-import { useTranslation } from 'react-i18next';
 
 type LeaveRoomPromptProps = {
   roomId: string;
@@ -28,7 +27,6 @@ type LeaveRoomPromptProps = {
   onCancel: () => void;
 };
 export function LeaveRoomPrompt({ roomId, onDone, onCancel }: LeaveRoomPromptProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
 
   const [leaveState, leaveRoom] = useAsyncCallback<undefined, MatrixError, []>(
@@ -68,7 +66,7 @@ export function LeaveRoomPrompt({ roomId, onDone, onCancel }: LeaveRoomPromptPro
               size="500"
             >
               <Box grow="Yes">
-                <Text size="H4">{t('room.leave_room')}</Text>
+                <Text size="H4">Leave Room</Text>
               </Box>
               <IconButton size="300" onClick={onCancel} radii="300">
                 <Icon src={Icons.Cross} />

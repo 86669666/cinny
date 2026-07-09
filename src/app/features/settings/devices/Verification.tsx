@@ -35,7 +35,6 @@ import { stopPropagation } from '../../../utils/keyboard';
 import { useAuthMetadata } from '../../../hooks/useAuthMetadata';
 import { withSearchParam } from '../../../pages/pathUtils';
 import { useAccountManagementActions } from '../../../hooks/useAccountManagement';
-import { useTranslation } from 'react-i18next';
 
 type VerificationStatusBadgeProps = {
   verificationStatus: VerificationStatus;
@@ -45,7 +44,6 @@ export function VerificationStatusBadge({
   verificationStatus,
   otherUnverifiedCount,
 }: VerificationStatusBadgeProps) {
-  const { t } = useTranslation();
   if (
     verificationStatus === VerificationStatus.Unknown ||
     typeof otherUnverifiedCount !== 'number'
@@ -55,7 +53,7 @@ export function VerificationStatusBadge({
   if (verificationStatus === VerificationStatus.Unverified) {
     return (
       <Badge variant="Critical" fill="Solid" size="500">
-        <Text size="L400">{t('settings.unverified')}</Text>
+        <Text size="L400">Unverified</Text>
       </Badge>
     );
   }
@@ -70,24 +68,25 @@ export function VerificationStatusBadge({
 
   return (
     <Badge variant="Success" fill="Solid" size="500">
-      <Text size="L400">{t('settings.verified')}</Text>
+      <Text size="L400">Verified</Text>
     </Badge>
   );
 }
 
 function LearnStartVerificationFromOtherDevice() {
-  const { t } = useTranslation();
   return (
     <Box direction="Column">
-      <Text size="T200">{t('settings.verify_steps')}</Text>
+      <Text size="T200">Steps to verify from other device.</Text>
       <Text as="div" size="T200">
         <ul style={{ margin: `${config.space.S100} 0` }}>
-          <li>{t('settings.open_verified_device')}</li>
+          <li>Open your other verified device.</li>
           <li>
-            Open <i>{t('nav.settings')}</i>.
+            Open <i>Settings</i>.
           </li>
-          <li>{t('settings.find_device')}</li>
-          <li>{t('settings.initiate_verification')}</li>
+          <li>
+            Find this device in <i>Devices/Sessions</i> section.
+          </li>
+          <li>Initiate verification.</li>
         </ul>
       </Text>
       <Text size="T200">

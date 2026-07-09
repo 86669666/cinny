@@ -25,7 +25,6 @@ import {
   Spinner,
 } from 'folds';
 import FocusTrap from 'focus-trap-react';
-import { useTranslation } from 'react-i18next';
 import { SequenceCard } from '../../../components/sequence-card';
 import { SequenceCardStyle } from '../styles.css';
 import { SettingTile } from '../../../components/setting-tile';
@@ -50,7 +49,6 @@ type ProfileProps = {
   userId: string;
 };
 function ProfileAvatar({ profile, userId }: ProfileProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const capabilities = useCapabilities();
@@ -125,7 +123,7 @@ function ProfileAvatar({ profile, userId }: ProfileProps) {
             radii="300"
             disabled={disableSetAvatar}
           >
-            <Text size="B300">{t('action.upload')}</Text>
+            <Text size="B300">Upload</Text>
           </Button>
           {avatarUrl && (
             <Button
@@ -136,7 +134,7 @@ function ProfileAvatar({ profile, userId }: ProfileProps) {
               disabled={disableSetAvatar}
               onClick={() => setAlertRemove(true)}
             >
-              <Text size="B300">{t('action.remove')}</Text>
+              <Text size="B300">Remove</Text>
             </Button>
           )}
         </Box>
@@ -185,7 +183,7 @@ function ProfileAvatar({ profile, userId }: ProfileProps) {
                 size="500"
               >
                 <Box grow="Yes">
-                  <Text size="H4">{t('settings.remove_avatar')}</Text>
+                  <Text size="H4">Remove Avatar</Text>
                 </Box>
                 <IconButton size="300" onClick={() => setAlertRemove(false)} radii="300">
                   <Icon src={Icons.Cross} />
@@ -193,10 +191,10 @@ function ProfileAvatar({ profile, userId }: ProfileProps) {
               </Header>
               <Box style={{ padding: config.space.S400 }} direction="Column" gap="400">
                 <Box direction="Column" gap="200">
-                  <Text priority="400">{t('settings.remove_avatar_confirm')}</Text>
+                  <Text priority="400">Are you sure you want to remove profile avatar?</Text>
                 </Box>
                 <Button variant="Critical" onClick={handleRemoveAvatar}>
-                  <Text size="B400">{t('action.remove')}</Text>
+                  <Text size="B400">Remove</Text>
                 </Button>
               </Box>
             </Dialog>
@@ -208,7 +206,6 @@ function ProfileAvatar({ profile, userId }: ProfileProps) {
 }
 
 function ProfileDisplayName({ profile, userId }: ProfileProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const capabilities = useCapabilities();
   const disableSetDisplayname = capabilities['m.set_displayname']?.enabled === false;
@@ -251,7 +248,7 @@ function ProfileDisplayName({ profile, userId }: ProfileProps) {
     <SettingTile
       title={
         <Text as="span" size="L400">
-          {t('settings.display_name')}
+          Display Name
         </Text>
       }
     >
@@ -298,7 +295,7 @@ function ProfileDisplayName({ profile, userId }: ProfileProps) {
             type="submit"
           >
             {changingDisplayName && <Spinner variant="Success" fill="Solid" size="300" />}
-            <Text size="B400">{t('action.save')}</Text>
+            <Text size="B400">Save</Text>
           </Button>
         </Box>
       </Box>
@@ -307,14 +304,13 @@ function ProfileDisplayName({ profile, userId }: ProfileProps) {
 }
 
 export function Profile() {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const userId = mx.getUserId()!;
   const profile = useUserProfile(userId);
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">{t('settings.profile')}</Text>
+      <Text size="L400">Profile</Text>
       <SequenceCard
         className={SequenceCardStyle}
         variant="SurfaceVariant"

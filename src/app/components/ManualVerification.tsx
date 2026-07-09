@@ -20,7 +20,6 @@ import { SecretStorageRecoveryKey, SecretStorageRecoveryPassphrase } from './Sec
 import { useMatrixClient } from '../hooks/useMatrixClient';
 import { AsyncStatus, useAsyncCallback } from '../hooks/useAsyncCallback';
 import { storePrivateKey } from '../../client/secretStorageKeys';
-import { useTranslation } from 'react-i18next';
 
 export enum ManualVerificationMethod {
   RecoveryPassphrase = 'passphrase',
@@ -34,7 +33,6 @@ export function ManualVerificationMethodSwitcher({
   value,
   onChange,
 }: ManualVerificationMethodSwitcherProps) {
-  const { t } = useTranslation();
   const [menuCords, setMenuCords] = useState<RectCords>();
 
   const handleMenu: MouseEventHandler<HTMLButtonElement> = (evt) => {
@@ -100,7 +98,7 @@ export function ManualVerificationMethodSwitcher({
                   onClick={() => handleSelect(ManualVerificationMethod.RecoveryKey)}
                 >
                   <Box grow="Yes">
-                    <Text size="T300">{t('settings.recovery_key')}</Text>
+                    <Text size="T300">Recovery Key</Text>
                   </Box>
                 </MenuItem>
               </Box>
@@ -122,7 +120,6 @@ export function ManualVerificationTile({
   secretStorageKeyContent,
   options,
 }: ManualVerificationTileProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
 
   const hasPassphrase = !!secretStorageKeyContent.passphrase;

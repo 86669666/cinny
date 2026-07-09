@@ -1,5 +1,4 @@
 import React, { MouseEventHandler, forwardRef, useMemo, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
@@ -71,7 +70,6 @@ type HomeMenuProps = {
   requestClose: () => void;
 };
 const HomeMenu = forwardRef<HTMLDivElement, HomeMenuProps>(({ requestClose }, ref) => {
-  const { t } = useTranslation();
   const orphanRooms = useHomeRooms();
   const [hideActivity] = useSetting(settingsAtom, 'hideActivity');
   const unread = useRoomsUnread(orphanRooms, roomToUnreadAtom);
@@ -94,7 +92,7 @@ const HomeMenu = forwardRef<HTMLDivElement, HomeMenuProps>(({ requestClose }, re
           aria-disabled={!unread}
         >
           <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-            {t('nav.mark_as_read')}
+            Mark as Read
           </Text>
         </MenuItem>
       </Box>
@@ -103,7 +101,6 @@ const HomeMenu = forwardRef<HTMLDivElement, HomeMenuProps>(({ requestClose }, re
 });
 
 function HomeHeader() {
-  const { t } = useTranslation();
   const [menuAnchor, setMenuAnchor] = useState<RectCords>();
 
   const handleOpenMenu: MouseEventHandler<HTMLButtonElement> = (evt) => {
@@ -120,7 +117,7 @@ function HomeHeader() {
         <Box alignItems="Center" grow="Yes" gap="300">
           <Box grow="Yes">
             <Text size="H4" truncate>
-              {t('nav.home')}
+              Home
             </Text>
           </Box>
           <Box>
@@ -156,7 +153,6 @@ function HomeHeader() {
 }
 
 function HomeEmpty() {
-  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -165,19 +161,19 @@ function HomeEmpty() {
         icon={<Icon size="600" src={Icons.Hash} />}
         title={
           <Text size="H5" align="Center">
-            {t('nav.no_rooms')}
+            No Rooms
           </Text>
         }
         content={
           <Text size="T300" align="Center">
-            {t('nav.no_rooms_desc')}
+            You do not have any rooms yet.
           </Text>
         }
         options={
           <>
             <Button onClick={() => navigate(getHomeCreatePath())} variant="Secondary" size="300">
               <Text size="B300" truncate>
-                {t('nav.create_room')}
+                Create Room
               </Text>
             </Button>
             <Button
@@ -187,7 +183,7 @@ function HomeEmpty() {
               size="300"
             >
               <Text size="B300" truncate>
-                {t('nav.explore_community_rooms')}
+                Explore Community Rooms
               </Text>
             </Button>
           </>
@@ -199,7 +195,6 @@ function HomeEmpty() {
 
 const DEFAULT_CATEGORY_ID = makeNavCategoryId('home', 'room');
 export function Home() {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   useNavToActivePathMapper('home');
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -255,7 +250,7 @@ export function Home() {
                       </Avatar>
                       <Box as="span" grow="Yes">
                         <Text as="span" size="Inherit" truncate>
-                          {t('nav.create_room')}
+                          Create Room
                         </Text>
                       </Box>
                     </Box>
@@ -274,7 +269,7 @@ export function Home() {
                             </Avatar>
                             <Box as="span" grow="Yes">
                               <Text as="span" size="Inherit" truncate>
-                                {t('nav.join_address')}
+                                Join with Address
                               </Text>
                             </Box>
                           </Box>
@@ -309,7 +304,7 @@ export function Home() {
                       </Avatar>
                       <Box as="span" grow="Yes">
                         <Text as="span" size="Inherit" truncate>
-                          {t('nav.message_search')}
+                          Message Search
                         </Text>
                       </Box>
                     </Box>
@@ -324,7 +319,7 @@ export function Home() {
                   data-category-id={DEFAULT_CATEGORY_ID}
                   onClick={handleCategoryClick}
                 >
-                  {t('nav.rooms')}
+                  Rooms
                 </RoomNavCategoryButton>
               </NavCategoryHeader>
               <div

@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import React, {
   ChangeEventHandler,
   FormEventHandler,
@@ -57,7 +56,6 @@ type InviteUserProps = {
   requestClose: () => void;
 };
 export function InviteUserPrompt({ room, requestClose }: InviteUserProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const alive = useAlive();
 

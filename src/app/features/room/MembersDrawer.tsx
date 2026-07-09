@@ -59,13 +59,11 @@ import { useSpaceOptionally } from '../../hooks/useSpace';
 import { ContainerColor } from '../../styles/ContainerColor.css';
 import { useFlattenPowerTagMembers, useGetMemberPowerTag } from '../../hooks/useMemberPowerTag';
 import { useRoomCreators } from '../../hooks/useRoomCreators';
-import { useTranslation } from 'react-i18next';
 
 type MemberDrawerHeaderProps = {
   room: Room;
 };
 function MemberDrawerHeader({ room }: MemberDrawerHeaderProps) {
-  const { t } = useTranslation();
   const setPeopleDrawer = useSetSetting(settingsAtom, 'isPeopleDrawer');
 
   return (
@@ -83,7 +81,7 @@ function MemberDrawerHeader({ room }: MemberDrawerHeaderProps) {
             offset={4}
             tooltip={
               <Tooltip>
-                <Text>{t('action.close')}</Text>
+                <Text>Close</Text>
               </Tooltip>
             }
           >

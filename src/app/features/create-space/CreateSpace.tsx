@@ -14,7 +14,6 @@ import {
   Text,
   TextArea,
 } from 'folds';
-import { useTranslation } from 'react-i18next';
 import { SettingTile } from '../../components/setting-tile';
 import { SequenceCard } from '../../components/sequence-card';
 import {
@@ -53,7 +52,6 @@ type CreateSpaceFormProps = {
   onCreate?: (roomId: string) => void;
 };
 export function CreateSpaceForm({ defaultAccess, space, onCreate }: CreateSpaceFormProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const alive = useAlive();
 
@@ -140,7 +138,7 @@ export function CreateSpaceForm({ defaultAccess, space, onCreate }: CreateSpaceF
   return (
     <Box as="form" onSubmit={handleSubmit} grow="Yes" direction="Column" gap="500">
       <Box direction="Column" gap="100">
-        <Text size="L400">{t('room.access')}</Text>
+        <Text size="L400">Access</Text>
         <CreateRoomAccessSelector
           value={access}
           onSelect={setAccess}
@@ -150,7 +148,7 @@ export function CreateSpaceForm({ defaultAccess, space, onCreate }: CreateSpaceF
         />
       </Box>
       <Box shrink="No" direction="Column" gap="100">
-        <Text size="L400">{t('chat.name')}</Text>
+        <Text size="L400">Name</Text>
         <Input
           required
           before={<Icon size="100" src={getCreateSpaceAccessToIcon(access)} />}
@@ -178,7 +176,7 @@ export function CreateSpaceForm({ defaultAccess, space, onCreate }: CreateSpaceF
 
       <Box shrink="No" direction="Column" gap="100">
         <Box gap="200" alignItems="End">
-          <Text size="L400">{t('action.options')}</Text>
+          <Text size="L400">Options</Text>
           <Box grow="Yes" justifyContent="End">
             <Chip
               radii="Pill"
@@ -186,7 +184,7 @@ export function CreateSpaceForm({ defaultAccess, space, onCreate }: CreateSpaceF
               onClick={() => setAdvance(!advance)}
               type="button"
             >
-              <Text size="T200">{t('room.advanced_options')}</Text>
+              <Text size="T200">Advanced Options</Text>
             </Chip>
           </Box>
         </Box>
@@ -212,7 +210,7 @@ export function CreateSpaceForm({ defaultAccess, space, onCreate }: CreateSpaceF
             gap="500"
           >
             <SettingTile
-              title={t('room.knock_to_join')}
+              title="Knock to Join"
               description="Anyone can send request to join this space."
               after={
                 <Switch variant="Primary" value={knock} onChange={setKnock} disabled={disabled} />
@@ -228,7 +226,7 @@ export function CreateSpaceForm({ defaultAccess, space, onCreate }: CreateSpaceF
           gap="500"
         >
           <SettingTile
-            title={t('room.allow_federation')}
+            title="Allow Federation"
             description="Users from other servers can join."
             after={
               <Switch
@@ -273,7 +271,7 @@ export function CreateSpaceForm({ defaultAccess, space, onCreate }: CreateSpaceF
           disabled={disabled}
           before={loading && <Spinner variant="Primary" fill="Solid" size="200" />}
         >
-          <Text size="B500">{t('action.create')}</Text>
+          <Text size="B500">Create</Text>
         </Button>
       </Box>
     </Box>

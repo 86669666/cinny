@@ -54,7 +54,6 @@ import { StateEvent } from '../../../types/matrix/room';
 import { getViaServers } from '../../plugins/via-servers';
 import { rateLimitedActions } from '../../utils/matrix';
 import { useAlive } from '../../hooks/useAlive';
-import { useTranslation } from 'react-i18next';
 
 const SEARCH_OPTS: UseAsyncSearchOptions = {
   limit: 500,
@@ -72,7 +71,6 @@ type AddExistingModalProps = {
   requestClose: () => void;
 };
 export function AddExistingModal({ parentId, space, requestClose }: AddExistingModalProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const alive = useAlive();
@@ -200,7 +198,7 @@ export function AddExistingModal({ parentId, space, requestClose }: AddExistingM
                 }}
               >
                 <Box grow="Yes">
-                  <Text size="H4">{t('settings.add_existing')}</Text>
+                  <Text size="H4">Add Existing</Text>
                 </Box>
                 <Box shrink="No">
                   <IconButton size="300" radii="300" onClick={requestClose}>
@@ -332,11 +330,11 @@ export function AddExistingModal({ parentId, space, requestClose }: AddExistingM
                           <Box grow="Yes" direction="Column">
                             {applyState.status === AsyncStatus.Error ? (
                               <Text size="T200">
-                                <b>{t('settings.failed_apply_changes')}</b>
+                                <b>Failed to apply changes! Please try again.</b>
                               </Text>
                             ) : (
                               <Text size="T200">
-                                <b>{t('settings.apply_when_ready')} ({selected.length} Selected)</b>
+                                <b>Apply when ready. ({selected.length} Selected)</b>
                               </Text>
                             )}
                           </Box>
@@ -349,7 +347,7 @@ export function AddExistingModal({ parentId, space, requestClose }: AddExistingM
                               disabled={applyingChanges}
                               onClick={resetChanges}
                             >
-                              <Text size="B300">{t('action.reset')}</Text>
+                              <Text size="B300">Reset</Text>
                             </Button>
                             <Button
                               size="300"
@@ -363,7 +361,7 @@ export function AddExistingModal({ parentId, space, requestClose }: AddExistingM
                               }
                               onClick={handleApplyChanges}
                             >
-                              <Text size="B300">{t('action.apply_changes')}</Text>
+                              <Text size="B300">Apply Changes</Text>
                             </Button>
                           </Box>
                         </Box>

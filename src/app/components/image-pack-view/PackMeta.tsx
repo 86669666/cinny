@@ -25,7 +25,6 @@ import { createUploadAtom, UploadSuccess } from '../../state/upload';
 import { CompactUploadCardRenderer } from '../upload-card';
 import { useMediaAuthentication } from '../../hooks/useMediaAuthentication';
 import { PackMetaReader } from '../../plugins/custom-emoji';
-import { useTranslation } from 'react-i18next';
 
 type ImagePackAvatarProps = {
   url?: string;
@@ -51,7 +50,6 @@ type ImagePackProfileProps = {
   onEdit?: () => void;
 };
 export function ImagePackProfile({ meta, canEdit, onEdit }: ImagePackProfileProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const avatarUrl = meta.avatar
@@ -81,7 +79,7 @@ export function ImagePackProfile({ meta, canEdit, onEdit }: ImagePackProfileProp
               onClick={onEdit}
               outlined
             >
-              <Text size="B300">{t('action.edit')}</Text>
+              <Text size="B300">Edit</Text>
             </Chip>
           </Box>
         )}
@@ -99,7 +97,6 @@ type ImagePackProfileEditProps = {
   onSave: (meta: PackMetaReader) => void;
 };
 export function ImagePackProfileEdit({ meta, onCancel, onSave }: ImagePackProfileEditProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const [avatar, setAvatar] = useState(meta.avatar);
@@ -169,7 +166,7 @@ export function ImagePackProfileEdit({ meta, onCancel, onSave }: ImagePackProfil
                 radii="300"
                 onClick={() => pickFile('image/*')}
               >
-                <Text size="B300">{t('action.upload')}</Text>
+                <Text size="B300">Upload</Text>
               </Button>
               {!avatar && meta.avatar && (
                 <Button
@@ -180,7 +177,7 @@ export function ImagePackProfileEdit({ meta, onCancel, onSave }: ImagePackProfil
                   radii="300"
                   onClick={() => setAvatar(meta.avatar)}
                 >
-                  <Text size="B300">{t('action.reset')}</Text>
+                  <Text size="B300">Reset</Text>
                 </Button>
               )}
               {avatar && (
@@ -192,7 +189,7 @@ export function ImagePackProfileEdit({ meta, onCancel, onSave }: ImagePackProfil
                   radii="300"
                   onClick={() => setAvatar(undefined)}
                 >
-                  <Text size="B300">{t('action.remove')}</Text>
+                  <Text size="B300">Remove</Text>
                 </Button>
               )}
             </Box>
@@ -203,7 +200,7 @@ export function ImagePackProfileEdit({ meta, onCancel, onSave }: ImagePackProfil
         </Box>
       </Box>
       <Box direction="Inherit" gap="100">
-        <Text size="L400">{t('chat.name')}</Text>
+        <Text size="L400">Name</Text>
         <Input name="nameInput" defaultValue={meta.name} variant="Secondary" radii="300" required />
       </Box>
       <Box direction="Inherit" gap="100">
@@ -217,7 +214,7 @@ export function ImagePackProfileEdit({ meta, onCancel, onSave }: ImagePackProfil
       </Box>
       <Box gap="300">
         <Button type="submit" variant="Success" size="300" radii="300" disabled={uploadingAvatar}>
-          <Text size="B300">{t('action.save')}</Text>
+          <Text size="B300">Save</Text>
         </Button>
         <Button
           type="reset"
@@ -227,7 +224,7 @@ export function ImagePackProfileEdit({ meta, onCancel, onSave }: ImagePackProfil
           size="300"
           radii="300"
         >
-          <Text size="B300">{t('action.cancel')}</Text>
+          <Text size="B300">Cancel</Text>
         </Button>
       </Box>
     </Box>

@@ -22,7 +22,6 @@ import { useTextAreaCodeEditor } from '../../../hooks/useTextAreaCodeEditor';
 import { AsyncStatus, useAsyncCallback } from '../../../hooks/useAsyncCallback';
 import { syntaxErrorPosition } from '../../../utils/dom';
 import { Cursor } from '../../../plugins/text-area';
-import { useTranslation } from 'react-i18next';
 
 const EDITOR_INTENT_SPACE_COUNT = 2;
 
@@ -32,7 +31,6 @@ export type SendRoomEventProps = {
   requestClose: () => void;
 };
 export function SendRoomEvent({ type, stateKey, requestClose }: SendRoomEventProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const room = useRoom();
   const alive = useAlive();
@@ -116,7 +114,7 @@ export function SendRoomEvent({ type, stateKey, requestClose }: SendRoomEventPro
               onClick={requestClose}
               before={<Icon size="100" src={Icons.ArrowLeft} />}
             >
-              <Text size="T300">{t('settings.developer_tools')}</Text>
+              <Text size="T300">Developer Tools</Text>
             </Chip>
           </Box>
           <Box shrink="No">
@@ -158,7 +156,7 @@ export function SendRoomEvent({ type, stateKey, requestClose }: SendRoomEventPro
                 disabled={submitting}
                 before={submitting && <Spinner variant="Primary" fill="Solid" size="300" />}
               >
-                <Text size="B400">{t('action.send')}</Text>
+                <Text size="B400">Send</Text>
               </Button>
             </Box>
 

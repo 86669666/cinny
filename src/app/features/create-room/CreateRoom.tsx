@@ -14,7 +14,6 @@ import {
   Text,
   TextArea,
 } from 'folds';
-import { useTranslation } from 'react-i18next';
 import { SettingTile } from '../../components/setting-tile';
 import { SequenceCard } from '../../components/sequence-card';
 import {
@@ -71,7 +70,6 @@ export function CreateRoomForm({
   space,
   onCreate,
 }: CreateRoomFormProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const alive = useAlive();
 
@@ -174,7 +172,7 @@ export function CreateRoomForm({
         </Box>
       )}
       <Box direction="Column" gap="100">
-        <Text size="L400">{t('room.access')}</Text>
+        <Text size="L400">Access</Text>
         <CreateRoomAccessSelector
           value={access}
           onSelect={setAccess}
@@ -184,7 +182,7 @@ export function CreateRoomForm({
         />
       </Box>
       <Box shrink="No" direction="Column" gap="100">
-        <Text size="L400">{t('chat.name')}</Text>
+        <Text size="L400">Name</Text>
         <Input
           required
           before={<Icon size="100" src={getCreateRoomAccessToIcon(access, type)} />}
@@ -212,7 +210,7 @@ export function CreateRoomForm({
 
       <Box shrink="No" direction="Column" gap="100">
         <Box gap="200" alignItems="End">
-          <Text size="L400">{t('action.options')}</Text>
+          <Text size="L400">Options</Text>
           <Box grow="Yes" justifyContent="End">
             <Chip
               radii="Pill"
@@ -220,7 +218,7 @@ export function CreateRoomForm({
               onClick={() => setAdvance(!advance)}
               type="button"
             >
-              <Text size="T200">{t('room.advanced_options')}</Text>
+              <Text size="T200">Advanced Options</Text>
             </Chip>
           </Box>
         </Box>
@@ -247,7 +245,7 @@ export function CreateRoomForm({
               gap="500"
             >
               <SettingTile
-                title={t('room.e2e_encryption')}
+                title="End-to-End Encryption"
                 description="Once this feature is enabled, it can't be disabled after the room is created."
                 after={
                   <Switch
@@ -335,7 +333,7 @@ export function CreateRoomForm({
           disabled={disabled}
           before={loading && <Spinner variant="Primary" fill="Solid" size="200" />}
         >
-          <Text size="B500">{t('action.create')}</Text>
+          <Text size="B500">Create</Text>
         </Button>
       </Box>
     </Box>

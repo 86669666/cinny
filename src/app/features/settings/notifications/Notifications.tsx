@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Text, IconButton, Icon, Icons, Scroll } from 'folds';
-import { useTranslation } from 'react-i18next';
 import { Page, PageContent, PageHeader } from '../../../components/page';
 import { SystemNotification } from './SystemNotification';
 import { AllMessagesNotifications } from './AllMessages';
@@ -14,7 +13,6 @@ type NotificationsProps = {
   requestClose: () => void;
 };
 export function Notifications({ requestClose }: NotificationsProps) {
-  const { t } = useTranslation();
   return (
     <Page>
       <PageHeader outlined={false}>
@@ -40,7 +38,7 @@ export function Notifications({ requestClose }: NotificationsProps) {
               <SpecialMessagesNotifications />
               <KeywordMessagesNotifications />
               <Box direction="Column" gap="100">
-                <Text size="L400">{t('settings.block_messages')}</Text>
+                <Text size="L400">Block Messages</Text>
                 <SequenceCard
                   className={SequenceCardStyle}
                   variant="SurfaceVariant"

@@ -38,14 +38,12 @@ import { getDirectRoomAvatarUrl, getRoomAvatarUrl } from '../../utils/room';
 import { ItemDraggableTarget, useDraggableItem } from './DnD';
 import { mxcUrlToHttp } from '../../utils/matrix';
 import { useMediaAuthentication } from '../../hooks/useMediaAuthentication';
-import { useTranslation } from 'react-i18next';
 
 type RoomJoinButtonProps = {
   roomId: string;
   via?: string[];
 };
 function RoomJoinButton({ roomId, via }: RoomJoinButtonProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
 
   const [joinState, join] = useAsyncCallback<Room, MatrixError, []>(
@@ -93,7 +91,7 @@ function RoomJoinButton({ roomId, via }: RoomJoinButtonProps) {
         onClick={join}
         disabled={!canJoin}
       >
-        <Text size="B300">{t('action.join')}</Text>
+        <Text size="B300">Join</Text>
       </Chip>
     </Box>
   );
@@ -129,7 +127,6 @@ type RoomProfileErrorProps = {
   via?: string[];
 };
 function RoomProfileError({ roomId, suggested, inaccessibleRoom, via }: RoomProfileErrorProps) {
-  const { t } = useTranslation();
   return (
     <Box grow="Yes" gap="300">
       <Avatar>
@@ -154,7 +151,7 @@ function RoomProfileError({ roomId, suggested, inaccessibleRoom, via }: RoomProf
           {suggested && (
             <Box shrink="No" alignItems="Center">
               <Badge variant="Success" fill="Soft" radii="Pill" outlined>
-                <Text size="L400">{t('nav.suggested')}</Text>
+                <Text size="L400">Suggested</Text>
               </Badge>
             </Box>
           )}
@@ -198,7 +195,6 @@ function RoomProfile({
   joinRule,
   options,
 }: RoomProfileProps) {
-  const { t } = useTranslation();
   return (
     <Box grow="Yes" gap="300">
       <Avatar>
@@ -217,7 +213,7 @@ function RoomProfile({
           {suggested && (
             <Box shrink="No" alignItems="Center">
               <Badge variant="Success" fill="Soft" radii="Pill" outlined>
-                <Text size="L400">{t('nav.suggested')}</Text>
+                <Text size="L400">Suggested</Text>
               </Badge>
             </Box>
           )}

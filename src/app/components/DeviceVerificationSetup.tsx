@@ -25,7 +25,6 @@ import { ActionUIA, ActionUIAFlowsLoader } from './ActionUIA';
 import { useMatrixClient } from '../hooks/useMatrixClient';
 import { useAlive } from '../hooks/useAlive';
 import { UseStateProvider } from './UseStateProvider';
-import { useTranslation } from 'react-i18next';
 
 type UIACallback<T> = (
   authDict: AuthDict | null
@@ -72,7 +71,6 @@ type SetupVerificationProps = {
   onComplete: (recoveryKey: string) => void;
 };
 function SetupVerification({ onComplete }: SetupVerificationProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const alive = useAlive();
 
@@ -184,7 +182,7 @@ function SetupVerification({ onComplete }: SetupVerificationProps) {
   return (
     <Box as="form" onSubmit={handleSubmit} direction="Column" gap="400">
       <Text size="T300">
-        Generate a <b>{t('settings.recovery_key')}</b> for verifying identity if you do not have access to other
+        Generate a <b>Recovery Key</b> for verifying identity if you do not have access to other
         devices. Additionally, setup a passphrase as a memorable alternative.
       </Text>
       <Box direction="Column" gap="100">
@@ -196,7 +194,7 @@ function SetupVerification({ onComplete }: SetupVerificationProps) {
         disabled={loading}
         before={loading && <Spinner size="200" variant="Primary" fill="Solid" />}
       >
-        <Text size="B400">{t('action.continue')}</Text>
+        <Text size="B400">Continue</Text>
       </Button>
       {setupState.status === AsyncStatus.Error && (
         <Text size="T200" style={{ color: color.Critical.Main }}>
@@ -230,7 +228,6 @@ type RecoveryKeyDisplayProps = {
   recoveryKey: string;
 };
 function RecoveryKeyDisplay({ recoveryKey }: RecoveryKeyDisplayProps) {
-  const { t } = useTranslation();
   const [show, setShow] = useState(false);
 
   const handleCopy = () => {
@@ -253,7 +250,7 @@ function RecoveryKeyDisplay({ recoveryKey }: RecoveryKeyDisplayProps) {
         identity if you do not have access to other devices.
       </Text>
       <Box direction="Column" gap="100">
-        <Text size="L400">{t('settings.recovery_key')}</Text>
+        <Text size="L400">Recovery Key</Text>
         <Box
           className={ContainerColor({ variant: 'SurfaceVariant' })}
           style={{
@@ -274,10 +271,10 @@ function RecoveryKeyDisplay({ recoveryKey }: RecoveryKeyDisplayProps) {
       </Box>
       <Box direction="Column" gap="200">
         <Button onClick={handleCopy}>
-          <Text size="B400">{t('action.copy')}</Text>
+          <Text size="B400">Copy</Text>
         </Button>
         <Button onClick={handleDownload} fill="Soft">
-          <Text size="B400">{t('action.download')}</Text>
+          <Text size="B400">Download</Text>
         </Button>
       </Box>
     </Box>
@@ -363,12 +360,12 @@ export const DeviceVerificationReset = forwardRef<HTMLDivElement, DeviceVerifica
               <Text size="T300">
                 Anyone you have verified with will see security alerts and your encryption backup
                 will be lost. You almost certainly do not want to do this, unless you have lost{' '}
-                <b>{t('settings.recovery_key')}</b> or <b>Recovery Passphrase</b> and every device you can verify
+                <b>Recovery Key</b> or <b>Recovery Passphrase</b> and every device you can verify
                 from.
               </Text>
             </Box>
             <Button variant="Critical" onClick={() => setReset(true)}>
-              <Text size="B400">{t('action.reset')}</Text>
+              <Text size="B400">Reset</Text>
             </Button>
           </Box>
         )}

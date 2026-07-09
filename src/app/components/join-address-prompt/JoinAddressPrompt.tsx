@@ -20,14 +20,12 @@ import { stopPropagation } from '../../utils/keyboard';
 import { isRoomAlias, isRoomId } from '../../utils/matrix';
 import { parseMatrixToRoom, parseMatrixToRoomEvent, testMatrixTo } from '../../plugins/matrix-to';
 import { tryDecodeURIComponent } from '../../utils/dom';
-import { useTranslation } from 'react-i18next';
 
 type JoinAddressProps = {
   onOpen: (roomIdOrAlias: string, via?: string[], eventId?: string) => void;
   onCancel: () => void;
 };
 export function JoinAddressPrompt({ onOpen, onCancel }: JoinAddressProps) {
-  const { t } = useTranslation();
   const [invalid, setInvalid] = useState(false);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (evt) => {
@@ -82,7 +80,7 @@ export function JoinAddressPrompt({ onOpen, onCancel }: JoinAddressProps) {
               size="500"
             >
               <Box grow="Yes">
-                <Text size="H4">{t('nav.join_address')}</Text>
+                <Text size="H4">Join with Address</Text>
               </Box>
               <IconButton size="300" onClick={onCancel} radii="300">
                 <Icon src={Icons.Cross} />
@@ -106,7 +104,7 @@ export function JoinAddressPrompt({ onOpen, onCancel }: JoinAddressProps) {
                 </Text>
               </Box>
               <Box direction="Column" gap="100">
-                <Text size="L400">{t('room.address')}</Text>
+                <Text size="L400">Address</Text>
                 <Input
                   size="500"
                   autoFocus
@@ -122,7 +120,7 @@ export function JoinAddressPrompt({ onOpen, onCancel }: JoinAddressProps) {
                 )}
               </Box>
               <Button type="submit" variant="Primary">
-                <Text size="B400">{t('action.open')}</Text>
+                <Text size="B400">Open</Text>
               </Button>
             </Box>
           </Dialog>

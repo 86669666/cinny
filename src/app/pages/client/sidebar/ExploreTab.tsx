@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Icon, Icons } from 'folds';
 import { useNavigate } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
@@ -18,7 +17,6 @@ import { ScreenSize, useScreenSizeContext } from '../../../hooks/useScreenSize';
 import { useNavToActivePathAtom } from '../../../state/hooks/navToActivePath';
 
 export function ExploreTab() {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const screenSize = useScreenSizeContext();
   const clientConfig = useClientConfig();
@@ -54,7 +52,7 @@ export function ExploreTab() {
 
   return (
     <SidebarItem active={exploreSelected}>
-      <SidebarItemTooltip tooltip={t('nav.explore_community')}>
+      <SidebarItemTooltip tooltip="Explore Community">
         {(triggerRef) => (
           <SidebarAvatar as="button" ref={triggerRef} outlined onClick={handleExploreClick}>
             <Icon src={Icons.Explore} filled={exploreSelected} />

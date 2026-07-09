@@ -43,7 +43,6 @@ import { allRoomsAtom } from '../../../state/room-list/roomList';
 import { AccountDataEvent } from '../../../../types/matrix/accountData';
 import { AsyncStatus, useAsyncCallback } from '../../../hooks/useAsyncCallback';
 import { stopPropagation } from '../../../utils/keyboard';
-import { useTranslation } from 'react-i18next';
 
 function GlobalPackSelector({
   packs,
@@ -252,7 +251,6 @@ type GlobalPacksProps = {
   onViewPack: (imagePack: ImagePack) => void;
 };
 export function GlobalPacks({ onViewPack }: GlobalPacksProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const globalPacks = useGlobalImagePacks();
@@ -410,7 +408,7 @@ export function GlobalPacks({ onViewPack }: GlobalPacksProps) {
                 outlined
                 onClick={() => onViewPack(pack)}
               >
-                <Text size="B300">{t('action.view')}</Text>
+                <Text size="B300">View</Text>
               </Button>
             )
           }
@@ -422,7 +420,7 @@ export function GlobalPacks({ onViewPack }: GlobalPacksProps) {
   return (
     <>
       <Box direction="Column" gap="100">
-        <Text size="L400">{t('settings.favorite_packs')}</Text>
+        <Text size="L400">Favorite Packs</Text>
         <SequenceCard
           className={SequenceCardStyle}
           variant="SurfaceVariant"
@@ -442,7 +440,7 @@ export function GlobalPacks({ onViewPack }: GlobalPacksProps) {
                   radii="300"
                   outlined
                 >
-                  <Text size="B300">{t('settings.select')}</Text>
+                  <Text size="B300">Select</Text>
                 </Button>
                 <PopOut
                   anchor={menuCords}
@@ -504,11 +502,11 @@ export function GlobalPacks({ onViewPack }: GlobalPacksProps) {
             <Box grow="Yes" direction="Column">
               {applyState.status === AsyncStatus.Error ? (
                 <Text size="T200">
-                  <b>{t('settings.failed_apply_changes')}</b>
+                  <b>Failed to apply changes! Please try again.</b>
                 </Text>
               ) : (
                 <Text size="T200">
-                  <b>{t('settings.changes_saved')}</b>
+                  <b>Changes saved! Apply when ready.</b>
                 </Text>
               )}
             </Box>
@@ -521,7 +519,7 @@ export function GlobalPacks({ onViewPack }: GlobalPacksProps) {
                 disabled={applyingChanges}
                 onClick={resetChanges}
               >
-                <Text size="B300">{t('action.reset')}</Text>
+                <Text size="B300">Reset</Text>
               </Button>
               <Button
                 size="300"
@@ -531,7 +529,7 @@ export function GlobalPacks({ onViewPack }: GlobalPacksProps) {
                 before={applyingChanges && <Spinner variant="Success" fill="Solid" size="100" />}
                 onClick={applyChanges}
               >
-                <Text size="B300">{t('action.apply_changes')}</Text>
+                <Text size="B300">Apply Changes</Text>
               </Button>
             </Box>
           </Box>

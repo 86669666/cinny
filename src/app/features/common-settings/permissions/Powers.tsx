@@ -28,7 +28,6 @@ import { PermissionGroup } from './types';
 import { getPowerTagIconSrc } from '../../../hooks/useMemberPowerTag';
 import { useRoomCreatorsTag } from '../../../hooks/useRoomCreatorsTag';
 import { useRoomCreators } from '../../../hooks/useRoomCreators';
-import { useTranslation } from 'react-i18next';
 
 type PeekPermissionsProps = {
   powerLevels: IPowerLevels;
@@ -109,7 +108,6 @@ type PowersProps = {
   onEdit?: () => void;
 };
 export function Powers({ powerLevels, permissionGroups, onEdit }: PowersProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const room = useRoom();
@@ -170,7 +168,7 @@ export function Powers({ powerLevels, permissionGroups, onEdit }: PowersProps) {
                   outlined
                   onClick={onEdit}
                 >
-                  <Text size="B300">{t('action.edit')}</Text>
+                  <Text size="B300">Edit</Text>
                 </Button>
               </Box>
             )

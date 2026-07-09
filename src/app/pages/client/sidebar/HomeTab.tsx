@@ -1,5 +1,4 @@
 import React, { MouseEventHandler, forwardRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Box, Icon, Icons, Menu, MenuItem, PopOut, RectCords, Text, config, toRem } from 'folds';
 import { useAtomValue } from 'jotai';
@@ -32,7 +31,6 @@ type HomeMenuProps = {
   requestClose: () => void;
 };
 const HomeMenu = forwardRef<HTMLDivElement, HomeMenuProps>(({ requestClose }, ref) => {
-  const { t } = useTranslation();
   const orphanRooms = useHomeRooms();
   const [hideActivity] = useSetting(settingsAtom, 'hideActivity');
   const unread = useRoomsUnread(orphanRooms, roomToUnreadAtom);
@@ -55,7 +53,7 @@ const HomeMenu = forwardRef<HTMLDivElement, HomeMenuProps>(({ requestClose }, re
           aria-disabled={!unread}
         >
           <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-            {t('nav.mark_as_read')}
+            Mark as Read
           </Text>
         </MenuItem>
       </Box>
@@ -64,7 +62,6 @@ const HomeMenu = forwardRef<HTMLDivElement, HomeMenuProps>(({ requestClose }, re
 });
 
 export function HomeTab() {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const mx = useMatrixClient();
   const screenSize = useScreenSizeContext();
@@ -98,7 +95,7 @@ export function HomeTab() {
 
   return (
     <SidebarItem active={homeSelected}>
-      <SidebarItemTooltip tooltip={t('nav.home')}>
+      <SidebarItemTooltip tooltip="Home">
         {(triggerRef) => (
           <SidebarAvatar
             as="button"

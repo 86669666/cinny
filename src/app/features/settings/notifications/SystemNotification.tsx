@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { Box, Text, Switch, Button, color, Spinner } from 'folds';
 import { IPusherRequest } from 'matrix-js-sdk';
-import { useTranslation } from 'react-i18next';
 import { SequenceCard } from '../../../components/sequence-card';
 import { SequenceCardStyle } from '../styles.css';
 import { SettingTile } from '../../../components/setting-tile';
@@ -86,7 +85,6 @@ function EmailNotification() {
 }
 
 export function SystemNotification() {
-  const { t } = useTranslation();
   const notifPermission = usePermissionState('notifications', getNotificationState());
   const [showNotifications, setShowNotifications] = useSetting(settingsAtom, 'showNotifications');
   const [isNotificationSounds, setIsNotificationSounds] = useSetting(
@@ -100,7 +98,7 @@ export function SystemNotification() {
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">{t('settings.system')}</Text>
+      <Text size="L400">System</Text>
       <SequenceCard
         className={SequenceCardStyle}
         variant="SurfaceVariant"
@@ -117,13 +115,13 @@ export function SystemNotification() {
                   : 'Notifications are not supported by the system.'}
               </Text>
             ) : (
-              <span>{t('settings.system_notification_desc')}</span>
+              <span>Show desktop notifications when message arrive.</span>
             )
           }
           after={
             notifPermission === 'prompt' ? (
               <Button size="300" radii="300" onClick={requestNotificationPermission}>
-                <Text size="B300">{t('action.enable')}</Text>
+                <Text size="B300">Enable</Text>
               </Button>
             ) : (
               <Switch

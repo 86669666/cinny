@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Icon, Icons } from 'folds';
 import { useAtomValue } from 'jotai';
@@ -22,7 +21,6 @@ import { ScreenSize, useScreenSizeContext } from '../../../hooks/useScreenSize';
 import { useNavToActivePathAtom } from '../../../state/hooks/navToActivePath';
 
 export function InboxTab() {
-  const { t } = useTranslation();
   const screenSize = useScreenSizeContext();
   const navigate = useNavigate();
   const navToActivePath = useAtomValue(useNavToActivePathAtom());
@@ -47,7 +45,7 @@ export function InboxTab() {
 
   return (
     <SidebarItem active={inboxSelected}>
-      <SidebarItemTooltip tooltip={t('nav.inbox')}>
+      <SidebarItemTooltip tooltip="Inbox">
         {(triggerRef) => (
           <SidebarAvatar as="button" ref={triggerRef} outlined onClick={handleInboxClick}>
             <Icon src={Icons.Inbox} filled={inboxSelected} />

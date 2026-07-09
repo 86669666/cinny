@@ -27,7 +27,6 @@ import { AsyncStatus } from '../../hooks/useAsyncCallback';
 import { useZoom } from '../../hooks/useZoom';
 import { createPage, usePdfDocumentLoader, usePdfJSLoader } from '../../plugins/pdfjs-dist';
 import { stopPropagation } from '../../utils/keyboard';
-import { useTranslation } from 'react-i18next';
 
 export type PdfViewerProps = {
   name: string;
@@ -146,7 +145,7 @@ export const PdfViewer = as<'div', PdfViewerProps>(
               radii="300"
               before={<Icon size="50" src={Icons.Download} />}
             >
-              <Text size="B300">{t('action.download')}</Text>
+              <Text size="B300">Download</Text>
             </Chip>
           </Box>
         </Header>
@@ -163,7 +162,7 @@ export const PdfViewer = as<'div', PdfViewerProps>(
                 before={<Icon src={Icons.Warning} size="50" />}
                 onClick={loadPdfJS}
               >
-                <Text size="B300">{t('action.retry')}</Text>
+                <Text size="B300">Retry</Text>
               </Button>
             </>
           )}
@@ -190,7 +189,7 @@ export const PdfViewer = as<'div', PdfViewerProps>(
               onClick={handlePrevPage}
               aria-disabled={pageNo <= 1}
             >
-              <Text size="B300">{t('action.previous')}</Text>
+              <Text size="B300">Previous</Text>
             </Chip>
             <Box grow="Yes" justifyContent="Center" alignItems="Center" gap="200">
               <PopOut
@@ -252,7 +251,7 @@ export const PdfViewer = as<'div', PdfViewerProps>(
               onClick={handleNextPage}
               aria-disabled={pageNo >= docState.data.numPages}
             >
-              <Text size="B300">{t('action.next')}</Text>
+              <Text size="B300">Next</Text>
             </Chip>
           </Header>
         )}

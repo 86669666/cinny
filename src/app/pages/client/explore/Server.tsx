@@ -45,7 +45,6 @@ import { getMxIdServer } from '../../../utils/matrix';
 import { stopPropagation } from '../../../utils/keyboard';
 import { ScreenSize, useScreenSizeContext } from '../../../hooks/useScreenSize';
 import { BackRouteHandler } from '../../../components/BackRouteHandler';
-import { useTranslation } from 'react-i18next';
 
 const useServerSearchParams = (searchParams: URLSearchParams): ExploreServerPathSearchParams =>
   useMemo(
@@ -92,7 +91,6 @@ type SearchProps = {
   onReset: () => void;
 };
 function Search({ active, loading, searchInputRef, onSearch, onReset }: SearchProps) {
-  const { t } = useTranslation();
   const handleSearchSubmit: FormEventHandler<HTMLFormElement> = (evt) => {
     evt.preventDefault();
     const { searchInput } = evt.target as HTMLFormElement & {
@@ -108,7 +106,7 @@ function Search({ active, loading, searchInputRef, onSearch, onReset }: SearchPr
   return (
     <Box as="form" direction="Column" gap="100" onSubmit={handleSearchSubmit}>
       <span data-spacing-node />
-      <Text size="L400">{t('action.search')}</Text>
+      <Text size="L400">Search</Text>
       <Input
         ref={searchInputRef}
         style={{ paddingRight: config.space.S300 }}
@@ -134,11 +132,11 @@ function Search({ active, loading, searchInputRef, onSearch, onReset }: SearchPr
               after={<Icon size="50" src={Icons.Cross} />}
               onClick={onReset}
             >
-              <Text size="B300">{t('action.clear')}</Text>
+              <Text size="B300">Clear</Text>
             </Chip>
           ) : (
             <Chip type="submit" variant="Primary" size="400" radii="Pill" outlined>
-              <Text size="B300">{t('action.enter')}</Text>
+              <Text size="B300">Enter</Text>
             </Chip>
           )
         }
@@ -254,7 +252,6 @@ type LimitButtonProps = {
   onLimitChange: (limit: string) => void;
 };
 function LimitButton({ limit, onLimitChange }: LimitButtonProps) {
-  const { t } = useTranslation();
   const [menuAnchor, setMenuAnchor] = useState<RectCords>();
 
   const handleLimitSubmit: FormEventHandler<HTMLFormElement> = (evt) => {

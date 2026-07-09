@@ -10,7 +10,6 @@ import {
 } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { useTranslation } from 'react-i18next';
 import { AuthFooter } from './AuthFooter';
 import * as css from './styles.css';
 import * as PatternsCss from '../../styles/Patterns.css';
@@ -67,7 +66,6 @@ function AuthLayoutError({ message }: { message: string }) {
 }
 
 export function AuthLayout() {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { server: urlEncodedServer } = useParams();
@@ -136,14 +134,14 @@ export function AuthLayout() {
         <Box direction="Column" className={css.AuthCard}>
           <Header className={css.AuthHeader} size="600" variant="Surface">
             <Box grow="Yes" direction="Row" gap="300" alignItems="Center">
-              <img className={css.AuthLogo} src={CinnySVG} alt={t('misc.cinny_logo')} />
-              <Text size="H3">{t('misc.cinny')}</Text>
+              <img className={css.AuthLogo} src={CinnySVG} alt="Cinny Logo" />
+              <Text size="H3">Cinny</Text>
             </Box>
           </Header>
           <Box className={css.AuthCardContent} direction="Column">
             <Box direction="Column" gap="100">
               <Text as="label" size="L400" priority="300">
-                {t('auth.homeserver')}
+                Homeserver
               </Text>
               <ServerPicker
                 server={server}

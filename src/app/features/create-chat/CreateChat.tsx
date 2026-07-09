@@ -2,7 +2,6 @@ import { Box, Button, color, config, Icon, Icons, Input, Spinner, Switch, Text }
 import React, { FormEventHandler, useCallback, useState } from 'react';
 import { ICreateRoomStateEvent, MatrixError, Preset, Visibility } from 'matrix-js-sdk';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { SettingTile } from '../../components/setting-tile';
 import { SequenceCard } from '../../components/sequence-card';
 import { addRoomIdToMDirect, isUserId } from '../../utils/matrix';
@@ -18,7 +17,6 @@ type CreateChatProps = {
   defaultUserId?: string;
 };
 export function CreateChat({ defaultUserId }: CreateChatProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const alive = useAlive();
   const navigate = useNavigate();
@@ -80,7 +78,7 @@ export function CreateChat({ defaultUserId }: CreateChatProps) {
         <Text size="L400">User ID</Text>
         <Input
           defaultValue={defaultUserId}
-          placeholder={t('chat.username_server')}
+          placeholder="@username:server"
           name="userIdInput"
           variant="SurfaceVariant"
           size="500"
@@ -108,7 +106,7 @@ export function CreateChat({ defaultUserId }: CreateChatProps) {
           gap="500"
         >
           <SettingTile
-            title={t('room.e2e_encryption')}
+            title="End-to-End Encryption"
             description="Once this feature is enabled, it can't be disabled after the room is created."
             after={
               <Switch
@@ -144,7 +142,7 @@ export function CreateChat({ defaultUserId }: CreateChatProps) {
           disabled={disabled}
           before={loading && <Spinner variant="Primary" fill="Solid" size="200" />}
         >
-          <Text size="B500">{t('action.create')}</Text>
+          <Text size="B500">Create</Text>
         </Button>
       </Box>
     </Box>

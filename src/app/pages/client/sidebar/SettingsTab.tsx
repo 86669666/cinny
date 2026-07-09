@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Text } from 'folds';
 import { SidebarItem, SidebarItemTooltip, SidebarAvatar } from '../../../components/sidebar';
 import { UserAvatar } from '../../../components/user-avatar';
@@ -12,7 +11,6 @@ import { useUserProfile } from '../../../hooks/useUserProfile';
 import { Modal500 } from '../../../components/Modal500';
 
 export function SettingsTab() {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const userId = mx.getUserId()!;
@@ -30,7 +28,7 @@ export function SettingsTab() {
 
   return (
     <SidebarItem active={settings}>
-      <SidebarItemTooltip tooltip={t('nav.settings')}>
+      <SidebarItemTooltip tooltip="User Settings">
         {(triggerRef) => (
           <SidebarAvatar as="button" ref={triggerRef} onClick={openSettings}>
             <UserAvatar

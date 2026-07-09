@@ -23,7 +23,6 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { ChildNode } from 'domhandler';
 import * as css from '../styles/CustomHtml.css';
 import { HermesCard } from '../components/message/HermesCard';
-import { ModelCard } from '../components/message/ModelCard';
 import {
   getMxIdLocalPart,
   getCanonicalAliasRoomId,
@@ -476,19 +475,6 @@ export const getReactCustomHtmlParser = (
         }
 
         if (name === 'div' && 'data-hermes-card' in props) {
-          const cardType = props['data-hermes-card-type'];
-
-          if (cardType === 'model') {
-            return (
-              <ModelCard
-                page={props['data-hermes-page']}
-                total={props['data-hermes-total']}
-              >
-                {domToReact(children, opts)}
-              </ModelCard>
-            );
-          }
-
           return (
             <HermesCard
               page={props['data-hermes-page']}

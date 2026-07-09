@@ -40,7 +40,6 @@ import { useFilePicker } from '../../../hooks/useFilePicker';
 import { AsyncStatus, useAsyncCallback } from '../../../hooks/useAsyncCallback';
 import { useAlive } from '../../../hooks/useAlive';
 import { RoomPermissionsAPI } from '../../../hooks/useRoomPermissions';
-import { useTranslation } from 'react-i18next';
 
 type RoomProfileEditProps = {
   canEditAvatar: boolean;
@@ -60,7 +59,6 @@ export function RoomProfileEdit({
   topic,
   onClose,
 }: RoomProfileEditProps) {
-  const { t } = useTranslation();
   const room = useRoom();
   const mx = useMatrixClient();
   const alive = useAlive();
@@ -162,7 +160,7 @@ export function RoomProfileEdit({
                 disabled={!canEditAvatar || submitting}
                 onClick={() => pickFile('image/*')}
               >
-                <Text size="B300">{t('action.upload')}</Text>
+                <Text size="B300">Upload</Text>
               </Button>
               {!roomAvatar && avatar && (
                 <Button
@@ -174,7 +172,7 @@ export function RoomProfileEdit({
                   disabled={!canEditAvatar || submitting}
                   onClick={() => setRoomAvatar(avatar)}
                 >
-                  <Text size="B300">{t('action.reset')}</Text>
+                  <Text size="B300">Reset</Text>
                 </Button>
               )}
               {roomAvatar && (
@@ -187,7 +185,7 @@ export function RoomProfileEdit({
                   disabled={!canEditAvatar || submitting}
                   onClick={() => setRoomAvatar(undefined)}
                 >
-                  <Text size="B300">{t('action.remove')}</Text>
+                  <Text size="B300">Remove</Text>
                 </Button>
               )}
             </Box>
@@ -212,7 +210,7 @@ export function RoomProfileEdit({
         </Box>
       </Box>
       <Box direction="Inherit" gap="100">
-        <Text size="L400">{t('chat.name')}</Text>
+        <Text size="L400">Name</Text>
         <Input
           name="nameInput"
           defaultValue={name}
@@ -222,7 +220,7 @@ export function RoomProfileEdit({
         />
       </Box>
       <Box direction="Inherit" gap="100">
-        <Text size="L400">{t('room.topic')}</Text>
+        <Text size="L400">Topic</Text>
         <TextArea
           name="topicTextArea"
           defaultValue={topic}
@@ -245,7 +243,7 @@ export function RoomProfileEdit({
           disabled={uploadingAvatar || submitting}
           before={submitting && <Spinner size="100" variant="Success" fill="Solid" />}
         >
-          <Text size="B300">{t('action.save')}</Text>
+          <Text size="B300">Save</Text>
         </Button>
         <Button
           type="reset"
@@ -255,7 +253,7 @@ export function RoomProfileEdit({
           size="300"
           radii="300"
         >
-          <Text size="B300">{t('action.cancel')}</Text>
+          <Text size="B300">Cancel</Text>
         </Button>
       </Box>
     </Box>
@@ -266,7 +264,6 @@ type RoomProfileProps = {
   permissions: RoomPermissionsAPI;
 };
 export function RoomProfile({ permissions }: RoomProfileProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const room = useRoom();
@@ -292,7 +289,7 @@ export function RoomProfile({ permissions }: RoomProfileProps) {
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">{t('settings.profile')}</Text>
+      <Text size="L400">Profile</Text>
       <SequenceCard
         className={SequenceCardStyle}
         variant="SurfaceVariant"
@@ -332,7 +329,7 @@ export function RoomProfile({ permissions }: RoomProfileProps) {
                     onClick={() => setEdit(true)}
                     outlined
                   >
-                    <Text size="B300">{t('action.edit')}</Text>
+                    <Text size="B300">Edit</Text>
                   </Chip>
                 </Box>
               )}

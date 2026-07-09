@@ -25,7 +25,6 @@ import {
 } from 'folds';
 import { useNavigate } from 'react-router-dom';
 import { Room } from 'matrix-js-sdk';
-import { useTranslation } from 'react-i18next';
 import { useStateEvent } from '../../hooks/useStateEvent';
 import { PageHeader } from '../../components/page';
 import { RoomAvatar, RoomIcon } from '../../components/room-avatar';
@@ -79,7 +78,6 @@ type RoomMenuProps = {
   requestClose: () => void;
 };
 const RoomMenu = forwardRef<HTMLDivElement, RoomMenuProps>(({ room, requestClose }, ref) => {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const [hideActivity] = useSetting(settingsAtom, 'hideActivity');
   const unread = useRoomUnread(room.roomId, roomToUnreadAtom);
@@ -195,7 +193,7 @@ const RoomMenu = forwardRef<HTMLDivElement, RoomMenuProps>(({ room, requestClose
           radii="300"
         >
           <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-            {t('room.room_settings')}
+            Room Settings
           </Text>
         </MenuItem>
         <UseStateProvider initial={false}>
@@ -386,7 +384,6 @@ function CallButton() {
 }
 
 export function RoomViewHeader({ callView }: { callView?: boolean }) {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
@@ -529,7 +526,7 @@ export function RoomViewHeader({ callView }: { callView?: boolean }) {
               offset={4}
               tooltip={
                 <Tooltip>
-                  <Text>{t('action.search')}</Text>
+                  <Text>Search</Text>
                 </Tooltip>
               }
             >
@@ -607,7 +604,7 @@ export function RoomViewHeader({ callView }: { callView?: boolean }) {
               tooltip={
                 <Tooltip>
                   {callView ? (
-                    <Text>{t('room.members')}</Text>
+                    <Text>Members</Text>
                   ) : (
                     <Text>{peopleDrawer ? 'Hide Members' : 'Show Members'}</Text>
                   )}
@@ -628,7 +625,7 @@ export function RoomViewHeader({ callView }: { callView?: boolean }) {
             offset={4}
             tooltip={
               <Tooltip>
-                <Text>{t('action.more_options')}</Text>
+                <Text>More Options</Text>
               </Tooltip>
             }
           >

@@ -6,7 +6,6 @@ import { SettingTile } from '../../../components/setting-tile';
 import { useMatrixClient } from '../../../hooks/useMatrixClient';
 import { useAccountDataCallback } from '../../../hooks/useAccountDataCallback';
 import { CutoutCard } from '../../../components/cutout-card';
-import { useTranslation } from 'react-i18next';
 
 type AccountDataProps = {
   expand: boolean;
@@ -14,7 +13,6 @@ type AccountDataProps = {
   onSelect: (type: string | null) => void;
 };
 export function AccountData({ expand, onExpandToggle, onSelect }: AccountDataProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const [accountDataTypes, setAccountDataKeys] = useState(() =>
     Array.from(mx.store.accountData.keys())
@@ -29,7 +27,7 @@ export function AccountData({ expand, onExpandToggle, onSelect }: AccountDataPro
 
   return (
     <Box direction="Column" gap="100">
-      <Text size="L400">{t('settings.account_data')}</Text>
+      <Text size="L400">Account Data</Text>
       <SequenceCard
         className={SequenceCardStyle}
         variant="SurfaceVariant"
@@ -58,7 +56,7 @@ export function AccountData({ expand, onExpandToggle, onSelect }: AccountDataPro
         {expand && (
           <Box direction="Column" gap="100">
             <Box justifyContent="SpaceBetween">
-              <Text size="L400">{t('settings.events')}</Text>
+              <Text size="L400">Events</Text>
               <Text size="L400">Total: {accountDataTypes.length}</Text>
             </Box>
             <CutoutCard>

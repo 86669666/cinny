@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import { Box, Text, IconButton, Icon, Icons, Scroll, Switch, Button } from 'folds';
-import { useTranslation } from 'react-i18next';
 import { Page, PageContent, PageHeader } from '../../../components/page';
 import { SequenceCard } from '../../../components/sequence-card';
 import { SequenceCardStyle } from '../styles.css';
@@ -19,7 +18,6 @@ type DeveloperToolsProps = {
   requestClose: () => void;
 };
 export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const [developerTools, setDeveloperTools] = useSetting(settingsAtom, 'developerTools');
   const [expand, setExpend] = useState(false);
@@ -49,7 +47,7 @@ export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
         <Box grow="Yes" gap="200">
           <Box grow="Yes" alignItems="Center" gap="200">
             <Text size="H3" truncate>
-              {t('settings.developer_tools')}
+              Developer Tools
             </Text>
           </Box>
           <Box shrink="No">
@@ -64,7 +62,7 @@ export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
           <PageContent>
             <Box direction="Column" gap="700">
               <Box direction="Column" gap="100">
-                <Text size="L400">{t('action.options')}</Text>
+                <Text size="L400">Options</Text>
                 <SequenceCard
                   className={SequenceCardStyle}
                   variant="SurfaceVariant"
@@ -72,7 +70,7 @@ export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
                   gap="400"
                 >
                   <SettingTile
-                    title={t('settings.enable_dev_tools')}
+                    title="Enable Developer Tools"
                     after={
                       <Switch
                         variant="Primary"
@@ -103,7 +101,7 @@ export function DeveloperTools({ requestClose }: DeveloperToolsProps) {
                           radii="300"
                           outlined
                         >
-                          <Text size="B300">{t('action.copy')}</Text>
+                          <Text size="B300">Copy</Text>
                         </Button>
                       }
                     />

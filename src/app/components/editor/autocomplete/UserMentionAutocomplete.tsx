@@ -20,7 +20,6 @@ import { getMemberDisplayName, getMemberSearchStr } from '../../../utils/room';
 import { UserAvatar } from '../../user-avatar';
 import { useMediaAuthentication } from '../../../hooks/useMediaAuthentication';
 import { Membership } from '../../../../types/matrix/room';
-import { useTranslation } from 'react-i18next';
 
 type MentionAutoCompleteHandler = (userId: string, name: string) => void;
 
@@ -91,7 +90,6 @@ export function UserMentionAutocomplete({
   query,
   requestClose,
 }: UserMentionAutocompleteProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const roomId: string = room.roomId!;
@@ -139,7 +137,7 @@ export function UserMentionAutocomplete({
     getMemberDisplayName(room, member.userId) ?? getMxIdLocalPart(member.userId) ?? member.userId;
 
   return (
-    <AutocompleteMenu headerContent={<Text size="L400">{t('misc.mentions')}</Text>} requestClose={requestClose}>
+    <AutocompleteMenu headerContent={<Text size="L400">Mentions</Text>} requestClose={requestClose}>
       {query.text === 'room' && (
         <UnknownMentionItem
           userId={roomAliasOrId}

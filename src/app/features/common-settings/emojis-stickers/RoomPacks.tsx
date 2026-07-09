@@ -40,14 +40,12 @@ import { AsyncStatus, useAsyncCallback } from '../../../hooks/useAsyncCallback';
 import { useAlive } from '../../../hooks/useAlive';
 import { useRoomCreators } from '../../../hooks/useRoomCreators';
 import { useRoomPermissions } from '../../../hooks/useRoomPermissions';
-import { useTranslation } from 'react-i18next';
 
 type CreatePackTileProps = {
   packs: ImagePack[];
   roomId: string;
 };
 function CreatePackTile({ packs, roomId }: CreatePackTileProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const alive = useAlive();
 
@@ -110,7 +108,7 @@ function CreatePackTile({ packs, roomId }: CreatePackTileProps) {
           alignItems="End"
         >
           <Box direction="Column" gap="100" grow="Yes">
-            <Text size="L400">{t('chat.name')}</Text>
+            <Text size="L400">Name</Text>
             <Input
               name="nameInput"
               required
@@ -132,7 +130,7 @@ function CreatePackTile({ packs, roomId }: CreatePackTileProps) {
             disabled={creating}
             before={creating && <Spinner size="200" variant="Success" fill="Solid" />}
           >
-            <Text size="B400">{t('action.create')}</Text>
+            <Text size="B400">Create</Text>
           </Button>
         </Box>
       </SettingTile>
@@ -144,7 +142,6 @@ type RoomPacksProps = {
   onViewPack: (imagePack: ImagePack) => void;
 };
 export function RoomPacks({ onViewPack }: RoomPacksProps) {
-  const { t } = useTranslation();
   const mx = useMatrixClient();
   const useAuthentication = useMediaAuthentication();
   const room = useRoom();
@@ -258,7 +255,7 @@ export function RoomPacks({ onViewPack }: RoomPacksProps) {
                 outlined
                 onClick={() => onViewPack(pack)}
               >
-                <Text size="B300">{t('action.view')}</Text>
+                <Text size="B300">View</Text>
               </Button>
             )
           }
@@ -335,7 +332,7 @@ export function RoomPacks({ onViewPack }: RoomPacksProps) {
                 disabled={applyingChanges}
                 onClick={handleCancelChanges}
               >
-                <Text size="B300">{t('action.cancel')}</Text>
+                <Text size="B300">Cancel</Text>
               </Button>
               <Button
                 size="300"
@@ -345,7 +342,7 @@ export function RoomPacks({ onViewPack }: RoomPacksProps) {
                 before={applyingChanges && <Spinner variant="Critical" fill="Solid" size="100" />}
                 onClick={handleApplyChanges}
               >
-                <Text size="B300">{t('action.delete')}</Text>
+                <Text size="B300">Delete</Text>
               </Button>
             </Box>
           </Box>

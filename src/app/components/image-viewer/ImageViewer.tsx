@@ -7,7 +7,6 @@ import * as css from './ImageViewer.css';
 import { useZoom } from '../../hooks/useZoom';
 import { usePan } from '../../hooks/usePan';
 import { downloadMedia } from '../../utils/matrix';
-import { useTranslation } from 'react-i18next';
 
 export type ImageViewerProps = {
   alt: string;
@@ -71,7 +70,7 @@ export const ImageViewer = as<'div', ImageViewerProps>(
               radii="300"
               before={<Icon size="50" src={Icons.Download} />}
             >
-              <Text size="B300">{t('action.download')}</Text>
+              <Text size="B300">Download</Text>
             </Chip>
           </Box>
         </Header>

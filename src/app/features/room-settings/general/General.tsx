@@ -15,13 +15,11 @@ import {
 } from '../../common-settings/general';
 import { useRoomCreators } from '../../../hooks/useRoomCreators';
 import { useRoomPermissions } from '../../../hooks/useRoomPermissions';
-import { useTranslation } from 'react-i18next';
 
 type GeneralProps = {
   requestClose: () => void;
 };
 export function General({ requestClose }: GeneralProps) {
-  const { t } = useTranslation();
   const room = useRoom();
   const powerLevels = usePowerLevels(room);
   const creators = useRoomCreators(room);
@@ -49,19 +47,19 @@ export function General({ requestClose }: GeneralProps) {
             <Box direction="Column" gap="700">
               <RoomProfile permissions={permissions} />
               <Box direction="Column" gap="100">
-                <Text size="L400">{t('action.options')}</Text>
+                <Text size="L400">Options</Text>
                 <RoomJoinRules permissions={permissions} />
                 <RoomHistoryVisibility permissions={permissions} />
                 <RoomEncryption permissions={permissions} />
                 <RoomPublish permissions={permissions} />
               </Box>
               <Box direction="Column" gap="100">
-                <Text size="L400">{t('room.addresses')}</Text>
+                <Text size="L400">Addresses</Text>
                 <RoomPublishedAddresses permissions={permissions} />
                 <RoomLocalAddresses permissions={permissions} />
               </Box>
               <Box direction="Column" gap="100">
-                <Text size="L400">{t('room.advanced_options')}</Text>
+                <Text size="L400">Advanced Options</Text>
                 <RoomUpgrade permissions={permissions} requestClose={requestClose} />
               </Box>
             </Box>
