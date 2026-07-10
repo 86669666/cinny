@@ -1,0 +1,12 @@
+[
+  { "id": "default", "provider": "HLM", "name": "Mixture of Agents" },
+  { "id": "dsv4-flash0", "provider": "HLM", "name": "DeepSeek v4 Flash" },
+  { "id": "img1-duck", "provider": "HLM", "name": "Image Duck" },
+  { "id": "54mini-splus", "provider": "HLM", "name": "Mini S Plus" },
+  { "id": "55-ycyp1", "provider": "HLM", "name": "YCYP v1" },
+  { "id": "dsv4-pro0", "provider": "HLM", "name": "DeepSeek v4 Pro" },
+  { "id": "fable5-ycy1", "provider": "HLM", "name": "Fable 5" },
+  { "id": "opus48-ycy1", "provider": "HLM", "name": "Opus 4.8" },
+  { "id": "sonnet5-ycy1", "provider": "HLM", "name": "Sonnet 5" },
+  { "id": "sonnet5-fish1", "provider": "HLM", "name": "Sonnet 5 Fish" }
+]

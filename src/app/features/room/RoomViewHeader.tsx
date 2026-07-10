@@ -72,6 +72,7 @@ import { RoomSettingsPage } from '../../state/roomSettings';
 import { useCallEmbed, useCallStart } from '../../hooks/useCallEmbed';
 import { useLivekitSupport } from '../../hooks/useLivekitSupport';
 import { webRTCSupported } from '../../utils/rtc';
+import { ModelSwitcher } from '../../components/model-switcher';
 
 type RoomMenuProps = {
   room: Room;
@@ -403,6 +404,7 @@ export function RoomViewHeader({ callView }: { callView?: boolean }) {
 
   const [menuAnchor, setMenuAnchor] = useState<RectCords>();
   const [pinMenuAnchor, setPinMenuAnchor] = useState<RectCords>();
+  const [modelSwitcherOpen, setModelSwitcherOpen] = useState(false);
   const direct = useIsDirectRoom();
 
   const pinnedEvents = useRoomPinnedEvents(room);
@@ -621,6 +623,26 @@ export function RoomViewHeader({ callView }: { callView?: boolean }) {
 
           <TooltipProvider
             position="Bottom"
+            offset={4}
+            tooltip={
+              <Tooltip>
+                <Text>Model Configuration</Text>
+              </Tooltip>
+            }
+          >
+            {(triggerRef) => (
+              <IconButton
+                fill="None"
+                ref={triggerRef}
+                onClick={() => setModelSwitcherOpen(true)}
+              >
+                <Icon size="400" src={Icons.Setting} />
+              </IconButton>
+            )}
+          </TooltipProvider>
+
+          <TooltipProvider
+            position="Bottom"
             align="End"
             offset={4}
             tooltip={
@@ -662,6 +684,8 @@ export function RoomViewHeader({ callView }: { callView?: boolean }) {
           />
         </Box>
       </Box>
+
+      <ModelSwitcher open={modelSwitcherOpen} onClose={() => setModelSwitcherOpen(false)} />
     </PageHeader>
   );
 }
