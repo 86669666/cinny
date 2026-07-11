@@ -150,24 +150,17 @@ export function ModelSwitcher({ open, onClose }: ModelSwitcherProps) {
     setCurrentModel(modelId);
     setStoredModel(modelId);
 
-    // Dispatch auto-action event
-    setTimeout(() => {
-      const event = new CustomEvent('hermes-auto-action', {
-        detail: { action: 'model', text: `/model ${modelId}` },
-        bubbles: true,
-      });
-      document.dispatchEvent(event);
+    // Dispatch event — RoomView listens and sends /model command via Matrix
+    const event = new CustomEvent('hermes-auto-action', {
+      detail: { action: 'model', text: `/model ${modelId}` },
+      bubbles: true,
+    });
+    document.dispatchEvent(event);
 
-      // Insert into composer if focused
-      const input = document.querySelector('[contenteditable="true"]') as HTMLElement | null;
-      if (input) {
-        input.focus();
-        document.execCommand('insertText', false, `/model ${modelId}`);
-      }
-      
+    setTimeout(() => {
       setSwitchingModel(null);
       onClose();
-    }, 150);
+    }, 200);
   }, [currentModel, switchingModel, onClose]);
 
   const selectProvider = (provider: string | null) => {

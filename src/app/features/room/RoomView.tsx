@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { Box, Text, config } from 'folds';
 import { EventType } from 'matrix-js-sdk';
 import { ReactEditor } from 'slate-react';
@@ -89,6 +89,21 @@ export function RoomView({ eventId }: { eventId?: string }) {
       [editor]
     )
   );
+
+  // Listen for model-switch auto-action from ModelSwitcher
+  useEffect(() => {
+    const handler = (evt: Event) => {
+      const detail = (evt as CustomEvent).detail;
+      if (detail?.action === 'model' && detail?.text) {
+        mx.sendMessage(roomId, {
+          body: detail.text,
+          msgtype: 'm.text',
+        });
+      }
+    };
+    document.addEventListener('hermes-auto-action', handler);
+    return () => document.removeEventListener('hermes-auto-action', handler);
+  }, [mx, roomId]);
 
   return (
     <Page ref={roomViewRef}>
