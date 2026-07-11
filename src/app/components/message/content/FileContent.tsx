@@ -187,6 +187,22 @@ export function ReadPdfFile({ body, mimeType, url, encInfo, renderViewer }: Read
     }, [mx, url, useAuthentication, mimeType, encInfo])
   );
 
+  // Revoke PDF ObjectURL when viewer closes
+  useEffect(() => {
+    if (!pdfViewer) {
+      const src = pdfState.data;
+      if (src && src.startsWith('blob:')) {
+        URL.revokeObjectURL(src);
+      }
+    }
+    return () => {
+      const src = pdfState.data;
+      if (src && src.startsWith('blob:')) {
+        URL.revokeObjectURL(src);
+      }
+    };
+  }, [pdfViewer, pdfState.data]);
+
   return (
     <>
       {pdfState.status === AsyncStatus.Success && (

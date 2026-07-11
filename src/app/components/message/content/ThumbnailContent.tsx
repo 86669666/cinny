@@ -36,6 +36,14 @@ export function ThumbnailContent({ info, renderImage }: ThumbnailContentProps) {
     }, [mx, info, useAuthentication])
   );
 
+  // Revoke ObjectURL on unmount
+  useEffect(() => {
+    const src = thumbSrcState.data;
+    if (src && src.startsWith('blob:')) {
+      return () => { URL.revokeObjectURL(src); };
+    }
+  }, [thumbSrcState.data]);
+
   useEffect(() => {
     loadThumbSrc();
   }, [loadThumbSrc]);

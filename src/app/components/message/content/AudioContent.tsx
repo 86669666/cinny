@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { ReactNode, useCallback, useRef, useState } from 'react';
+import React, { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { Badge, Chip, Icon, IconButton, Icons, ProgressBar, Spinner, Text, toRem } from 'folds';
 import { EncryptedAttachmentInfo } from 'browser-encrypt-attachment';
 import { Range } from 'react-range';
@@ -62,6 +62,14 @@ export function AudioContent({
       return URL.createObjectURL(fileContent);
     }, [mx, url, useAuthentication, mimeType, encInfo])
   );
+
+  // Revoke ObjectURL on unmount or re-fetch
+  useEffect(() => {
+    const src = srcState.data;
+    if (src && src.startsWith('blob:')) {
+      return () => { URL.revokeObjectURL(src); };
+    }
+  }, [srcState.data]);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 

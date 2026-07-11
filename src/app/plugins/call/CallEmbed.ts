@@ -149,6 +149,11 @@ export class CallEmbed {
     return iframe;
   }
 
+  private readonly boundOnEvent: (ev: MatrixEvent) => void;
+  private readonly boundOnEventDecrypted: (ev: MatrixEvent) => void;
+  private readonly boundOnStateUpdate: (ev: MatrixEvent) => void;
+  private readonly boundOnToDeviceEvent: (ev: MatrixEvent) => void;
+
   constructor(
     mx: MatrixClient,
     room: Room,
@@ -169,6 +174,12 @@ export class CallEmbed {
     this.room = room;
     this.iframe = iframe;
     this.container = container;
+
+    // Bind handlers once so dispose() can match them for .off()
+    this.boundOnEvent = this.onEvent.bind(this);
+    this.boundOnEventDecrypted = this.onEventDecrypted.bind(this);
+    this.boundOnStateUpdate = this.onStateUpdate.bind(this);
+    this.boundOnToDeviceEvent = this.onToDeviceEvent.bind(this);
 
     const controlState = initialControlState ?? new CallControlState(true, false, true);
     this.control = new CallControl(controlState, call, iframe);
@@ -245,10 +256,10 @@ export class CallEmbed {
     });
 
     // Attach listeners for feeding events - the underlying widget classes handle permissions for us
-    this.mx.on(ClientEvent.Event, this.onEvent.bind(this));
-    this.mx.on(MatrixEventEvent.Decrypted, this.onEventDecrypted.bind(this));
-    this.mx.on(RoomStateEvent.Events, this.onStateUpdate.bind(this));
-    this.mx.on(ClientEvent.ToDeviceEvent, this.onToDeviceEvent.bind(this));
+    this.mx.on(ClientEvent.Event, this.boundOnEvent);
+    this.mx.on(MatrixEventEvent.Decrypted, this.boundOnEventDecrypted);
+    this.mx.on(RoomStateEvent.Events, this.boundOnStateUpdate);
+    this.mx.on(ClientEvent.ToDeviceEvent, this.boundOnToDeviceEvent);
   }
 
   /**
@@ -264,10 +275,10 @@ export class CallEmbed {
     this.container.removeChild(this.iframe);
     this.control.dispose();
 
-    this.mx.off(ClientEvent.Event, this.onEvent.bind(this));
-    this.mx.off(MatrixEventEvent.Decrypted, this.onEventDecrypted.bind(this));
-    this.mx.off(RoomStateEvent.Events, this.onStateUpdate.bind(this));
-    this.mx.off(ClientEvent.ToDeviceEvent, this.onToDeviceEvent.bind(this));
+    this.mx.off(ClientEvent.Event, this.boundOnEvent);
+    this.mx.off(MatrixEventEvent.Decrypted, this.boundOnEventDecrypted);
+    this.mx.off(RoomStateEvent.Events, this.boundOnStateUpdate);
+    this.mx.off(ClientEvent.ToDeviceEvent, this.boundOnToDeviceEvent);
 
     // Clear internal state
     this.readUpToMap = {};

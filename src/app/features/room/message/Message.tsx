@@ -683,7 +683,7 @@ export type MessageProps = {
   hour24Clock: boolean;
   dateFormatString: string;
 };
-export const Message = as<'div', MessageProps>(
+const _Message = as<'div', MessageProps>(
   (
     {
       className,
@@ -1300,3 +1300,5 @@ export const Event = as<'div', EventProps>(
     );
   }
 );
+
+export const Message = React.memo(_Message);

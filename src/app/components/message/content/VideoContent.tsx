@@ -92,6 +92,14 @@ export const VideoContent = as<'div', VideoContentProps>(
       }, [mx, url, useAuthentication, mimeType, encInfo])
     );
 
+    // Revoke ObjectURL on unmount or re-fetch
+    useEffect(() => {
+      const src = srcState.data;
+      if (src && src.startsWith('blob:')) {
+        return () => { URL.revokeObjectURL(src); };
+      }
+    }, [srcState.data]);
+
     const handleLoad = () => {
       setLoad(true);
     };
